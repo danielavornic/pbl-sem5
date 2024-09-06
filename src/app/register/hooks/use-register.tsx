@@ -23,13 +23,28 @@ export const formSchema = z
     phoneNumber: z
       .string()
       .min(1, { message: "Numărul de telefon este obligatoriu" })
-      .refine(isValidPhoneNumber, { message: "Număr de telefon invalid" }),
+      .refine(isValidPhoneNumber, { message: "Introduceți un număr de telefon valid" }),
     password: z
       .string()
       .min(8, { message: "Parola trebuie să conțină cel puțin 8 caractere" })
       .regex(
         PASSWORD_REGEX,
         "Parola trebuie să conțină cel puțin o literă mare, o literă mică, un număr și un caracter special"
+      ),
+    birthday: z
+      .date()
+      .refine(
+        (date) => {
+          const now = new Date();
+          return date < now && now.getFullYear() - date.getFullYear() >= 13;
+        },
+        { message: "Trebuie să aveți cel puțin 13 ani" }
+      )
+      .refine(
+        (date) => {
+          return date < new Date();
+        },
+        { message: "Data de naștere nu poate fi in viitor" }
       ),
     confirmPassword: z.string().min(1, { message: "Confirmați parola" })
   })
@@ -38,16 +53,17 @@ export const formSchema = z
       ctx.addIssue({
         code: "custom",
         message: "Parolele nu se potrivesc",
-        path: ["confirmPassord"]
+        path: ["confirmPassword"]
       });
     }
   });
 
-const useRegiser = () => {
+const useRegister = () => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -70,11 +86,18 @@ const useRegiser = () => {
     }
   });
 
-  const onSubmit = (data: UserRegisterCredentials) => {
-    mutate(data);
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
+    mutate({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      password: data.password,
+      birthday: data.birthday.toISOString()
+    });
   };
 
   return { form, onSubmit, isPending };
 };
 
-export default useRegiser;
+export default useRegister;

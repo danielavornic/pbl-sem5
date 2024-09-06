@@ -1,10 +1,17 @@
+import PublicLayout from "@/layouts/public";
+
 import { LoginForm } from "./components/form";
 
 const LoginPage = () => {
   return (
-    <div>
-      <LoginForm />
-    </div>
+    <PublicLayout title="Intră în cont">
+      <main className="h-without-topbar container flex items-center justify-center gap-[15vw]">
+        <div>
+          <div className="flex h-[500px] w-[26vw] items-center justify-center rounded-md bg-muted" />
+        </div>
+        <LoginForm />
+      </main>
+    </PublicLayout>
   );
 };
 

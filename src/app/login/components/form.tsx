@@ -4,14 +4,15 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 
 import useLogin from "../hooks/use-login";
 
@@ -19,53 +20,56 @@ export const LoginForm = () => {
   const { form, onSubmit, isPending } = useLogin();
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <Card>
-        <CardHeader>
-          <CardTitle>Conectează-te</CardTitle>
-          <CardDescription>Completează câmpurile de mai jos cu datele personale</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
-            <div className="mb-4">
-              <Input
-                type="email"
-                placeholder="Adresa de email"
-                {...form.register("email")}
-                required
-                autoComplete="email"
-                className={form.formState.errors.email ? "border-red-500" : ""}
-              />
-              {form.formState.errors.email && (
-                <p className="mt-1 text-sm text-red-500">{form.formState.errors.email.message}</p>
-              )}
-            </div>
-            <div className="mb-4">
-              <Input
-                type="password"
-                placeholder="Parola"
-                {...form.register("password")}
-                required
-                autoComplete="current-password"
-                className={form.formState.errors.password ? "border-red-500" : ""}
-              />
-              {form.formState.errors.password && (
-                <p className="mt-1 text-sm text-red-500">
-                  {form.formState.errors.password.message}
-                </p>
-              )}
-            </div>
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "Se incarcă..." : "Conectează-te"}
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <Link href="/forgot-password" className="text-blue-600 hover:underline">
-            Ai uitat parola?
-          </Link>
-        </CardFooter>
-      </Card>
+    <div className="min-w-[500px]">
+      <h1 className="mb-4 text-3xl font-bold">Intră în cont</h1>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col items-end space-y-4"
+          noValidate
+        >
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Adresa de e-mail</FormLabel>
+                <FormControl>
+                  <Input placeholder="maria.cucos@gmail.com" type="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Parola</FormLabel>
+                <FormControl>
+                  <PasswordInput
+                    placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button type="submit" loading={isPending}>
+            {isPending ? "Se incarcă..." : "Accesează contul"}
+          </Button>
+        </form>
+      </Form>
+
+      <div className="mt-10 flex justify-center">
+        <span className="mr-2">Nu ai cont?</span>
+        <Button variant="link-accent" className="h-auto p-0" asChild>
+          <Link href="/register">Înregistrează-te</Link>
+        </Button>
+      </div>
     </div>
   );
 };
