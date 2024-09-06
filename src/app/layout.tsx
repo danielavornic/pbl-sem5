@@ -1,7 +1,8 @@
-import "./globals.css";
+import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 
@@ -22,6 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
+      <Toaster richColors position="top-right" />
     </ReactQueryProvider>
   );
 }
