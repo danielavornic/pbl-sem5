@@ -19,19 +19,19 @@ export const formSchema = z
     email: z
       .string()
       .min(1, { message: "Adresa de email este obligatorie" })
-      .email({ message: "Introduceti o adresa de email valida" }),
+      .email({ message: "Introduceți o adresă de email validă" }),
     phoneNumber: z
       .string()
-      .min(1, { message: "Phone number is required" })
-      .refine(isValidPhoneNumber, { message: "Invalid phone number" }),
+      .min(1, { message: "Numărul de telefon este obligatoriu" })
+      .refine(isValidPhoneNumber, { message: "Număr de telefon invalid" }),
     password: z
       .string()
-      .min(8, { message: "Parola trebuie sa contina cel putin 8 caractere" })
+      .min(8, { message: "Parola trebuie să conțină cel puțin 8 caractere" })
       .regex(
         PASSWORD_REGEX,
-        "Parola trebuie sa contina cel putin o litera mare, o litera mica, un numar si un caracter special"
+        "Parola trebuie să conțină cel puțin o literă mare, o literă mică, un număr și un caracter special"
       ),
-    confirmPassword: z.string().min(1, { message: "Va rugam confirmati parola" })
+    confirmPassword: z.string().min(1, { message: "Confirmați parola" })
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
