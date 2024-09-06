@@ -1,7 +1,11 @@
-import React from "react";
+import PublicLayout from "@/layouts/public";
 
 const AdminDashboard = () => {
-  return <div>AdminDashboard</div>;
+  return (
+    <PublicLayout title="Admin Dashboard">
+      <main className="container my-10">hello</main>
+    </PublicLayout>
+  );
 };
 
 export default AdminDashboard;

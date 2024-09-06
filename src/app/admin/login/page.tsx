@@ -1,10 +1,14 @@
+import PublicLayout from "@/layouts/public";
+
 import { AdminLoginForm } from "./components/form";
 
 const AdminLoginPage = () => {
   return (
-    <div>
-      <AdminLoginForm />
-    </div>
+    <PublicLayout title="Admin Login">
+      <main className="h-without-topbar flex items-center justify-center">
+        <AdminLoginForm />
+      </main>
+    </PublicLayout>
   );
 };
 
