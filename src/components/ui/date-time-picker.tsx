@@ -304,7 +304,7 @@ function Calendar({
                   props.onMonthChange?.(newDate);
                 }}
               >
-                <SelectTrigger className="w-fit gap-1 border-none px-2 text-sm">
+                <SelectTrigger className="w-fit gap-1 border-none px-2 text-xs">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -323,7 +323,7 @@ function Calendar({
                   props.onMonthChange?.(newDate);
                 }}
               >
-                <SelectTrigger className="w-fit gap-1 border-none px-2 text-sm">
+                <SelectTrigger className="w-fit gap-1 border-none px-2 text-xs">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
