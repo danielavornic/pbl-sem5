@@ -32,7 +32,7 @@ const useLogin = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: UserLoginCredentials) => authApi.login(data),
     onSuccess: () => {
-      router.push("/admin");
+      router.push("/");
     },
     onError: (error: any) => {
       toast.error("Eroare la autentificare", {
