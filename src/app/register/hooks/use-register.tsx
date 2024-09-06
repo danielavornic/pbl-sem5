@@ -32,7 +32,7 @@ export const formSchema = z
         "Parola trebuie să conțină cel puțin o literă mare, o literă mică, un număr și un caracter special"
       ),
     birthday: z
-      .date()
+      .date({ message: "Data de naștere este obligatorie" })
       .refine(
         (date) => {
           const now = new Date();
