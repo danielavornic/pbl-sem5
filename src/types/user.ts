@@ -20,7 +20,7 @@ export interface AdminUser extends BaseUser {
   username: string;
 }
 
-export interface UserRegisterCredentials extends BaseUser {
+export interface UserRegisterCredentials extends UserLoginCredentials {
   firstName: string;
   lastName: string;
   birthday: string;

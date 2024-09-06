@@ -36,6 +36,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> = React.forwa
       countrySelectComponent={CountrySelect}
       inputComponent={InputComponent}
       defaultCountry="MD"
+      international={true}
       /**
        * Handles the onChange event.
        *
@@ -83,7 +84,7 @@ const CountrySelect = ({ disabled, value, onChange, options }: CountrySelectProp
           type="button"
           variant={"outline"}
           className={cn("flex gap-1 rounded-e-none rounded-s-lg px-3")}
-          disabled={disabled}
+          disabled={true}
         >
           <FlagComponent country={value} countryName={value} />
           <ChevronsUpDown
