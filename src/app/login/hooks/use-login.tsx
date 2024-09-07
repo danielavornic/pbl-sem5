@@ -44,6 +44,9 @@ const useLogin = () => {
 
   const onSubmit = (data: UserLoginCredentials) => {
     mutate(data);
+
+    // TODO: Remove after backend implementation and set it only if the user enters the platform for the first time
+    router.push("/?setup=true");
   };
 
   return { form, onSubmit, isPending };

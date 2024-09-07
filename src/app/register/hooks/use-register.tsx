@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { toast } from "sonner";
@@ -59,7 +59,8 @@ export const formSchema = z
   });
 
 const useRegister = () => {
-  const router = useRouter();
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
+  const [dialogEmail, setDialogEmail] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,7 +78,8 @@ const useRegister = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: UserRegisterCredentials) => authApi.register(data),
     onSuccess: () => {
-      router.push("/confirm-email");
+      setShowEmailDialog(true);
+      form.reset();
     },
     onError: (error: any) => {
       toast.error("Eroare la inregistrare", {
@@ -95,9 +97,14 @@ const useRegister = () => {
       password: data.password,
       birthday: data.birthday.toISOString()
     });
+
+    // TODO: Remove after backend implementation
+    setDialogEmail(data.email);
+    setShowEmailDialog(true);
+    form.reset();
   };
 
-  return { form, onSubmit, isPending };
+  return { form, onSubmit, isPending, showEmailDialog, setShowEmailDialog, dialogEmail };
 };
 
 export default useRegister;
