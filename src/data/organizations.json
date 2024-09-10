@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "createdBy": {
+      "id": 1,
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "name": "Team name",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Etiam non elit dui. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Etiam non elit dui.",
+    "logo": "https://path.com/logo.jpg",
+    "address": "address",
+    "region": {
+      "id": 1,
+      "name": "Chisi"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category"
+      }
+    ],
+    "website": "url",
+    "phoneNumber": "+37368576855",
+    "createdAt": "2023-07-01T00:00:00.000Z",
+    "updatedAt": "2023-07-01T00:00:00.000Z",
+    "approvalStatus": "pending",
+    "approvedBy": null,
+    "approvalDate": null
+  },
+  {
+    "id": 2,
+    "adminId": 2,
+    "name": "Vaconi",
+    "description": "description",
+    "logo": "https://path.com/logo.jpg",
+    "address": "address",
+    "region": {
+      "id": 1,
+      "name": "Chisi"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category"
+      }
+    ],
+    "website": "url",
+    "phoneNumber": "+37368576855",
+    "createdAt": "2024-07-01T00:00:00.000Z",
+    "updatedAt": "2024-07-01T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 7,
+      "username": "username"
+    },
+    "approvalDate": "ISO Date"
+  }
+]

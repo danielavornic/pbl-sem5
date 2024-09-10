@@ -25,7 +25,7 @@
 @layer base {
   :root {
     --background: 0 0% 96%;
-    --foreground: 0 0% 18%;
+    --foreground: 0 0% 24%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
@@ -42,8 +42,12 @@
 
     --destructive: 5 80% 51%;
     --destructive-foreground: 0 0% 18%;
+     --warning: 44 96.85% 50.2%;
+    --warning-foreground: 0 0% 18%;
+    --success:  136 53% 43%;
+    --success-foreground: 0 0% 18%;
 
-    --border: 0 0% 76%;
+    --border: 0 0% 86%;
     --input: 0 0% 76%;
     --ring: 262 100% 89%;
 

@@ -18,7 +18,7 @@ interface AdminLayoutProps {
 const links = [
   {
     label: "Organizații",
-    href: "/admin",
+    href: "/admin/organizations",
     icon: <Building className="h-5 w-5 flex-shrink-0 text-background" />
   },
   {
@@ -54,7 +54,7 @@ const AdminLayout = ({ title, children }: React.PropsWithChildren<AdminLayoutPro
                     <SidebarLink
                       key={idx}
                       link={link}
-                      className={pathname === link.href ? "bg-primary/10 opacity-100" : ""}
+                      className={pathname === link.href ? "bg-secondary/5 opacity-100" : ""}
                     />
                   ))}
                 </div>
@@ -64,7 +64,7 @@ const AdminLayout = ({ title, children }: React.PropsWithChildren<AdminLayoutPro
               <SidebarLink
                 link={{
                   label: "Deconectare",
-                  href: "/admin/logout",
+                  href: "/admin/login",
                   icon: (
                     <LogOut className="h-5 w-5 flex-shrink-0 rotate-180 transform text-background" />
                   )
