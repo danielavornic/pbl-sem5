@@ -26,10 +26,8 @@ export const RegisterForm = () => {
   return (
     <>
       <div className="my-10">
-        <h1 className="-ml-[60px] mb-4 text-center text-3xl font-bold">
-          Creează profilul tău de voluntar
-        </h1>
-        <div className="max-w-[436px]">
+        <h1 className="mb-4 text-center text-3xl font-bold">Creează profilul tău de voluntar</h1>
+        <div className="mx-auto max-w-[436px]">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
