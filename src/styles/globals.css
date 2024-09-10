@@ -50,6 +50,7 @@
     --radius: 0.825rem;
 
     --h-topbar: 96px;
+    --h-admin-topbar: 72px;
   }
 }
 
@@ -63,6 +64,19 @@
 
   .h-without-topbar {
     height: calc(100vh - var(--h-topbar));
+  }
+  .mt-topbar {
+    margin-top: var(--h-topbar);
+  }
+
+  .h-admin-topbar {
+    height: var(--h-admin-topbar);
+  }
+  .h-without-admin-topbar {
+    height: calc(100vh - var(--h-admin-topbar));
+  }
+  .mt-admin-topbar {
+    margin-top: var(--h-admin-topbar);
   }
 
   h1,

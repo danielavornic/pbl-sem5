@@ -10,8 +10,8 @@ const config: Config = {
         padding: "1rem"
       },
       fontFamily: {
-        heading: ["var(--font-montserrat)", "var(--font-lato)", "sans-serif"],
-        body: ["var(--font-lato)", "sans-serif"]
+        heading: ["var(--font-montserrat)", "var(--font-inter)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"]
       },
       borderRadius: {
         lg: "var(--radius)",

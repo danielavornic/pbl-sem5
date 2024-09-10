@@ -1,10 +1,10 @@
-import PublicLayout from "@/layouts/public";
+import AdminLayout from "@/layouts/admin";
 
 const AdminDashboard = () => {
   return (
-    <PublicLayout title="Admin Dashboard">
-      <main className="container my-10">hello</main>
-    </PublicLayout>
+    <AdminLayout title="Organizații">
+      <main className="pt-8"></main>
+    </AdminLayout>
   );
 };
 
