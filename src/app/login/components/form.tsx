@@ -20,7 +20,7 @@ export const LoginForm = () => {
   const { form, onSubmit, isPending } = useLogin();
 
   return (
-    <div className="min-w-[500px]">
+    <div className="min-w-[436px]">
       <h1 className="mb-4 text-3xl font-bold">Intră în cont</h1>
       <Form {...form}>
         <form
