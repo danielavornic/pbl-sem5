@@ -25,8 +25,8 @@ export const RegisterForm = () => {
 
   return (
     <>
-      <div className="min-w-[500px]">
-        <h1 className="mb-4 text-3xl font-bold">Creeză un cont</h1>
+      <div className="my-8 max-w-[436px]">
+        <h1 className="mb-4 text-center text-3xl font-bold">Creeză profilul tău de voluntar</h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -94,7 +94,6 @@ export const RegisterForm = () => {
                   <FormControl>
                     <DateTimePicker
                       granularity="day"
-                      yearRange={100}
                       value={field.value}
                       onChange={field.onChange}
                     />
