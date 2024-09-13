@@ -1,8 +1,9 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { ArrowUpDown, Info, MoreHorizontal } from "lucide-react";
+import { parseAsInteger, useQueryState } from "nuqs";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -139,13 +140,26 @@ export const columns: ColumnDef<Organization>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
+            <DetailsCellComponent row={row} />
+            {/* <DropdownMenuItem>
               <Info size={16} className="mr-2" />
               Vezi detalii
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       );
     }
   }
 ];
+
+const DetailsCellComponent = ({ row }: { row: Row<Organization> }) => {
+  const [id, setId] = useQueryState("id", parseAsInteger);
+  const organizationId = row.getValue("id") as number;
+
+  return (
+    <DropdownMenuItem onClick={() => setId(organizationId)}>
+      <Info size={16} className="mr-2" />
+      Vezi detalii
+    </DropdownMenuItem>
+  );
+};

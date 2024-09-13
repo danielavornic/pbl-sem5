@@ -26,3 +26,9 @@ export interface Organization {
   createdAt: string;
   updatedAt: string;
 }
+
+export enum ApprovalStatus {
+  pending = "În așteptare",
+  approved = "Aprobat",
+  rejected = "Respins"
+}

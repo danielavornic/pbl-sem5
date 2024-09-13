@@ -3,6 +3,7 @@ import data from "@/data/organizations.json";
 import AdminLayout from "@/layouts/admin";
 
 import { columns } from "./components/columns";
+import { OrganizationSheet } from "./components/sheet";
 
 const OrganizationsPage = () => {
   return (
@@ -10,6 +11,8 @@ const OrganizationsPage = () => {
       <main className="pt-8">
         <DataTable columns={columns} data={data as any} />
       </main>
+
+      <OrganizationSheet />
     </AdminLayout>
   );
 };
