@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
+import { Suspense } from "react";
 import { Toaster } from "sonner";
 
 import { cn } from "@/lib/utils";
@@ -34,8 +35,10 @@ export default function RootLayout({
     <ReactQueryProvider>
       <html lang="ro" className={cn(inter.variable, montserrat.variable)}>
         <body>
-          <ProgressBarProvider>{children}</ProgressBarProvider>
-          <Toaster richColors position="top-right" />
+          <Suspense>
+            <ProgressBarProvider>{children}</ProgressBarProvider>
+            <Toaster richColors position="top-right" />
+          </Suspense>
         </body>
       </html>
     </ReactQueryProvider>
