@@ -181,7 +181,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       emptyIndicator,
       maxSelected = Number.MAX_SAFE_INTEGER,
       onMaxSelected,
-      hidePlaceholderWhenSelected,
+      hidePlaceholderWhenSelected = true,
       disabled,
       groupBy,
       className,
@@ -440,7 +440,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       >
         <div
           className={cn(
-            "min-h-12 rounded-md border border-input bg-card px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            "min-h-12 rounded-md border border-input bg-card px-1 py-2 text-gray-600 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
             {
               "px-3 py-2": selected.length !== 0,
               "cursor-text": !disabled && selected.length !== 0
@@ -513,7 +513,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
               className={cn(
                 "flex-1 bg-card outline-none file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                 {
-                  "w-full": hidePlaceholderWhenSelected,
+                  "w-full": selected.length === 0,
                   "px-3 py-2": selected.length === 0,
                   "ml-1": selected.length !== 0
                 },
