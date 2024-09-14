@@ -440,7 +440,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       >
         <div
           className={cn(
-            "min-h-12 rounded-md border border-input bg-card px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+            "min-h-12 items-center rounded-md border border-input bg-card px-4 py-1 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             {
               "px-3 py-2": selected.length !== 0,
               "cursor-text": !disabled && selected.length !== 0
@@ -453,7 +453,11 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
             inputRef.current?.focus();
           }}
         >
-          <div className="relative flex flex-wrap gap-1">
+          <div
+            className={cn("relative flex flex-wrap gap-1", {
+              "pr-8": selected.length !== 0
+            })}
+          >
             {selected.map((option) => {
               return (
                 <Badge
@@ -463,6 +467,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                     "data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground",
                     badgeClassName
                   )}
+                  variant="muted"
                   data-fixed={option.fixed}
                   data-disabled={disabled || undefined}
                 >
@@ -511,10 +516,10 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
               }}
               placeholder={hidePlaceholderWhenSelected && selected.length !== 0 ? "" : placeholder}
               className={cn(
-                "flex-1 bg-card outline-none file:text-sm file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground focus:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "!focus-visible:ring-0 flex-1 bg-card px-0 text-base outline-none file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground",
                 {
                   "w-full": hidePlaceholderWhenSelected,
-                  "px-3 py-2": selected.length === 0,
+                  "py-2": selected.length === 0,
                   "ml-1": selected.length !== 0
                 },
                 inputProps?.className
@@ -527,7 +532,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 onChange?.(selected.filter((s) => s.fixed));
               }}
               className={cn(
-                "absolute right-0 h-6 w-6 p-0",
+                "absolute right-0 h-6 w-6 p-0 text-foreground/80",
                 (hideClearAllButton ||
                   disabled ||
                   selected.length < 1 ||
