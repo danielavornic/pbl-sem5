@@ -1,20 +1,56 @@
 import { NamedEntity } from "./common";
 
-export interface Organization {
+export enum ApprovalStatus {
+  pending = "În așteptare",
+  approved = "Aprobat",
+  rejected = "Respins"
+}
+export interface OrganizationCreateData {
+  name: string;
+  description: string;
+  address: string;
+  region: string;
+  categories?: number[] | NamedEntity[];
+  website?: string;
+  phoneNumber: string;
+}
+
+// export interface Organization extends OrganizationCreateData {
+//   id: number;
+//   createdAt: string;
+//   updatedAt: string;
+//   ownerId: number;
+//   owner: {
+//     id: number;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//   };
+//   volunteers: {
+//     id: number;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//   }[];
+//   events: {
+//     id: number;
+//     name: string;
+//     date: string;
+//     location: string;
+//   }[];
+//   categoriesData: NamedEntity[];
+//   regionId: NamedEntity;
+// }
+
+export interface Organization extends OrganizationCreateData {
   id: number;
   createdBy: {
     id: number;
     firstName: string;
     lastName: string;
   };
-  name: string;
-  description: string;
-  address: string;
-  region: NamedEntity;
-  phoneNumber: string;
   categories?: NamedEntity[];
   logo?: string;
-  website?: string;
 
   approvalStatus: "pending" | "approved" | "rejected";
   approvedBy: {
@@ -25,10 +61,4 @@ export interface Organization {
 
   createdAt: string;
   updatedAt: string;
-}
-
-export enum ApprovalStatus {
-  pending = "În așteptare",
-  approved = "Aprobat",
-  rejected = "Respins"
 }

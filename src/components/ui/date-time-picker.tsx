@@ -1,4 +1,4 @@
-import { add, format } from "date-fns";
+import { format } from "date-fns";
 import { enUS, type Locale } from "date-fns/locale";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import * as React from "react";
@@ -216,37 +216,45 @@ function genMonths(locale: Pick<Locale, "options" | "localize" | "formatLong">) 
   }));
 }
 
-function genYears(yearRange = 50) {
-  const today = new Date();
-  return Array.from({ length: yearRange * 2 + 1 }, (_, i) => ({
-    value: today.getFullYear() - yearRange + i,
-    label: (today.getFullYear() - yearRange + i).toString()
+const maxYear = 2024;
+
+function genYears(minYear = 1924) {
+  return Array.from({ length: maxYear - minYear + 1 }, (_, i) => ({
+    value: minYear + i,
+    label: (minYear + i).toString()
   }));
 }
 
 // ---------- utils end ----------
 
-function Calendar({
-  className,
-  classNames,
-  showOutsideDays = true,
-  yearRange = 50,
-  ...props
-}: CalendarProps & { yearRange?: number }) {
+function Calendar({ className, classNames, showOutsideDays = true, ...props }: CalendarProps) {
+  const currentYear = new Date().getFullYear();
+  const startYear = currentYear - 100;
+
   const MONTHS = React.useMemo(() => {
-    let locale: Pick<Locale, "options" | "localize" | "formatLong"> = enUS;
-    const { options, localize, formatLong } = props.locale || {};
-    if (options && localize && formatLong) {
-      locale = {
-        options,
-        localize,
-        formatLong
-      };
-    }
-    return genMonths(locale);
+    return [
+      { value: 0, label: "Ianuarie" },
+      { value: 1, label: "Februarie" },
+      { value: 2, label: "Martie" },
+      { value: 3, label: "Aprilie" },
+      { value: 4, label: "Mai" },
+      { value: 5, label: "Iunie" },
+      { value: 6, label: "Iulie" },
+      { value: 7, label: "August" },
+      { value: 8, label: "Septembrie" },
+      { value: 9, label: "Octombrie" },
+      { value: 10, label: "Noiembrie" },
+      { value: 11, label: "Decembrie" }
+    ];
   }, []);
 
-  const YEARS = React.useMemo(() => genYears(yearRange), []);
+  const YEARS = React.useMemo(() => {
+    const years = [];
+    for (let year = startYear; year <= currentYear; year++) {
+      years.push({ value: year, label: year.toString() });
+    }
+    return years;
+  }, [currentYear, startYear]);
 
   return (
     <DayPicker
@@ -618,8 +626,6 @@ type DateTimePickerProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   disabled?: boolean;
-  /** showing `AM/PM` or not. */
-  hourCycle?: 12 | 24;
   placeholder?: string;
   /**
    * The year range will be: `This year + yearRange` and `this year - yearRange`.
@@ -632,7 +638,7 @@ type DateTimePickerProps = {
    * The format is derived from the `date-fns` documentation.
    * @reference https://date-fns.org/v3.6.0/docs/format
    **/
-  displayFormat?: { hour24?: string; hour12?: string };
+  displayFormat?: { date: string };
   /**
    * The granularity prop allows you to control the smallest unit that is displayed by DateTimePicker.
    * By default, the value is `second` which shows all time inputs.
@@ -650,11 +656,9 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       locale = enUS,
       value,
       onChange,
-      hourCycle = 24,
-      yearRange = 50,
       disabled = false,
       displayFormat,
-      granularity = "second",
+      granularity = "day",
       placeholder = "Selectează o dată",
       ...props
     },
@@ -662,22 +666,15 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
   ) => {
     const [month, setMonth] = React.useState<Date>(value ?? new Date());
     const buttonRef = useRef<HTMLButtonElement>(null);
+
     /**
      * carry over the current time when a user clicks a new day
      * instead of resetting to 00:00
      */
     const handleSelect = (newDay: Date | undefined) => {
       if (!newDay) return;
-      if (!value) {
-        onChange?.(newDay);
-        setMonth(newDay);
-        return;
-      }
-      const diff = newDay.getTime() - value.getTime();
-      const diffInDays = diff / (1000 * 60 * 60 * 24);
-      const newDateFull = add(value, { days: Math.ceil(diffInDays) });
-      onChange?.(newDateFull);
-      setMonth(newDateFull);
+      onChange?.(newDay);
+      setMonth(newDay);
     };
 
     useImperativeHandle(
@@ -689,14 +686,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       [value]
     );
 
-    const initHourFormat = {
-      hour24:
-        displayFormat?.hour24 ??
-        `PPP HH:mm${!granularity || granularity === "second" ? ":ss" : ""}`,
-      hour12:
-        displayFormat?.hour12 ??
-        `PP hh:mm${!granularity || granularity === "second" ? ":ss" : ""} b`
-    };
+    const dateFormat = displayFormat?.date ?? "PP";
 
     let loc = enUS;
     const { options, localize, formatLong } = locale;
@@ -722,7 +712,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {value ? (
-              format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
+              format(value, dateFormat, {
                 locale: loc
               })
             ) : (
@@ -735,22 +725,11 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
             mode="single"
             selected={value}
             month={month}
-            onSelect={(d: Date | undefined) => handleSelect(d)}
-            onMonthChange={handleSelect}
-            yearRange={yearRange}
+            onSelect={handleSelect}
+            onMonthChange={setMonth}
             locale={locale}
             {...props}
           />
-          {granularity !== "day" && (
-            <div className="border-t border-border p-3">
-              <TimePicker
-                onChange={onChange}
-                date={value}
-                hourCycle={hourCycle}
-                granularity={granularity}
-              />
-            </div>
-          )}
         </PopoverContent>
       </Popover>
     );

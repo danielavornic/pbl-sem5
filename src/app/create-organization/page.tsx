@@ -1,12 +1,10 @@
 import PublicLayout from "@/layouts/public";
 
-import ConfirmEmailDialog from "./components/email-dialog";
-import { RegisterForm } from "./components/form";
-import useRegister from "./hooks/use-register";
+import { CreateOrganizationForm } from "./components/form";
 
-const RegisterPage = () => {
+const CreateOrganizationPage = () => {
   return (
-    <PublicLayout title="Creează un cont">
+    <PublicLayout title="Creează o organizație">
       <main className="container mt-[35px] flex items-start justify-center gap-[8vw]">
         <div className="flex h-[100%] w-[500px] justify-center">
           <div className="relative w-[490px]">
@@ -16,10 +14,10 @@ const RegisterPage = () => {
             <div className="absolute top-[695px] flex h-[235px] w-[235px] items-center justify-center rounded-[30px] bg-muted" />
           </div>
         </div>
-        <RegisterForm />
+        <CreateOrganizationForm />
       </main>
     </PublicLayout>
   );
 };
 
-export default RegisterPage;
+export default CreateOrganizationPage;
