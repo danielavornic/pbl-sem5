@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 
 import useCreateOrganization from "../hooks/use-create-organization";
@@ -106,7 +107,7 @@ export const CreateOrganizationForm = () => {
                         <SelectTrigger>
                           <SelectValue placeholder="Selectează o regiune" />
                         </SelectTrigger>
-                        <SelectContent className="h-[240px]">
+                        <SelectContent className="h-[324px]">
                           <SelectGroup>
                             <SelectLabel>Chișinău</SelectLabel>
                             <SelectItem value="1">Ciocana</SelectItem>
@@ -115,14 +116,12 @@ export const CreateOrganizationForm = () => {
                             <SelectItem value="4">Botanica</SelectItem>
                             <SelectItem value="5">Buiucani</SelectItem>
                           </SelectGroup>
-                          <SelectGroup>
-                            <SelectLabel>Chișinău</SelectLabel>
-                            <SelectItem value="6">Ciocana</SelectItem>
-                            <SelectItem value="7">Râșcani</SelectItem>
-                            <SelectItem value="8">Centru</SelectItem>
-                            <SelectItem value="9">Botanica</SelectItem>
-                            <SelectItem value="10">Buiucani</SelectItem>
-                          </SelectGroup>
+                          <Separator />
+                          <SelectItem value="6">Bălți</SelectItem>
+                          <SelectItem value="7">Anenii Noi</SelectItem>
+                          <SelectItem value="8">Basarabeasca</SelectItem>
+                          <SelectItem value="9">Briceni</SelectItem>
+                          <SelectItem value="10">Cahul</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
