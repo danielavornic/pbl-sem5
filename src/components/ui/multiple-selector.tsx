@@ -181,7 +181,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
       emptyIndicator,
       maxSelected = Number.MAX_SAFE_INTEGER,
       onMaxSelected,
-      hidePlaceholderWhenSelected,
+      hidePlaceholderWhenSelected = true,
       disabled,
       groupBy,
       className,
@@ -518,7 +518,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
               className={cn(
                 "!focus-visible:ring-0 flex-1 bg-card px-0 text-base outline-none file:font-medium placeholder:text-muted-foreground/60 hover:border-foreground",
                 {
-                  "w-full": hidePlaceholderWhenSelected,
+                  "w-full": hidePlaceholderWhenSelected || selected.length === 0,
                   "py-2": selected.length === 0,
                   "ml-1": selected.length !== 0
                 },
