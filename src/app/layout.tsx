@@ -5,6 +5,7 @@ import { Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 
 import { cn } from "@/lib/utils";
+import ProgressBarProvider from "@/providers/progress-bar-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
 
 const inter = Inter({
@@ -32,8 +33,10 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <html lang="ro" className={cn(inter.variable, montserrat.variable)}>
-        <body>{children}</body>
-        <Toaster richColors position="top-right" />
+        <body>
+          <ProgressBarProvider>{children}</ProgressBarProvider>
+          <Toaster richColors position="top-right" />
+        </body>
       </html>
     </ReactQueryProvider>
   );

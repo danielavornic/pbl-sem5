@@ -88,7 +88,8 @@ const useCreateOrganization = () => {
         logo: logoUrl
       });
     }
-  }, [uploadedFiles, form, mutate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadedFiles, form]);
 
   return { form, onSubmit, isPending, onUpload, progresses, uploadedFiles, isUploading };
 };
