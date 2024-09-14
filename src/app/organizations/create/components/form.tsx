@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
 import { cn } from "@/lib/utils";
@@ -98,7 +99,7 @@ export const CreateOrganizationForm = () => {
                       >
                         <SelectValue placeholder="Selectează o regiune" />
                       </SelectTrigger>
-                      <SelectContent className="h-[240px]">
+                      <SelectContent className="h-[324px]">
                         <SelectGroup>
                           <SelectLabel>Chișinău</SelectLabel>
                           <SelectItem value="1">Ciocana</SelectItem>
@@ -107,14 +108,42 @@ export const CreateOrganizationForm = () => {
                           <SelectItem value="4">Botanica</SelectItem>
                           <SelectItem value="5">Buiucani</SelectItem>
                         </SelectGroup>
-                        <SelectGroup>
-                          <SelectLabel>Chișinău</SelectLabel>
-                          <SelectItem value="6">Ciocana</SelectItem>
-                          <SelectItem value="7">Râșcani</SelectItem>
-                          <SelectItem value="8">Centru</SelectItem>
-                          <SelectItem value="9">Botanica</SelectItem>
-                          <SelectItem value="10">Buiucani</SelectItem>
-                        </SelectGroup>
+                        <Separator />
+                        <SelectItem value="6">Bălți</SelectItem>
+                        <SelectItem value="7">Anenii Noi</SelectItem>
+                        <SelectItem value="8">Basarabeasca</SelectItem>
+                        <SelectItem value="9">Briceni</SelectItem>
+                        <SelectItem value="10">Cahul</SelectItem>
+                        <SelectItem value="11">Călărași</SelectItem>
+                        <SelectItem value="12">Cantemir</SelectItem>
+                        <SelectItem value="13">Căușeni</SelectItem>
+                        <SelectItem value="14">Ciadâr-Lunga</SelectItem>
+                        <SelectItem value="15">Cimișlia</SelectItem>
+                        <SelectItem value="16">Comrat</SelectItem>
+                        <SelectItem value="17">Criuleni</SelectItem>
+                        <SelectItem value="18">Dondușeni</SelectItem>
+                        <SelectItem value="19">Drochia</SelectItem>
+                        <SelectItem value="20">Edineț</SelectItem>
+                        <SelectItem value="21">Fălești</SelectItem>
+                        <SelectItem value="22">Florești</SelectItem>
+                        <SelectItem value="23">Glodeni</SelectItem>
+                        <SelectItem value="24">Hîncești</SelectItem>
+                        <SelectItem value="25">Ialoveni</SelectItem>
+                        <SelectItem value="26">Leova</SelectItem>
+                        <SelectItem value="27">Nisporeni</SelectItem>
+                        <SelectItem value="28">Ocnița</SelectItem>
+                        <SelectItem value="29">Orhei</SelectItem>
+                        <SelectItem value="30">Rezina</SelectItem>
+                        <SelectItem value="31">Rîșcani</SelectItem>
+                        <SelectItem value="32">Sîngerei</SelectItem>
+                        <SelectItem value="33">Soroca</SelectItem>
+                        <SelectItem value="34">Strășeni</SelectItem>
+                        <SelectItem value="35">Șoldănești</SelectItem>
+                        <SelectItem value="36">Ștefan-Vodă</SelectItem>
+                        <SelectItem value="37">Taraclia</SelectItem>
+                        <SelectItem value="38">Telenești</SelectItem>
+                        <SelectItem value="39">Ungheni</SelectItem>
+                        <SelectItem value="40">UTA Găgăuzia</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormControl>
