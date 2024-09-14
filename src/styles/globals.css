@@ -42,9 +42,9 @@
 
     --destructive: 5 80% 51%;
     --destructive-foreground: 0 0% 18%;
-     --warning: 44 96.85% 50.2%;
+    --warning: 44 96.85% 50.2%;
     --warning-foreground: 0 0% 18%;
-    --success:  136 53% 43%;
+    --success: 136 53% 43%;
     --success-foreground: 0 0% 18%;
 
     --border: 0 0% 86%;
@@ -90,5 +90,18 @@
   h5,
   h6 {
     @apply font-heading;
+  }
+
+  .textarea-scrollbar::-webkit-scrollbar {
+    @apply w-4;
+  }
+
+  .textarea-scrollbar::-webkit-scrollbar-thumb {
+    border: 5px solid rgba(0, 0, 0, 0);
+    @apply cursor-default rounded-[9999px] bg-secondary/60 bg-clip-padding;
+  }
+
+  .textarea-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary/70;
   }
 }

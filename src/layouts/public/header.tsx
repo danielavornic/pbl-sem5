@@ -15,7 +15,7 @@ export const Header = () => {
       <div className="container flex h-full items-center justify-between">
         <div className="flex items-start">
           <Link href={isAdmin ? "/admin" : "/"}>
-            <Image src="/logo.svg" alt="Voluntariat Moldova" width={238} height={48} />
+            <Image src="/logo.svg" alt="Voluntariat Moldova" width={238} height={48} priority />
           </Link>
           {isAdmin && <span className="font-heading text-sm font-semibold text-accent">admin</span>}
         </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import { DataTable } from "@/components/ui/data-table";
 import data from "@/data/organizations.json";
 import AdminLayout from "@/layouts/admin";

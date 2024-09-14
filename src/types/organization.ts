@@ -13,6 +13,7 @@ export interface OrganizationCreateData {
   categories?: number[] | NamedEntity[];
   website?: string;
   phoneNumber: string;
+  logo?: string;
 }
 
 // export interface Organization extends OrganizationCreateData {
@@ -50,7 +51,6 @@ export interface Organization extends OrganizationCreateData {
     lastName: string;
   };
   categories?: NamedEntity[];
-  logo?: string;
 
   approvalStatus: "pending" | "approved" | "rejected";
   approvedBy: {

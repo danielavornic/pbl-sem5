@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { FileUploader } from "@/components/ui/file-uploader";
 import {
   Form,
   FormControl,
@@ -22,9 +23,12 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
+import { cn } from "@/lib/utils";
 
 import useCreateOrganization from "../hooks/use-create-organization";
 
+// TODO: Update after API is ready
 const CATEGORY_OPTIONS: Option[] = [
   { value: "1", label: "Mediu" },
   { value: "2", label: "Social" },
@@ -40,157 +44,189 @@ const CATEGORY_OPTIONS: Option[] = [
 ];
 
 export const CreateOrganizationForm = () => {
-  const { form, onSubmit, isPending } = useCreateOrganization();
+  const { form, onSubmit, isPending, isUploading, progresses, uploadedFiles } =
+    useCreateOrganization();
 
   return (
-    <>
-      <div className="my-10">
-        <h1 className="mb-4 text-center text-3xl font-bold">Creează organizația ta</h1>
-        <div className="mx-auto max-w-[436px]">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col space-y-4"
-              noValidate
-            >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Numele Organizației</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Denumirea oficială" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <div className="my-10">
+      <h1 className="mb-4 text-3xl font-bold">Creează organizația ta</h1>
+      <div className="mx-auto min-w-[500px] max-w-[500px]">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col space-y-4"
+            noValidate
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Nume</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Denumirea oficială" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Descrierea Organizației</FormLabel>
-                    <FormControl>
-                      <Textarea placeholder="Adăugați o scurtă descriere aici..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Descriere</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Adăugați o scurtă descriere aici..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Adresa organizației</FormLabel>
-                    <FormControl>
-                      <Input placeholder="ex.: str. Independenței 4" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="region"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Regiune</FormLabel>
+                  <FormControl>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger
+                        className={cn({ "border-destructive": form.formState.errors.region })}
+                      >
+                        <SelectValue placeholder="Selectează o regiune" />
+                      </SelectTrigger>
+                      <SelectContent className="h-[240px]">
+                        <SelectGroup>
+                          <SelectLabel>Chișinău</SelectLabel>
+                          <SelectItem value="1">Ciocana</SelectItem>
+                          <SelectItem value="2">Râșcani</SelectItem>
+                          <SelectItem value="3">Centru</SelectItem>
+                          <SelectItem value="4">Botanica</SelectItem>
+                          <SelectItem value="5">Buiucani</SelectItem>
+                        </SelectGroup>
+                        <SelectGroup>
+                          <SelectLabel>Chișinău</SelectLabel>
+                          <SelectItem value="6">Ciocana</SelectItem>
+                          <SelectItem value="7">Râșcani</SelectItem>
+                          <SelectItem value="8">Centru</SelectItem>
+                          <SelectItem value="9">Botanica</SelectItem>
+                          <SelectItem value="10">Buiucani</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="region"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Regiunea</FormLabel>
-                    <FormControl>
-                      <Select {...field} onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selectează o regiune" />
-                        </SelectTrigger>
-                        <SelectContent className="h-[240px]">
-                          <SelectGroup>
-                            <SelectLabel>Chișinău</SelectLabel>
-                            <SelectItem value="1">Ciocana</SelectItem>
-                            <SelectItem value="2">Râșcani</SelectItem>
-                            <SelectItem value="3">Centru</SelectItem>
-                            <SelectItem value="4">Botanica</SelectItem>
-                            <SelectItem value="5">Buiucani</SelectItem>
-                          </SelectGroup>
-                          <SelectGroup>
-                            <SelectLabel>Chișinău</SelectLabel>
-                            <SelectItem value="6">Ciocana</SelectItem>
-                            <SelectItem value="7">Râșcani</SelectItem>
-                            <SelectItem value="8">Centru</SelectItem>
-                            <SelectItem value="9">Botanica</SelectItem>
-                            <SelectItem value="10">Buiucani</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Adresă</FormLabel>
+                  <FormControl>
+                    <Input placeholder="ex.: str. Independenței 4" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="categories"
-                render={({ field }) => (
+            <FormField
+              control={form.control}
+              name="categories"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Categorii</FormLabel>
+                  <FormControl>
+                    <MultipleSelector
+                      className={cn({ "border-destructive": form.formState.errors.categories })}
+                      options={CATEGORY_OPTIONS}
+                      placeholder="Selectează cel puțin o categorie"
+                      value={CATEGORY_OPTIONS.filter((option) =>
+                        field.value.includes(parseInt(option.value))
+                      )}
+                      onChange={(selectedValues) => {
+                        const values = selectedValues.map((option) => parseInt(option.value));
+                        field.onChange(values);
+                      }}
+                      emptyIndicator="Nu ați selectat nicio categorie"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Număr de telefon</FormLabel>
+                  <FormControl>
+                    <PhoneInput {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="website"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Website</FormLabel>
+                  <FormControl>
+                    <Input type="url" placeholder="https://www.exemplu.md" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="logo"
+              render={({ field }) => (
+                <div className="space-y-6">
                   <FormItem className="w-full">
-                    <FormLabel>Categorii</FormLabel>
+                    <FormLabel>Logo</FormLabel>
                     <FormControl>
-                      <MultipleSelector
-                        options={CATEGORY_OPTIONS}
-                        placeholder="Selectează cel puțin o categorie"
-                        value={CATEGORY_OPTIONS.filter((option) =>
-                          field.value?.includes(option.value)
-                        )}
-                        onChange={(selectedValues) => {
-                          field.onChange(selectedValues.map((option) => option.value));
-                        }}
-                        emptyIndicator="Nu ați selectat nicio categorie"
-                        {...field}
+                      <FileUploader
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        maxFileCount={1}
+                        maxSize={4 * 1024 * 1024}
+                        progresses={progresses}
+                        disabled={isUploading}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                )}
-              />
+                  {uploadedFiles.length > 0 ? (
+                    <UploadedFilesCard uploadedFiles={uploadedFiles} />
+                  ) : null}
+                </div>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="website"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Website</FormLabel>
-                    <FormControl>
-                      <Input type="url" placeholder="https://www.exemplu.md" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Număr de telefon</FormLabel>
-                    <FormControl>
-                      <PhoneInput {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button type="submit" loading={isPending}>
+            <div>
+              <Button className="float-right" type="submit" loading={isPending || isUploading}>
                 {isPending ? "Se incarcă..." : "Creează organizația"}
               </Button>
-            </form>
-          </Form>
-        </div>
+            </div>
+          </form>
+        </Form>
       </div>
-    </>
+    </div>
   );
 };
+
+export default CreateOrganizationForm;
