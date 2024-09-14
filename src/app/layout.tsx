@@ -5,7 +5,7 @@ import { Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 
 import { cn } from "@/lib/utils";
-import { ReactQueryProvider } from "@/providers/react-query-provider";
+import ReactQueryProvider from "@/providers/react-query-provider";
 
 const inter = Inter({
   subsets: ["latin-ext"],

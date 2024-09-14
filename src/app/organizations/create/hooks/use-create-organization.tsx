@@ -2,11 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { organizationApi } from "@/api/organizationApi";
+import { useUploadFile } from "@/hooks/use-upload-file";
 import { OrganizationCreateData } from "@/types";
 
 export const organizationFormSchema = z.object({
@@ -19,7 +21,8 @@ export const organizationFormSchema = z.object({
     z.literal(""),
     z.string().trim().url({ message: "Adresa site-ului trebuie să fie validă" })
   ]),
-  phoneNumber: z.string().min(1, { message: "Numărul de telefon este obligatoriu" })
+  phoneNumber: z.string().min(1, { message: "Numărul de telefon este obligatoriu" }),
+  logo: z.array(z.instanceof(File))
 });
 
 const useCreateOrganization = () => {
@@ -33,8 +36,13 @@ const useCreateOrganization = () => {
       region: "",
       categories: [],
       website: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      logo: []
     }
+  });
+
+  const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile("imageUploader", {
+    defaultUploadedFiles: []
   });
 
   const { mutate, isPending } = useMutation({
@@ -53,18 +61,36 @@ const useCreateOrganization = () => {
   });
 
   const onSubmit = (data: z.infer<typeof organizationFormSchema>) => {
-    mutate({
-      name: data.name,
-      description: data.description,
-      address: data.address,
-      region: data.region,
-      categories: data.categories,
-      website: data.website,
-      phoneNumber: data.phoneNumber
-    });
+    if (data.logo.length === 0) {
+      mutate({
+        name: data.name,
+        description: data.description,
+        address: data.address,
+        region: data.region,
+        categories: data.categories,
+        website: data.website,
+        phoneNumber: data.phoneNumber
+      });
+
+      return;
+    }
+
+    onUpload(data.logo);
   };
 
-  return { form, onSubmit, isPending };
+  useEffect(() => {
+    if (uploadedFiles.length) {
+      const formValues = form.getValues();
+      const logoUrl = uploadedFiles[0].url;
+
+      mutate({
+        ...formValues,
+        logo: logoUrl
+      });
+    }
+  }, [uploadedFiles, form, mutate]);
+
+  return { form, onSubmit, isPending, onUpload, progresses, uploadedFiles, isUploading };
 };
 
 export default useCreateOrganization;

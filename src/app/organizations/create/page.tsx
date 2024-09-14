@@ -1,6 +1,10 @@
+"use client";
+
+import dynamic from "next/dynamic";
+
 import PublicLayout from "@/layouts/public";
 
-import { CreateOrganizationForm } from "./components/form";
+const DynamicCreateOrganizationForm = dynamic(() => import("./components/form"), { ssr: false });
 
 const CreateOrganizationPage = () => {
   return (
@@ -16,7 +20,7 @@ const CreateOrganizationPage = () => {
           <div className="h-[235px] rounded-[30px] bg-muted" />
           <div className="h-[235px] rounded-[30px]" />
         </div>
-        <CreateOrganizationForm />
+        <DynamicCreateOrganizationForm />
       </main>
     </PublicLayout>
   );

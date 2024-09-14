@@ -455,7 +455,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
         >
           <div
             className={cn("relative flex flex-wrap gap-1", {
-              "pr-8": selected.length !== 0
+              "pr-8 pt-[3px]": selected.length !== 0
             })}
           >
             {selected.map((option) => {
