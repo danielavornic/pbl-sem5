@@ -12,10 +12,13 @@ import { OrganizationCreateData } from "@/types";
 export const organizationFormSchema = z.object({
   name: z.string().min(1, { message: "Numele organizației este obligatoriu" }),
   description: z.string().min(1, { message: "Descrierea organizației este obligatorie" }),
+  region: z.string().min(1, { message: "Localitatea organizației este obligatorie" }),
   address: z.string().min(1, { message: "Adresa organizației este obligatorie" }),
-  region: z.string().min(1, { message: "Regiunea organizației este obligatorie" }),
   categories: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o categorie" }),
-  website: z.string().url({ message: "URL-ul website-ului trebuie să fie valid" }),
+  website: z.union([
+    z.literal(""),
+    z.string().trim().url({ message: "Adresa site-ului trebuie să fie validă" })
+  ]),
   phoneNumber: z.string().min(1, { message: "Numărul de telefon este obligatoriu" })
 });
 
@@ -37,7 +40,9 @@ const useCreateOrganization = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: OrganizationCreateData) => organizationApi.create(data),
     onSuccess: () => {
-      toast.success("Organizația a fost creată cu succes");
+      toast.success("Organizația a fost creată cu succes", {
+        description: "Organizația a fost creată cu succes și va fi verificată de un administrator"
+      });
       form.reset();
     },
     onError: (error: any) => {

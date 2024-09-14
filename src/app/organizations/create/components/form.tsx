@@ -22,9 +22,11 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 import useCreateOrganization from "../hooks/use-create-organization";
 
+// TODO: Update after API is ready
 const CATEGORY_OPTIONS: Option[] = [
   { value: "1", label: "Mediu" },
   { value: "2", label: "Social" },
@@ -45,8 +47,8 @@ export const CreateOrganizationForm = () => {
   return (
     <>
       <div className="my-10">
-        <h1 className="mb-4 text-center text-3xl font-bold">Creează organizația ta</h1>
-        <div className="mx-auto max-w-[436px]">
+        <h1 className="mb-4 text-3xl font-bold">Creează organizația ta</h1>
+        <div className="mx-auto min-w-[500px] max-w-[500px]">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -58,7 +60,7 @@ export const CreateOrganizationForm = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Numele Organizației</FormLabel>
+                    <FormLabel>Nume</FormLabel>
                     <FormControl>
                       <Input placeholder="Denumirea oficială" {...field} />
                     </FormControl>
@@ -72,23 +74,9 @@ export const CreateOrganizationForm = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Descrierea Organizației</FormLabel>
+                    <FormLabel>Descriere</FormLabel>
                     <FormControl>
                       <Textarea placeholder="Adăugați o scurtă descriere aici..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Adresa organizației</FormLabel>
-                    <FormControl>
-                      <Input placeholder="ex.: str. Independenței 4" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -100,10 +88,12 @@ export const CreateOrganizationForm = () => {
                 name="region"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Regiunea</FormLabel>
+                    <FormLabel>Regiune</FormLabel>
                     <FormControl>
                       <Select {...field} onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger>
+                        <SelectTrigger
+                          className={cn({ "border-destructive": form.formState.errors.region })}
+                        >
                           <SelectValue placeholder="Selectează o regiune" />
                         </SelectTrigger>
                         <SelectContent className="h-[240px]">
@@ -133,23 +123,12 @@ export const CreateOrganizationForm = () => {
 
               <FormField
                 control={form.control}
-                name="categories"
+                name="address"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Categorii</FormLabel>
+                    <FormLabel>Adresă</FormLabel>
                     <FormControl>
-                      <MultipleSelector
-                        options={CATEGORY_OPTIONS}
-                        placeholder="Selectează cel puțin o categorie"
-                        value={CATEGORY_OPTIONS.filter((option) =>
-                          field.value?.includes(option.value)
-                        )}
-                        onChange={(selectedValues) => {
-                          field.onChange(selectedValues.map((option) => option.value));
-                        }}
-                        emptyIndicator="Nu ați selectat nicio categorie"
-                        {...field}
-                      />
+                      <Input placeholder="ex.: str. Independenței 4" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -158,12 +137,24 @@ export const CreateOrganizationForm = () => {
 
               <FormField
                 control={form.control}
-                name="website"
+                name="categories"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel>Website</FormLabel>
+                    <FormLabel>Categorii</FormLabel>
                     <FormControl>
-                      <Input type="url" placeholder="https://www.exemplu.md" {...field} />
+                      <MultipleSelector
+                        className={cn({ "border-destructive": form.formState.errors.categories })}
+                        options={CATEGORY_OPTIONS}
+                        placeholder="Selectează cel puțin o categorie"
+                        value={CATEGORY_OPTIONS.filter((option) =>
+                          field.value.includes(parseInt(option.value))
+                        )}
+                        onChange={(selectedValues) => {
+                          const values = selectedValues.map((option) => parseInt(option.value));
+                          field.onChange(values);
+                        }}
+                        emptyIndicator="Nu ați selectat nicio categorie"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -184,9 +175,25 @@ export const CreateOrganizationForm = () => {
                 )}
               />
 
-              <Button type="submit" loading={isPending}>
-                {isPending ? "Se incarcă..." : "Creează organizația"}
-              </Button>
+              <FormField
+                control={form.control}
+                name="website"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Website</FormLabel>
+                    <FormControl>
+                      <Input type="url" placeholder="https://www.exemplu.md" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div>
+                <Button className="float-right" type="submit" loading={isPending}>
+                  {isPending ? "Se incarcă..." : "Creează organizația"}
+                </Button>
+              </div>
             </form>
           </Form>
         </div>
