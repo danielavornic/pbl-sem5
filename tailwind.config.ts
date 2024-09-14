@@ -10,8 +10,8 @@ const config: Config = {
         padding: "1rem"
       },
       fontFamily: {
-        heading: ["var(--font-montserrat)", "var(--font-lato)", "sans-serif"],
-        body: ["var(--font-lato)", "sans-serif"]
+        heading: ["var(--font-montserrat)", "var(--font-inter)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"]
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -48,6 +48,14 @@ const config: Config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))"
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning) / <alpha-value>)",
+          foreground: "hsl(var(--warning-foreground) / <alpha-value>)"
+        },
+        success: {
+          DEFAULT: "hsl(var(--success) / <alpha-value>)",
+          foreground: "hsl(var(--success-foreground) / <alpha-value>)"
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

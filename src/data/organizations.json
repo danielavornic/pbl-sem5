@@ -1,0 +1,95 @@
+[
+  {
+    "id": 1,
+    "createdBy": {
+      "id": 1,
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "name": "Team name",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac volutpat turpis, quis dictum felis. Aenean quis dui non arcu congue tincidunt. Donec neque urna, congue in euismod non, egestas id neque. Suspendisse potenti. In lobortis libero eget quam euismod semper. Nunc consectetur pharetra posuere. Suspendisse in rutrum ligula, nec sodales dolor. Mauris quis tincidunt nisl. Nam molestie sapien quam, ut vulputate dui blandit vitae. In hac habitasse platea dictumst. Aliquam elementum libero id viverra egestas. Etiam pellentesque enim eu mauris pulvinar eleifend.\n Nulla pretium eros id dui lacinia iaculis. Donec id ligula mattis, condimentum metus vitae, vestibulum mi. Donec at turpis in leo suscipit faucibus eget quis est. Aenean non justo est. Etiam vehicula, turpis non vestibulum convallis, ligula ligula imperdiet arcu, vitae sagittis ante tellus non dui. Ut sed purus massa. Phasellus faucibus risus scelerisque, fringilla diam non, consequat arcu. Fusce sollicitudin vel nunc et commodo.",
+    "logo": "/images/avatar.png",
+    "address": "address",
+    "region": {
+      "id": 1,
+      "name": "Chisinau"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category"
+      }
+    ],
+    "website": "url",
+    "phoneNumber": "+37368576855",
+    "createdAt": "2023-07-01T00:00:00.000Z",
+    "updatedAt": "2023-07-01T00:00:00.000Z",
+    "approvalStatus": "pending",
+    "approvedBy": null,
+    "approvalDate": null
+  },
+  {
+    "id": 2,
+    "createdBy": {
+      "id": 1,
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "name": "Vaconi",
+    "description": "description",
+    "logo": "/images/avatar.png",
+    "address": "address",
+    "region": {
+      "id": 1,
+      "name": "Chisi"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category"
+      }
+    ],
+    "website": "url",
+    "phoneNumber": "+37368576855",
+    "createdAt": "2024-07-01T00:00:00.000Z",
+    "updatedAt": "2024-07-01T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 7,
+      "username": "username"
+    },
+    "approvalDate": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "createdBy": {
+      "id": 1,
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "name": "Maria",
+    "description": "description",
+    "logo": "/images/avatar.png",
+    "address": "address",
+    "region": {
+      "id": 1,
+      "name": "Soroca"
+    },
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category"
+      }
+    ],
+    "website": "url",
+    "phoneNumber": "+37368576855",
+    "createdAt": "2024-07-01T00:00:00.000Z",
+    "updatedAt": "2024-07-01T00:00:00.000Z",
+    "approvalStatus": "rejected",
+    "approvedBy": {
+      "id": 7,
+      "username": "username"
+    },
+    "approvalDate": "2024-07-01T00:00:00.000Z"
+  }
+]

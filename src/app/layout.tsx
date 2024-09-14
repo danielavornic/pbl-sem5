@@ -1,16 +1,16 @@
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
-import { Lato, Montserrat } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 
 import { cn } from "@/lib/utils";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 
-const lato = Lato({
+const inter = Inter({
   subsets: ["latin-ext"],
-  weight: ["400", "700"],
-  variable: "--font-lato"
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter"
 });
 const montserrat = Montserrat({
   subsets: ["latin-ext"],
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <ReactQueryProvider>
-      <html lang="ro" className={cn(lato.variable, montserrat.variable)}>
+      <html lang="ro" className={cn(inter.variable, montserrat.variable)}>
         <body>{children}</body>
         <Toaster richColors position="top-right" />
       </html>
