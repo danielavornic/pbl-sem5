@@ -16,33 +16,6 @@ export interface OrganizationCreateData {
   logo?: string;
 }
 
-// export interface Organization extends OrganizationCreateData {
-//   id: number;
-//   createdAt: string;
-//   updatedAt: string;
-//   ownerId: number;
-//   owner: {
-//     id: number;
-//     firstName: string;
-//     lastName: string;
-//     email: string;
-//   };
-//   volunteers: {
-//     id: number;
-//     firstName: string;
-//     lastName: string;
-//     email: string;
-//   }[];
-//   events: {
-//     id: number;
-//     name: string;
-//     date: string;
-//     location: string;
-//   }[];
-//   categoriesData: NamedEntity[];
-//   regionId: NamedEntity;
-// }
-
 export interface Organization extends OrganizationCreateData {
   id: number;
   createdBy: {
