@@ -17,7 +17,7 @@ const inter = Inter({
 });
 const montserrat = Montserrat({
   subsets: ["latin-ext"],
-  weight: ["400", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-montserrat",
   display: "swap"
 });
@@ -39,7 +39,7 @@ export default function RootLayout({
         <body>
           <Suspense>
             <ProgressBarProvider>{children}</ProgressBarProvider>
-            <Toaster richColors position="top-right" closeButton />
+            <Toaster richColors closeButton />
           </Suspense>
         </body>
       </html>

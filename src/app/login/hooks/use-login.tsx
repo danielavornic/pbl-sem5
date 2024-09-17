@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { authApi } from "@/api/authApi";
+import useUserStore from "@/lib/user-store";
 import { UserLoginCredentials } from "@/types";
 
 export const formSchema = z.object({
@@ -20,6 +21,7 @@ export const formSchema = z.object({
 
 const useLogin = () => {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -32,8 +34,22 @@ const useLogin = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: UserLoginCredentials) => authApi.login(data),
-    onSuccess: () => {
-      router.push("/");
+    onSuccess: (response) => {
+      const { user } = response;
+
+      if (user === null) {
+        toast.error("Eroare la autentificare", {
+          description: response.message
+        });
+        return;
+      }
+
+      setUser(user);
+      if (user?.isFirstLogin) {
+        router.push("/?setup=true");
+      } else {
+        router.push("/");
+      }
     },
     onError: (error: any) => {
       toast.error("Eroare la autentificare", {
@@ -42,12 +58,7 @@ const useLogin = () => {
     }
   });
 
-  const onSubmit = (data: UserLoginCredentials) => {
-    mutate(data);
-
-    // TODO: Remove after backend implementation and set it only if the user enters the platform for the first time
-    router.push("/?setup=true");
-  };
+  const onSubmit = (data: UserLoginCredentials) => mutate(data);
 
   return { form, onSubmit, isPending };
 };

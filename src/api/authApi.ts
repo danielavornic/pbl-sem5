@@ -18,7 +18,7 @@ export const authApi = {
       return error.response.data;
     }
   },
-  login: async (body: UserLoginCredentials): Promise<{ message: string; userInfo: User }> => {
+  login: async (body: UserLoginCredentials): Promise<{ message: string; user: User }> => {
     try {
       const { data } = await axiosInst.post("/auth/login", body);
       return data;
@@ -54,6 +54,15 @@ export const authApi = {
       return data;
     } catch (error: Error | any) {
       console.error("Error during setting first login:", error);
+      return error.response.data;
+    }
+  },
+  logout: async (): Promise<ResponseMessage> => {
+    try {
+      const { data } = await axiosInst.post("/auth/logout");
+      return data;
+    } catch (error: Error | any) {
+      console.error("Error during logout:", error);
       return error.response.data;
     }
   }

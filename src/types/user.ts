@@ -29,10 +29,11 @@ export interface UserRegisterCredentials extends UserLoginCredentials {
 
 export interface User extends UserRegisterCredentials {
   isFirstLogin: boolean;
-  organizationId?: number;
-  bio?: string;
+  role: "user" | "admin";
+  organizationId: number | null;
+  bio: string | null;
   region?: NamedEntity;
   skils?: NamedEntity[];
-  profilePicture?: string;
+  profilePicture: string | null;
   updatedAt: string;
 }

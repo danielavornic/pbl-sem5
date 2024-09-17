@@ -22,7 +22,7 @@ export const organizationFormSchema = z.object({
     z.string().trim().url({ message: "Adresa site-ului trebuie să fie validă" })
   ]),
   phoneNumber: z.string().min(1, { message: "Numărul de telefon este obligatoriu" }),
-  logo: z.array(z.instanceof(File))
+  logo: z.array(z.custom<File>())
 });
 
 const useCreateOrganization = () => {

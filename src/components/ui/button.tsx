@@ -18,8 +18,8 @@ const buttonVariants = cva(
         muted: "bg-muted text-muted-foreground hover:bg-muted/60",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        "link-foreground": "text-foreground font-medium underline-offset-4 hover:underline",
-        "link-accent": "text-accent font-medium underline-offset-4 hover:underline"
+        "link-foreground": "text-foreground font-medium underline-offset-8 hover:underline",
+        "link-accent": "text-accent font-medium underline-offset-8 hover:underline"
       },
       size: {
         default: "h-12 px-4 py-2",

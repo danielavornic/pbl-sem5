@@ -22,17 +22,32 @@ const ConfirmEmail = () => {
   });
 
   useEffect(() => {
-    if (confirmEmail.isSuccess) {
-      toast.success(confirmEmail.data.message);
+    if (!token) {
       router.push("/login");
+      return;
     }
-  }, [confirmEmail.isSuccess, confirmEmail.data, router]);
+
+    if (confirmEmail.isError) {
+      toast.error("A apărut o eroare la confirmarea adresei de email");
+      return;
+    }
+
+    if (confirmEmail.isSuccess) {
+      if (confirmEmail.data.status === "success") {
+        toast.success(confirmEmail.data.message);
+        router.push("/login");
+      } else {
+        toast.error(confirmEmail.data.message);
+        router.push("/");
+      }
+    }
+  }, [confirmEmail.isSuccess, confirmEmail.data, confirmEmail.isError, router, token]);
 
   return (
     <PublicLayout title="Confirmă adresa de email">
       <main className="flex h-full flex-col items-center justify-center pt-20">
         <MailCheck size={90} className="mb-4 text-secondary" />
-        <h1 className="pb-20 text-3xl font-bold">Confirmă adresa de email</h1>
+        <h1 className="pb-20 text-3xl font-bold">Se confirmă adresa de email</h1>
         {confirmEmail.isLoading && <Spinner />}
       </main>
     </PublicLayout>

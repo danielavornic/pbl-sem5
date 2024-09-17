@@ -77,9 +77,15 @@ const useRegister = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: UserRegisterCredentials) => authApi.register(data),
-    onSuccess: () => {
-      setShowEmailDialog(true);
-      form.reset();
+    onSuccess: (data) => {
+      if (data.status === "PENDING_EMAIL_CONFIRMATION") {
+        setShowEmailDialog(true);
+        form.reset();
+      } else {
+        toast.error("Eroare la inregistrare", {
+          description: data.message
+        });
+      }
     },
     onError: (error: any) => {
       toast.error("Eroare la inregistrare", {
@@ -97,11 +103,7 @@ const useRegister = () => {
       password: data.password,
       birthday: data.birthday.toISOString()
     });
-
-    // TODO: Remove after backend implementation
     setDialogEmail(data.email);
-    setShowEmailDialog(true);
-    form.reset();
   };
 
   return { form, onSubmit, isPending, showEmailDialog, setShowEmailDialog, dialogEmail };

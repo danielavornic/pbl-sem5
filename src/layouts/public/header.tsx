@@ -5,10 +5,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import useUserStore from "@/lib/user-store";
+import { cn } from "@/lib/utils";
+
+import { UserNav } from "./user-nav";
+
+const menuLinks: { label: string; href: string }[] = [
+  { label: "Oportunități", href: "/opportunities" },
+  { label: "Evenimente", href: "/events" }
+];
 
 export const Header = () => {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
+
+  const { user } = useUserStore();
 
   return (
     <header className="h-24">
@@ -20,7 +31,27 @@ export const Header = () => {
           {isAdmin && <span className="font-heading text-sm font-semibold text-accent">admin</span>}
         </div>
 
-        {isAdmin ? (
+        <div className="flex items-center gap-8">
+          {menuLinks.map((link) => (
+            <Button
+              key={link.label}
+              size="lg"
+              variant="link-foreground"
+              className={cn("font-medium", {
+                "font-semibold underline": pathname.startsWith(link.href)
+              })}
+              asChild
+            >
+              <Link href={link.href}>{link.label}</Link>
+            </Button>
+          ))}
+        </div>
+
+        {user ? (
+          <div className="flex">
+            <UserNav />
+          </div>
+        ) : isAdmin ? (
           <div>
             <Button variant="default" asChild>
               <Link href="/admin/login">Intră în cont</Link>
