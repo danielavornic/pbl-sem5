@@ -12,12 +12,14 @@ import ReactQueryProvider from "@/providers/react-query-provider";
 const inter = Inter({
   subsets: ["latin-ext"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-inter"
+  variable: "--font-inter",
+  display: "swap"
 });
 const montserrat = Montserrat({
   subsets: ["latin-ext"],
   weight: ["400", "600", "700"],
-  variable: "--font-montserrat"
+  variable: "--font-montserrat",
+  display: "swap"
 });
 
 export const metadata: Metadata = {
@@ -37,7 +39,7 @@ export default function RootLayout({
         <body>
           <Suspense>
             <ProgressBarProvider>{children}</ProgressBarProvider>
-            <Toaster richColors position="top-right" />
+            <Toaster richColors position="top-right" closeButton />
           </Suspense>
         </body>
       </html>

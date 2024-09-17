@@ -1,8 +1,6 @@
 import PublicLayout from "@/layouts/public";
 
-import ConfirmEmailDialog from "./components/email-dialog";
 import { RegisterForm } from "./components/form";
-import useRegister from "./hooks/use-register";
 
 const RegisterPage = () => {
   return (
