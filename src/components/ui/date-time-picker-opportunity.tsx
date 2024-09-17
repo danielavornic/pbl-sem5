@@ -1,5 +1,5 @@
 import { add, format } from "date-fns";
-import { enUS, type Locale } from "date-fns/locale";
+import { type Locale, ro } from "date-fns/locale";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Clock } from "lucide-react";
 import * as React from "react";
@@ -235,7 +235,7 @@ function Calendar({
   ...props
 }: CalendarProps & { yearRange?: number }) {
   const MONTHS = React.useMemo(() => {
-    let locale: Pick<Locale, "options" | "localize" | "formatLong"> = enUS;
+    let locale: Pick<Locale, "options" | "localize" | "formatLong"> = ro;
     const { options, localize, formatLong } = props.locale || {};
     if (options && localize && formatLong) {
       locale = {
@@ -615,7 +615,7 @@ TimePicker.displayName = "TimePicker";
 
 type Granularity = "day" | "hour" | "minute" | "second";
 
-type DateTimePickerProps = {
+type DateTimePickerOpportunityProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   disabled?: boolean;
@@ -641,14 +641,17 @@ type DateTimePickerProps = {
   granularity?: Granularity;
 } & Pick<CalendarProps, "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays">;
 
-type DateTimePickerRef = {
+type DateTimePickerOpportunityRef = {
   value?: Date;
 } & Omit<HTMLButtonElement, "value">;
 
-const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePickerProps>(
+const DateTimePickerOpportunity = React.forwardRef<
+  Partial<DateTimePickerOpportunityRef>,
+  DateTimePickerOpportunityProps
+>(
   (
     {
-      locale = enUS,
+      locale = ro,
       value,
       onChange,
       hourCycle = 24,
@@ -699,11 +702,11 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
         `PP hh:mm${!granularity || granularity === "second" ? ":ss" : ""} b`
     };
 
-    let loc = enUS;
+    let loc = ro;
     const { options, localize, formatLong } = locale;
     if (options && localize && formatLong) {
       loc = {
-        ...enUS,
+        ...ro,
         options,
         localize,
         formatLong
@@ -716,21 +719,23 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
           <Button
             variant="outline"
             className={cn(
-              "w-auto min-w-[220px] justify-start text-left font-normal",
+              "flex min-h-[60px] w-auto min-w-[220px] flex-col justify-start text-left font-normal",
               !value && "text-muted-foreground"
             )}
             ref={buttonRef}
           >
             <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <span className="truncate">
-              {value ? (
-                format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
-                  locale: loc
-                })
-              ) : (
-                <span>{placeholder}</span>
-              )}
-            </span>
+            <div className="flex flex-col">
+              <span className="truncate">
+                {value ? (
+                  format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
+                    locale: loc
+                  })
+                ) : (
+                  <span>{placeholder}</span>
+                )}
+              </span>
+            </div>
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
@@ -760,7 +765,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
   }
 );
 
-DateTimePicker.displayName = "DateTimePicker";
+DateTimePickerOpportunity.displayName = "DateTimePickerOpportunity";
 
-export { DateTimePicker, TimePicker, TimePickerInput };
-export type { DateTimePickerProps, DateTimePickerRef, TimePickerType };
+export { DateTimePickerOpportunity, TimePicker, TimePickerInput };
+export type { DateTimePickerOpportunityProps, DateTimePickerOpportunityRef, TimePickerType };

@@ -1,7 +1,10 @@
 "use client";
 
+import { Plus } from "lucide-react";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
-import { DateTimePicker } from "@/components/ui/date-time-picker";
+import { DateTimePickerOpportunity } from "@/components/ui/date-time-picker-opportunity";
 import {
   Form,
   FormControl,
@@ -31,10 +34,16 @@ import useCreateOpportunity from "../hooks/use-create-opportunity";
 export const CreateOpportunityForm = () => {
   const { form, onSubmit, isPending } = useCreateOpportunity();
 
+  const [rows, setRows] = useState(1);
+
+  const addRow = () => {
+    setRows((prevRows) => prevRows + 1);
+  };
+
   return (
     <div className="my-10">
       <h1 className="mb-4 text-3xl font-bold">Creează o nouă oportunitate</h1>
-      <div className="mx-auto min-w-[500px] max-w-[500px]">
+      <div className="mx-auto min-w-[500px] max-w-[680px]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -112,21 +121,6 @@ export const CreateOpportunityForm = () => {
 
             <FormField
               control={form.control}
-              name="isHighPriority"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div>
-                    <FormLabel className="text-base">Prioritate înaltă</FormLabel>
-                  </div>
-                  <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name="categories"
               render={({ field }) => (
                 <FormItem className="w-full">
@@ -177,76 +171,105 @@ export const CreateOpportunityForm = () => {
               )}
             />
 
+            {[...Array(rows)].map((_, index) => (
+              <FormField
+                key={index}
+                control={form.control}
+                name="sessions"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <div>
+                        <FormLabel>Sesiune {index + 1}</FormLabel>
+                        <div className="my-2 space-y-4">
+                          <div className="flex space-x-4">
+                            <div className="w-1/3 space-y-2 text-center">
+                              <FormLabel className="text-body text-base text-gray-800">
+                                Timp început
+                              </FormLabel>
+                              <DateTimePickerOpportunity
+                                granularity="minute"
+                                value={
+                                  field.value?.[0]?.startTime
+                                    ? new Date(field.value[0].startTime)
+                                    : undefined
+                                }
+                                onChange={(date) => {
+                                  const updatedSessions = field.value || [];
+                                  updatedSessions[0] = {
+                                    ...updatedSessions[0],
+                                    startTime: date?.toISOString() || ""
+                                  };
+                                  field.onChange(updatedSessions);
+                                }}
+                              />
+                            </div>
+                            <div className="w-1/3 space-y-2 text-center">
+                              <FormLabel className="text-body text-base text-gray-800">
+                                Timp sfârșit
+                              </FormLabel>
+                              <DateTimePickerOpportunity
+                                granularity="minute"
+                                value={
+                                  field.value?.[0]?.endTime
+                                    ? new Date(field.value[0].endTime)
+                                    : undefined
+                                }
+                                onChange={(date) => {
+                                  const updatedSessions = field.value || [];
+                                  updatedSessions[0] = {
+                                    ...updatedSessions[0],
+                                    endTime: date ? date.toISOString() : ""
+                                  };
+                                  field.onChange(updatedSessions);
+                                }}
+                              />
+                            </div>
+                            <div className="flex w-1/3 flex-col items-center space-y-2">
+                              <FormLabel className="text-base text-gray-800">Nr. locuri</FormLabel>
+                              <Input
+                                className="max-w-[100px]"
+                                type="number"
+                                min="0"
+                                value={field.value?.[0]?.spotsLeft || ""}
+                                onChange={(e) => {
+                                  const updatedSessions = field.value || [];
+                                  updatedSessions[0] = {
+                                    ...updatedSessions[0],
+                                    spotsLeft: parseInt(e.target.value, 10) || 0
+                                  };
+                                  field.onChange(updatedSessions);
+                                }}
+                                placeholder="0"
+                              />
+                            </div>
+                            <div className="flex items-center justify-center">
+                              <Button
+                                onClick={addRow}
+                                className="h-[34px] w-[34px] rounded-full p-0"
+                              >
+                                <Plus />
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ))}
+
             <FormField
               control={form.control}
-              name="sessions"
+              name="isHighPriority"
               render={({ field }) => (
-                <FormItem className="w-full">
+                <FormItem className="flex h-12 w-full flex-row items-center justify-between rounded-md border border-input bg-card px-4 py-2">
+                  <FormLabel className="text-base">Prioritate înaltă</FormLabel>
                   <FormControl>
-                    <div>
-                      <FormLabel>Sesiuni</FormLabel>
-                      <div className="my-4 space-y-2">
-                        <FormLabel className="text-base text-gray-800">
-                          Adăugați ziua și ora de început
-                        </FormLabel>
-                        <DateTimePicker
-                          granularity="minute"
-                          value={
-                            field.value?.[0]?.startTime
-                              ? new Date(field.value[0].startTime)
-                              : undefined
-                          }
-                          onChange={(date) => {
-                            const updatedSessions = field.value || [];
-                            updatedSessions[0] = {
-                              ...updatedSessions[0],
-                              startTime: date?.toISOString() || ""
-                            };
-                            field.onChange(updatedSessions);
-                          }}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <FormLabel className="text-base text-gray-800">
-                          Adăugați ziua și ora de sfârșit
-                        </FormLabel>
-                        <DateTimePicker
-                          granularity="minute"
-                          value={
-                            field.value?.[0]?.endTime ? new Date(field.value[0].endTime) : undefined
-                          }
-                          onChange={(date) => {
-                            const updatedSessions = field.value || [];
-                            updatedSessions[0] = {
-                              ...updatedSessions[0],
-                              endTime: date ? date.toISOString() : ""
-                            };
-                            field.onChange(updatedSessions);
-                          }}
-                        />
-                      </div>
-                      <div className="my-4">
-                        <FormLabel className="text-base text-gray-800">
-                          Locuri disponibile
-                        </FormLabel>
-                        <Input
-                          type="number"
-                          min="0"
-                          value={field.value?.[0]?.spotsLeft || ""}
-                          onChange={(e) => {
-                            const updatedSessions = field.value || [];
-                            updatedSessions[0] = {
-                              ...updatedSessions[0],
-                              spotsLeft: parseInt(e.target.value, 10) || 0
-                            };
-                            field.onChange(updatedSessions);
-                          }}
-                          placeholder="Locuri disponibile"
-                        />
-                      </div>
-                    </div>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
             />
