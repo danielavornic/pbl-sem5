@@ -1,7 +1,6 @@
-import { add, format } from "date-fns";
+import { add, format, isBefore } from "date-fns";
 import { type Locale, ro } from "date-fns/locale";
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
-import { Clock } from "lucide-react";
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import * as React from "react";
 import { useImperativeHandle, useRef } from "react";
 import { DayPicker } from "react-day-picker";
@@ -639,6 +638,9 @@ type DateTimePickerOpportunityProps = {
    * By default, the value is `second` which shows all time inputs.
    **/
   granularity?: Granularity;
+  minDate?: Date;
+  maxDate?: Date;
+  hideCalendar?: boolean;
 } & Pick<CalendarProps, "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays">;
 
 type DateTimePickerOpportunityRef = {
@@ -660,6 +662,9 @@ const DateTimePickerOpportunity = React.forwardRef<
       displayFormat,
       granularity = "second",
       placeholder = "Alege o dată",
+      minDate,
+      maxDate,
+      hideCalendar,
       ...props
     },
     ref
@@ -722,12 +727,12 @@ const DateTimePickerOpportunity = React.forwardRef<
 
     return (
       <Popover>
-        <div className="flex justify-center">
+        <div className="flex w-full">
           <PopoverTrigger asChild disabled={disabled}>
             <Button
               variant="outline"
               className={cn(
-                "flex h-auto w-auto flex-col justify-start text-left font-normal",
+                "flex w-full justify-start text-left font-body font-normal",
                 !value && "text-muted-foreground"
               )}
               ref={buttonRef}
@@ -751,16 +756,23 @@ const DateTimePickerOpportunity = React.forwardRef<
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
-            <Calendar
-              mode="single"
-              selected={value}
-              month={month}
-              onSelect={(d) => handleSelect(d)}
-              onMonthChange={handleSelect}
-              yearRange={yearRange}
-              locale={locale}
-              {...props}
-            />
+            {!hideCalendar && (
+              <Calendar
+                mode="single"
+                selected={value}
+                month={month}
+                onSelect={(d) => handleSelect(d)}
+                onMonthChange={handleSelect}
+                yearRange={yearRange}
+                disabled={(date) => {
+                  if (minDate && isBefore(date, minDate)) return true;
+                  if (maxDate && isBefore(maxDate, date)) return true;
+                  return false;
+                }}
+                locale={locale}
+                {...props}
+              />
+            )}
             {granularity !== "day" && (
               <div className="border-t border-border p-3">
                 <TimePicker

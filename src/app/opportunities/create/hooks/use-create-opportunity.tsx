@@ -2,21 +2,60 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { isBefore, isSameDay, startOfDay } from "date-fns";
+import { useEffect, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { opportunityApi } from "@/api/opportunityApi";
 import { OpportunityCreateData } from "@/types";
 
-const sessionSchema = z.object({
-  date: z.string().min(1, { message: "Data este obligatorie" }),
-  startTime: z.string().min(1, { message: "Ora de început este obligatorie" }),
-  endTime: z.string().min(1, { message: "Ora de sfârșit este obligatorie" }),
-  spotsLeft: z
-    .number()
-    .min(1, { message: "Numărul de locuri disponibile trebuie să fie de cel puțin 1" })
-});
+const sessionSchema = z
+  .object({
+    startTime: z
+      .string()
+      .nullable()
+      .refine((val) => val !== null, { message: "Ora de început este obligatorie" }),
+    endTime: z
+      .string()
+      .nullable()
+      .refine((val) => val !== null, { message: "Ora de sfârșit este obligatorie" }),
+    spotsLeft: z
+      .number()
+      .min(1, { message: "Numărul de locuri disponibile trebuie să fie de cel puțin 1" })
+  })
+  .superRefine((data, ctx) => {
+    if (data.startTime && data.endTime) {
+      const start = new Date(data.startTime);
+      const end = new Date(data.endTime);
+      const now = startOfDay(new Date());
+
+      if (isBefore(start, now)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Data de început nu poate fi în trecut",
+          path: ["startTime"]
+        });
+      }
+
+      if (isBefore(end, start)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Data de sfârșit trebuie să fie după data de început",
+          path: ["endTime"]
+        });
+      }
+
+      if (!isSameDay(start, end)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Data de început și de sfârșit trebuie să fie în aceeași zi",
+          path: ["endTime"]
+        });
+      }
+    }
+  });
 
 export const opportunityFormSchema = z.object({
   organizationId: z.number().optional(),
@@ -40,11 +79,38 @@ const useCreateOpportunity = () => {
       address: "",
       region: "",
       isHighPriority: false,
-      sessions: [],
+      sessions: [{ startTime: "", endTime: "", spotsLeft: 0 }],
       categories: [],
       skills: []
     }
   });
+
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: "sessions"
+  });
+
+  const [canAddSession, setCanAddSession] = useState(false);
+
+  const checkCanAddSession = () => {
+    const lastSession = form.getValues("sessions").slice(-1)[0];
+
+    if (!lastSession.startTime || !lastSession.endTime || lastSession.spotsLeft < 1) {
+      setCanAddSession(false);
+      return;
+    }
+
+    setCanAddSession(true);
+  };
+
+  useEffect(() => {
+    const subscription = form.watch(() => {
+      checkCanAddSession();
+    });
+
+    return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data: OpportunityCreateData) => opportunityApi.create(data),
@@ -76,7 +142,7 @@ const useCreateOpportunity = () => {
     return;
   };
 
-  return { form, onSubmit, isPending };
+  return { form, onSubmit, isPending, fields, append, remove, canAddSession };
 };
 
 export default useCreateOpportunity;

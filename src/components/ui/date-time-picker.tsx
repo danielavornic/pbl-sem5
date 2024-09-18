@@ -722,7 +722,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
             ref={buttonRef}
           >
             <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <span className="truncate">
+            <span className="truncate font-body">
               {value ? (
                 format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
                   locale: loc

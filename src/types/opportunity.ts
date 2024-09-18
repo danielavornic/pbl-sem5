@@ -14,7 +14,6 @@ export interface OpportunityCreateData {
 }
 
 export interface Session {
-  date: string;
   startTime: string;
   endTime: string;
   spotsLeft: number;

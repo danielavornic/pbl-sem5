@@ -1,13 +1,15 @@
 "use client";
 
-import { Plus } from "lucide-react";
-import { useState } from "react";
+import { addMinutes, endOfDay, isBefore, startOfDay } from "date-fns";
+import { Plus, Trash2 } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DateTimePickerOpportunity } from "@/components/ui/date-time-picker-opportunity";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,18 +34,23 @@ import { cn } from "@/lib/utils";
 import useCreateOpportunity from "../hooks/use-create-opportunity";
 
 export const CreateOpportunityForm = () => {
-  const { form, onSubmit, isPending } = useCreateOpportunity();
+  const { form, onSubmit, isPending, fields, append, remove, canAddSession } =
+    useCreateOpportunity();
 
-  const [rows, setRows] = useState(1);
-
-  const addRow = () => {
-    setRows((prevRows) => prevRows + 1);
+  const addSession = () => {
+    append({ startTime: "", endTime: "", spotsLeft: 0 });
   };
+
+  const removeSession = (index: number) => {
+    remove(index);
+  };
+
+  console.log(form.formState.errors.sessions);
 
   return (
     <div className="my-10">
       <h1 className="mb-4 text-3xl font-bold">Creează o nouă oportunitate</h1>
-      <div className="mx-auto max-w-[620px]">
+      <div className="mx-auto w-[700px] max-w-[720px]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -171,95 +178,132 @@ export const CreateOpportunityForm = () => {
               )}
             />
 
-            {[...Array(rows)].map((_, index) => (
+            <div>
+              <FormLabel>Sesiuni</FormLabel>
+              <FormDescription>
+                Specificați data, ora de început și de sfârșit pentru această sesiune. Asigurați-vă
+                că ambele ore sunt în aceeași zi în viitor și că numărul de locuri este introdus
+                corect.
+              </FormDescription>
+            </div>
+            {fields.map((field, index) => (
               <FormField
-                key={index}
+                key={field.id}
                 control={form.control}
-                name={"sessions[${index}]" as any}
+                name={`sessions.${index}`}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
                       <div>
-                        <FormLabel>Sesiune {index + 1}</FormLabel>
+                        <div className="flex items-center space-x-2">
+                          <FormLabel>Sesiune {index + 1}</FormLabel>
+                          {index > 0 && (
+                            <Button
+                              type="button"
+                              variant="link-destructive"
+                              size="xs"
+                              className="h-auto p-0 pl-2 underline-offset-4"
+                              onClick={() => removeSession(index)}
+                            >
+                              Șterge
+                            </Button>
+                          )}
+                        </div>
+
                         <div className="my-2 space-y-4">
                           <div className="flex space-x-4">
-                            <div className="w-1/3 space-y-2 text-center">
-                              <FormLabel className="text-body text-base text-gray-800">
-                                Timp început
-                              </FormLabel>
+                            <div className="w-[44%] space-y-2">
+                              <FormLabel className="font-body">Timp început</FormLabel>
                               <DateTimePickerOpportunity
-                                granularity="minute"
                                 value={
-                                  field.value?.[index]?.startTime
-                                    ? new Date(field.value[index].startTime)
+                                  field.value.startTime
+                                    ? new Date(field.value.startTime)
                                     : undefined
                                 }
                                 onChange={(date) => {
-                                  const updatedSessions = field.value || [];
-                                  updatedSessions[index] = {
-                                    ...updatedSessions[index],
-                                    startTime: date?.toISOString() || ""
-                                  };
-                                  field.onChange(updatedSessions);
+                                  form.setValue(
+                                    `sessions.${index}.startTime`,
+                                    date?.toISOString() || ""
+                                  );
+                                  if (
+                                    date &&
+                                    (!field.value.endTime ||
+                                      isBefore(new Date(field.value.endTime), addMinutes(date, 5)))
+                                  ) {
+                                    form.setValue(
+                                      `sessions.${index}.endTime`,
+                                      addMinutes(date, 5).toISOString()
+                                    );
+                                  }
+                                  form.trigger(`sessions.${index}`);
                                 }}
+                                minDate={startOfDay(new Date())}
                               />
                             </div>
-                            <div className="w-1/3 space-y-2 text-center">
-                              <FormLabel className="text-body text-base text-gray-800">
-                                Timp sfârșit
-                              </FormLabel>
+                            <div className="w-[44%] space-y-2">
+                              <FormLabel className="text-body">Timp sfârșit</FormLabel>
                               <DateTimePickerOpportunity
-                                granularity="minute"
                                 value={
-                                  field.value?.[index]?.endTime
-                                    ? new Date(field.value[index].endTime)
-                                    : undefined
+                                  field.value.endTime ? new Date(field.value.endTime) : undefined
                                 }
                                 onChange={(date) => {
-                                  const updatedSessions = field.value || [];
-                                  updatedSessions[index] = {
-                                    ...updatedSessions[index],
-                                    endTime: date ? date.toISOString() : ""
-                                  };
-                                  field.onChange(updatedSessions);
+                                  form.setValue(
+                                    `sessions.${index}.endTime`,
+                                    date?.toISOString() || ""
+                                  );
+                                  form.trigger(`sessions.${index}`);
                                 }}
+                                minDate={
+                                  field.value.startTime
+                                    ? addMinutes(new Date(field.value.startTime), 5)
+                                    : startOfDay(new Date())
+                                }
+                                maxDate={
+                                  field.value.startTime
+                                    ? endOfDay(new Date(field.value.startTime))
+                                    : undefined
+                                }
+                                hideCalendar
                               />
                             </div>
-                            <div className="flex w-1/3 flex-col items-center justify-center space-y-2">
-                              <FormLabel className="text-base text-gray-800">Nr. locuri</FormLabel>
+                            <div className="w-[12%] space-y-2">
+                              <FormLabel className="text-body">Nr. locuri</FormLabel>
                               <Input
-                                className="max-w-[100px]"
+                                className="w-full"
                                 type="number"
                                 min="0"
-                                value={field.value?.[index]?.spotsLeft || ""}
+                                value={field.value.spotsLeft || ""}
                                 onChange={(e) => {
-                                  const updatedSessions = field.value || [];
-                                  updatedSessions[index] = {
-                                    ...updatedSessions[index],
-                                    spotsLeft: parseInt(e.target.value, 10) || 0
-                                  };
-                                  field.onChange(updatedSessions);
+                                  form.setValue(
+                                    `sessions.${index}.spotsLeft`,
+                                    parseInt(e.target.value, 10) || 0
+                                  );
+                                  form.trigger(`sessions.${index}`);
                                 }}
                                 placeholder="0"
                               />
-                            </div>
-                            <div className="flex items-center justify-center">
-                              <Button
-                                onClick={addRow}
-                                className="h-[34px] w-[34px] rounded-full p-0"
-                              >
-                                <Plus />
-                              </Button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
             ))}
+            <div>
+              <Button
+                onClick={addSession}
+                type="button"
+                size="sm"
+                variant="link-accent"
+                className="mb-4 h-auto p-0"
+                disabled={!canAddSession}
+              >
+                <Plus size={16} className="mr-2" />
+                Adaugă sesiune
+              </Button>
+            </div>
 
             <FormField
               control={form.control}
