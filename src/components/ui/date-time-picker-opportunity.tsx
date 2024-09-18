@@ -1,5 +1,5 @@
 import { add, format } from "date-fns";
-import { enUS, type Locale } from "date-fns/locale";
+import { type Locale, ro } from "date-fns/locale";
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Clock } from "lucide-react";
 import * as React from "react";
@@ -235,7 +235,7 @@ function Calendar({
   ...props
 }: CalendarProps & { yearRange?: number }) {
   const MONTHS = React.useMemo(() => {
-    let locale: Pick<Locale, "options" | "localize" | "formatLong"> = enUS;
+    let locale: Pick<Locale, "options" | "localize" | "formatLong"> = ro;
     const { options, localize, formatLong } = props.locale || {};
     if (options && localize && formatLong) {
       locale = {
@@ -615,7 +615,7 @@ TimePicker.displayName = "TimePicker";
 
 type Granularity = "day" | "hour" | "minute" | "second";
 
-type DateTimePickerProps = {
+type DateTimePickerOpportunityProps = {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   disabled?: boolean;
@@ -641,14 +641,17 @@ type DateTimePickerProps = {
   granularity?: Granularity;
 } & Pick<CalendarProps, "locale" | "weekStartsOn" | "showWeekNumber" | "showOutsideDays">;
 
-type DateTimePickerRef = {
+type DateTimePickerOpportunityRef = {
   value?: Date;
 } & Omit<HTMLButtonElement, "value">;
 
-const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePickerProps>(
+const DateTimePickerOpportunity = React.forwardRef<
+  Partial<DateTimePickerOpportunityRef>,
+  DateTimePickerOpportunityProps
+>(
   (
     {
-      locale = enUS,
+      locale = ro,
       value,
       onChange,
       hourCycle = 24,
@@ -662,6 +665,7 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
     ref
   ) => {
     const [month, setMonth] = React.useState<Date>(value ?? new Date());
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     /**
      * carry over the current time when a user clicks a new day
@@ -677,8 +681,14 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
       const diff = newDay.getTime() - value.getTime();
       const diffInDays = diff / (1000 * 60 * 60 * 24);
       const newDateFull = add(value, { days: Math.ceil(diffInDays) });
+
+      if (diffInDays < 0) {
+        setErrorMessage("Data selectată este în trecut.");
+      }
+
       onChange?.(newDateFull);
       setMonth(newDateFull);
+      setErrorMessage(null);
     };
 
     useImperativeHandle(
@@ -699,11 +709,11 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
         `PP hh:mm${!granularity || granularity === "second" ? ":ss" : ""} b`
     };
 
-    let loc = enUS;
+    let loc = ro;
     const { options, localize, formatLong } = locale;
     if (options && localize && formatLong) {
       loc = {
-        ...enUS,
+        ...ro,
         options,
         localize,
         formatLong
@@ -712,55 +722,66 @@ const DateTimePicker = React.forwardRef<Partial<DateTimePickerRef>, DateTimePick
 
     return (
       <Popover>
-        <PopoverTrigger asChild disabled={disabled}>
-          <Button
-            variant="outline"
-            className={cn(
-              "w-auto min-w-[220px] justify-start text-left font-normal",
-              !value && "text-muted-foreground"
-            )}
-            ref={buttonRef}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <span className="truncate">
-              {value ? (
-                format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
-                  locale: loc
-                })
-              ) : (
-                <span>{placeholder}</span>
+        <div className="flex justify-center">
+          <PopoverTrigger asChild disabled={disabled}>
+            <Button
+              variant="outline"
+              className={cn(
+                "flex h-auto w-auto flex-col justify-start text-left font-normal",
+                !value && "text-muted-foreground"
               )}
-            </span>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={value}
-            month={month}
-            onSelect={(d) => handleSelect(d)}
-            onMonthChange={handleSelect}
-            yearRange={yearRange}
-            locale={locale}
-            {...props}
-          />
-          {granularity !== "day" && (
-            <div className="border-t border-border p-3">
-              <TimePicker
-                onChange={onChange}
-                date={value}
-                hourCycle={hourCycle}
-                granularity={granularity}
-              />
-            </div>
-          )}
-        </PopoverContent>
+              ref={buttonRef}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+              <div className="flex flex-col text-center">
+                <span className="overflow-hidden truncate whitespace-normal">
+                  {value ? (
+                    format(
+                      value,
+                      hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12,
+                      {
+                        locale: loc
+                      }
+                    )
+                  ) : (
+                    <span>{placeholder}</span>
+                  )}
+                </span>
+              </div>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={value}
+              month={month}
+              onSelect={(d) => handleSelect(d)}
+              onMonthChange={handleSelect}
+              yearRange={yearRange}
+              locale={locale}
+              {...props}
+            />
+            {granularity !== "day" && (
+              <div className="border-t border-border p-3">
+                <TimePicker
+                  onChange={onChange}
+                  date={value}
+                  hourCycle={hourCycle}
+                  granularity={granularity}
+                />
+              </div>
+            )}
+          </PopoverContent>
+        </div>
+        {errorMessage && (
+          <div className="mt-1 text-center text-sm text-red-600">{errorMessage}</div>
+        )}
       </Popover>
     );
   }
 );
 
-DateTimePicker.displayName = "DateTimePicker";
+DateTimePickerOpportunity.displayName = "DateTimePickerOpportunity";
 
-export { DateTimePicker, TimePicker, TimePickerInput };
-export type { DateTimePickerProps, DateTimePickerRef, TimePickerType };
+export { DateTimePickerOpportunity, TimePicker, TimePickerInput };
+export type { DateTimePickerOpportunityProps, DateTimePickerOpportunityRef, TimePickerType };

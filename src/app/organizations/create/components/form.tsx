@@ -11,38 +11,22 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
+import MultipleSelector from "@/components/ui/multiple-selector";
 import { PhoneInput } from "@/components/ui/phone-input";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
+import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
+import { REGION_OPTIONS } from "@/constants/regionOptions";
 import { cn } from "@/lib/utils";
 
 import useCreateOrganization from "../hooks/use-create-organization";
-
-// TODO: Update after API is ready
-const CATEGORY_OPTIONS: Option[] = [
-  { value: "1", label: "Mediu" },
-  { value: "2", label: "Social" },
-  { value: "3", label: "Educație" },
-  { value: "4", label: "Sănătate" },
-  { value: "5", label: "Serviciu Comunitar" },
-  { value: "6", label: "Artă și Cultură" },
-  { value: "7", label: "Sport" },
-  { value: "8", label: "Protecția Animalelor" },
-  { value: "9", label: "Drepturile Omului" },
-  { value: "10", label: "Religie" },
-  { value: "13", label: "Altele" }
-];
 
 export const CreateOrganizationForm = () => {
   const { form, onSubmit, isPending, isUploading, progresses, uploadedFiles } =
@@ -99,51 +83,12 @@ export const CreateOrganizationForm = () => {
                       >
                         <SelectValue placeholder="Selectează o regiune" />
                       </SelectTrigger>
-                      <SelectContent className="h-[324px]">
-                        <SelectGroup>
-                          <SelectLabel>Chișinău</SelectLabel>
-                          <SelectItem value="1">Ciocana</SelectItem>
-                          <SelectItem value="2">Râșcani</SelectItem>
-                          <SelectItem value="3">Centru</SelectItem>
-                          <SelectItem value="4">Botanica</SelectItem>
-                          <SelectItem value="5">Buiucani</SelectItem>
-                        </SelectGroup>
-                        <Separator />
-                        <SelectItem value="6">Bălți</SelectItem>
-                        <SelectItem value="7">Anenii Noi</SelectItem>
-                        <SelectItem value="8">Basarabeasca</SelectItem>
-                        <SelectItem value="9">Briceni</SelectItem>
-                        <SelectItem value="10">Cahul</SelectItem>
-                        <SelectItem value="11">Călărași</SelectItem>
-                        <SelectItem value="12">Cantemir</SelectItem>
-                        <SelectItem value="13">Căușeni</SelectItem>
-                        <SelectItem value="14">Ciadâr-Lunga</SelectItem>
-                        <SelectItem value="15">Cimișlia</SelectItem>
-                        <SelectItem value="16">Comrat</SelectItem>
-                        <SelectItem value="17">Criuleni</SelectItem>
-                        <SelectItem value="18">Dondușeni</SelectItem>
-                        <SelectItem value="19">Drochia</SelectItem>
-                        <SelectItem value="20">Edineț</SelectItem>
-                        <SelectItem value="21">Fălești</SelectItem>
-                        <SelectItem value="22">Florești</SelectItem>
-                        <SelectItem value="23">Glodeni</SelectItem>
-                        <SelectItem value="24">Hîncești</SelectItem>
-                        <SelectItem value="25">Ialoveni</SelectItem>
-                        <SelectItem value="26">Leova</SelectItem>
-                        <SelectItem value="27">Nisporeni</SelectItem>
-                        <SelectItem value="28">Ocnița</SelectItem>
-                        <SelectItem value="29">Orhei</SelectItem>
-                        <SelectItem value="30">Rezina</SelectItem>
-                        <SelectItem value="31">Rîșcani</SelectItem>
-                        <SelectItem value="32">Sîngerei</SelectItem>
-                        <SelectItem value="33">Soroca</SelectItem>
-                        <SelectItem value="34">Strășeni</SelectItem>
-                        <SelectItem value="35">Șoldănești</SelectItem>
-                        <SelectItem value="36">Ștefan-Vodă</SelectItem>
-                        <SelectItem value="37">Taraclia</SelectItem>
-                        <SelectItem value="38">Telenești</SelectItem>
-                        <SelectItem value="39">Ungheni</SelectItem>
-                        <SelectItem value="40">UTA Găgăuzia</SelectItem>
+                      <SelectContent>
+                        {REGION_OPTIONS.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormControl>
