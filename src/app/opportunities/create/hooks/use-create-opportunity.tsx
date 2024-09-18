@@ -2,13 +2,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
 import { opportunityApi } from "@/api/opportunityApi";
-// import { useUploadFile } from "@/hooks/use-upload-file";
 import { OpportunityCreateData } from "@/types";
 
 const sessionSchema = z.object({

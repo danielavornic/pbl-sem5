@@ -665,6 +665,7 @@ const DateTimePickerOpportunity = React.forwardRef<
     ref
   ) => {
     const [month, setMonth] = React.useState<Date>(value ?? new Date());
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     /**
      * carry over the current time when a user clicks a new day
@@ -680,8 +681,14 @@ const DateTimePickerOpportunity = React.forwardRef<
       const diff = newDay.getTime() - value.getTime();
       const diffInDays = diff / (1000 * 60 * 60 * 24);
       const newDateFull = add(value, { days: Math.ceil(diffInDays) });
+
+      if (diffInDays < 0) {
+        setErrorMessage("Data selectată este în trecut.");
+      }
+
       onChange?.(newDateFull);
       setMonth(newDateFull);
+      setErrorMessage(null);
     };
 
     useImperativeHandle(
@@ -715,51 +722,60 @@ const DateTimePickerOpportunity = React.forwardRef<
 
     return (
       <Popover>
-        <PopoverTrigger asChild disabled={disabled}>
-          <Button
-            variant="outline"
-            className={cn(
-              "flex min-h-[60px] w-auto min-w-[220px] flex-col justify-start text-left font-normal",
-              !value && "text-muted-foreground"
+        <div className="flex justify-center">
+          <PopoverTrigger asChild disabled={disabled}>
+            <Button
+              variant="outline"
+              className={cn(
+                "flex h-auto w-auto flex-col justify-start text-left font-normal",
+                !value && "text-muted-foreground"
+              )}
+              ref={buttonRef}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+              <div className="flex flex-col text-center">
+                <span className="overflow-hidden truncate whitespace-normal">
+                  {value ? (
+                    format(
+                      value,
+                      hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12,
+                      {
+                        locale: loc
+                      }
+                    )
+                  ) : (
+                    <span>{placeholder}</span>
+                  )}
+                </span>
+              </div>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={value}
+              month={month}
+              onSelect={(d) => handleSelect(d)}
+              onMonthChange={handleSelect}
+              yearRange={yearRange}
+              locale={locale}
+              {...props}
+            />
+            {granularity !== "day" && (
+              <div className="border-t border-border p-3">
+                <TimePicker
+                  onChange={onChange}
+                  date={value}
+                  hourCycle={hourCycle}
+                  granularity={granularity}
+                />
+              </div>
             )}
-            ref={buttonRef}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
-            <div className="flex flex-col">
-              <span className="truncate">
-                {value ? (
-                  format(value, hourCycle === 24 ? initHourFormat.hour24 : initHourFormat.hour12, {
-                    locale: loc
-                  })
-                ) : (
-                  <span>{placeholder}</span>
-                )}
-              </span>
-            </div>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={value}
-            month={month}
-            onSelect={(d) => handleSelect(d)}
-            onMonthChange={handleSelect}
-            yearRange={yearRange}
-            locale={locale}
-            {...props}
-          />
-          {granularity !== "day" && (
-            <div className="border-t border-border p-3">
-              <TimePicker
-                onChange={onChange}
-                date={value}
-                hourCycle={hourCycle}
-                granularity={granularity}
-              />
-            </div>
-          )}
-        </PopoverContent>
+          </PopoverContent>
+        </div>
+        {errorMessage && (
+          <div className="mt-1 text-center text-sm text-red-600">{errorMessage}</div>
+        )}
       </Popover>
     );
   }

@@ -43,7 +43,7 @@ export const CreateOpportunityForm = () => {
   return (
     <div className="my-10">
       <h1 className="mb-4 text-3xl font-bold">Creează o nouă oportunitate</h1>
-      <div className="mx-auto min-w-[500px] max-w-[680px]">
+      <div className="mx-auto max-w-[620px]">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -175,7 +175,7 @@ export const CreateOpportunityForm = () => {
               <FormField
                 key={index}
                 control={form.control}
-                name="sessions"
+                name={"sessions[${index}]" as any}
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
@@ -190,14 +190,14 @@ export const CreateOpportunityForm = () => {
                               <DateTimePickerOpportunity
                                 granularity="minute"
                                 value={
-                                  field.value?.[0]?.startTime
-                                    ? new Date(field.value[0].startTime)
+                                  field.value?.[index]?.startTime
+                                    ? new Date(field.value[index].startTime)
                                     : undefined
                                 }
                                 onChange={(date) => {
                                   const updatedSessions = field.value || [];
-                                  updatedSessions[0] = {
-                                    ...updatedSessions[0],
+                                  updatedSessions[index] = {
+                                    ...updatedSessions[index],
                                     startTime: date?.toISOString() || ""
                                   };
                                   field.onChange(updatedSessions);
@@ -211,31 +211,31 @@ export const CreateOpportunityForm = () => {
                               <DateTimePickerOpportunity
                                 granularity="minute"
                                 value={
-                                  field.value?.[0]?.endTime
-                                    ? new Date(field.value[0].endTime)
+                                  field.value?.[index]?.endTime
+                                    ? new Date(field.value[index].endTime)
                                     : undefined
                                 }
                                 onChange={(date) => {
                                   const updatedSessions = field.value || [];
-                                  updatedSessions[0] = {
-                                    ...updatedSessions[0],
+                                  updatedSessions[index] = {
+                                    ...updatedSessions[index],
                                     endTime: date ? date.toISOString() : ""
                                   };
                                   field.onChange(updatedSessions);
                                 }}
                               />
                             </div>
-                            <div className="flex w-1/3 flex-col items-center space-y-2">
+                            <div className="flex w-1/3 flex-col items-center justify-center space-y-2">
                               <FormLabel className="text-base text-gray-800">Nr. locuri</FormLabel>
                               <Input
                                 className="max-w-[100px]"
                                 type="number"
                                 min="0"
-                                value={field.value?.[0]?.spotsLeft || ""}
+                                value={field.value?.[index]?.spotsLeft || ""}
                                 onChange={(e) => {
                                   const updatedSessions = field.value || [];
-                                  updatedSessions[0] = {
-                                    ...updatedSessions[0],
+                                  updatedSessions[index] = {
+                                    ...updatedSessions[index],
                                     spotsLeft: parseInt(e.target.value, 10) || 0
                                   };
                                   field.onChange(updatedSessions);
