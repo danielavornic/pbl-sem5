@@ -36,17 +36,25 @@
       "lastName": "Last Name"
     },
     "name": "Vaconi",
-    "description": "description",
+    "description": "descriptionvcgbhjnnnnhbbbdcjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
     "logo": "/images/avatar.png",
     "address": "address",
     "region": {
       "id": 1,
-      "name": "Chisi"
+      "name": "Chișinău"
     },
     "categories": [
       {
         "id": 1,
         "name": "Category"
+      },
+      {
+        "id": 2,
+        "name": "Educatie"
+      },
+      {
+        "id": 3,
+        "name": "Sanatate"
       }
     ],
     "website": "url",
@@ -91,5 +99,293 @@
       "username": "username"
     },
     "approvalDate": "2024-07-01T00:00:00.000Z"
+  },
+  {
+    "id": 11,
+    "createdBy": {
+      "id": 1,
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "name": "TechHub",
+    "description": "A hub for technology startups and entrepreneurs.",
+    "logo": "/images/avatar.png",
+    "address": "123 Tech Street, London",
+    "region": {
+      "id": 2,
+      "name": "London"
+    },
+    "categories": [
+      {
+        "id": 4,
+        "name": "Technology"
+      },
+      {
+        "id": 5,
+        "name": "Entrepreneurship"
+      }
+    ],
+    "website": "www.techhub.com",
+    "phoneNumber": "+44 20 7123 4567",
+    "createdAt": "2024-08-15T00:00:00.000Z",
+    "updatedAt": "2024-08-15T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 8,
+      "username": "admin"
+    },
+    "approvalDate": "2024-08-15T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "createdBy": {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "name": "Greenpeace",
+    "description": "An environmental organization dedicated to protecting the planet.",
+    "logo": "/images/avatar.png",
+    "address": "456 Green Avenue, New York",
+    "region": {
+      "id": 3,
+      "name": "New York"
+    },
+    "categories": [
+      {
+        "id": 6,
+        "name": "Environmental"
+      },
+      {
+        "id": 7,
+        "name": "Conservation"
+      }
+    ],
+    "website": "www.greenpeace.org",
+    "phoneNumber": "+1 212 555 1212",
+    "createdAt": "2024-09-01T00:00:00.000Z",
+    "updatedAt": "2024-09-01T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 9,
+      "username": "reviewer"
+    },
+    "approvalDate": "2024-09-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "createdBy": {
+      "id": 3,
+      "firstName": "John",
+      "lastName": "Smith"
+    },
+    "name": "World Wildlife Fund",
+    "description": "A global conservation organization working to protect endangered species.",
+    "logo": "/images/avatar.png",
+    "address": "789 Wildlife Lane, Washington D.C.",
+    "region": {
+      "id": 4,
+      "name": "Washington D.C."
+    },
+    "categories": [
+      {
+        "id": 8,
+        "name": "Wildlife"
+      },
+      {
+        "id": 9,
+        "name": "Conservation"
+      }
+    ],
+    "website": "www.worldwildlife.org",
+    "phoneNumber": "+1 202 555 5555",
+    "createdAt": "2024-09-10T00:00:00.000Z",
+    "updatedAt": "2024-09-10T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 10,
+      "username": "moderator"
+    },
+    "approvalDate": "2024-09-10T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "createdBy": {
+      "id": 4,
+      "firstName": "Emily",
+      "lastName": "Jones"
+    },
+    "name": "The Red Cross",
+    "description": "A humanitarian organization providing aid to those in need.",
+    "logo": "/images/avatar.png",
+    "address": "1011 Red Cross Way, Geneva",
+    "region": {
+      "id": 5,
+      "name": "Geneva"
+    },
+    "categories": [
+      {
+        "id": 10,
+        "name": "Humanitarian"
+      },
+      {
+        "id": 11,
+        "name": "Aid"
+      }
+    ],
+    "website": "www.redcross.org",
+    "phoneNumber": "+41 22 748 20 00",
+    "createdAt": "2024-09-15T00:00:00.000Z",
+    "updatedAt": "2024-09-15T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 11,
+      "username": "admin2"
+    },
+    "approvalDate": "2024-09-15T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "createdBy": {
+      "id": 5,
+      "firstName": "Michael",
+      "lastName": "Brown"
+    },
+    "name": "Doctors Without Borders",
+    "description": "A medical humanitarian organization providing healthcare in conflict zones.",
+    "logo": "/images/avatar.png",
+    "address": "1213 Doctors Lane, Paris",
+    "region": {
+      "id": 6,
+      "name": "Paris"
+    },
+    "categories": [
+      {
+        "id": 12,
+        "name": "Medical"
+      },
+      {
+        "id": 13,
+        "name": "Humanitarian"
+      }
+    ],
+    "website": "www.doctorswithoutborders.org",
+    "phoneNumber": "+33 1 40 21 21 21",
+    "createdAt": "2024-09-18T00:00:00.000Z",
+    "updatedAt": "2024-09-18T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 12,
+      "username": "reviewer2"
+    },
+    "approvalDate": "2024-09-18T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "createdBy": {
+      "id": 6,
+      "firstName": "Sarah",
+      "lastName": "Wilson"
+    },
+    "name": "Save the Children",
+    "description": "A global organization working to improve the lives of children.",
+    "logo": "/images/avatar.png",
+    "address": "1415 Save Street, London",
+    "region": {
+      "id": 7,
+      "name": "London"
+    },
+    "categories": [
+      {
+        "id": 14,
+        "name": "Children"
+      },
+      {
+        "id": 15,
+        "name": "Humanitarian"
+      }
+    ],
+    "website": "www.savethechildren.org",
+    "phoneNumber": "+44 20 7012 6400",
+    "createdAt": "2024-09-19T00:00:00.000Z",
+    "updatedAt": "2024-09-19T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 13,
+      "username": "moderator2"
+    },
+    "approvalDate": "2024-09-19T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "createdBy": {
+      "id": 7,
+      "firstName": "David",
+      "lastName": "Garcia"
+    },
+    "name": "Habitat for Humanity",
+    "description": "A non-profit organization that helps families build and improve their homes.",
+    "logo": "/images/avatar.png",
+    "address": "1617 Habitat Avenue, Atlanta",
+    "region": {
+      "id": 8,
+      "name": "Atlanta"
+    },
+    "categories": [
+      {
+        "id": 16,
+        "name": "Housing"
+      },
+      {
+        "id": 17,
+        "name": "Community Development"
+      }
+    ],
+    "website": "www.habitat.org",
+    "phoneNumber": "+1 404 420 1212",
+    "createdAt": "2024-09-20T00:00:00.000Z",
+    "updatedAt": "2024-09-20T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 14,
+      "username": "admin3"
+    },
+    "approvalDate": "2024-09-20T00:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "createdBy": {
+      "id": 8,
+      "firstName": "Ashley",
+      "lastName": "Rodriguez"
+    },
+    "name": "UNICEF",
+    "description": "A United Nations agency working to improve the lives of children worldwide.",
+    "logo": "/images/avatar.png",
+    "address": "1819 UNICEF Way, New York",
+    "region": {
+      "id": 9,
+      "name": "New York"
+    },
+    "categories": [
+      {
+        "id": 18,
+        "name": "Children"
+      },
+      {
+        "id": 19,
+        "name": "Humanitarian"
+      }
+    ],
+    "website": "www.unicef.org",
+    "phoneNumber": "+1 212 326 7000",
+    "createdAt": "2024-09-17T00:00:00.000Z",
+    "updatedAt": "2024-09-17T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 15,
+      "username": "reviewer3"
+    },
+    "approvalDate": "2024-09-17T00:00:00.000Z"
   }
 ]
