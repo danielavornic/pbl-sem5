@@ -12,7 +12,7 @@ import { UserNav } from "./user-nav";
 
 const menuLinks: { label: string; href: string }[] = [
   { label: "Oportunități", href: "/opportunities" },
-  { label: "Evenimente", href: "/events" }
+  { label: "Organizații", href: "/organizations" }
 ];
 
 export const Header = () => {

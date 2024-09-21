@@ -14,7 +14,7 @@ const PublicLayout = ({
 }: React.PropsWithChildren<PublicLayoutProps>) => {
   return (
     <>
-      <title>{title}</title>
+      <title>{`${title} | voluntariat`}</title>
       {description && <meta name="description" content={description} />}
 
       <Header />
