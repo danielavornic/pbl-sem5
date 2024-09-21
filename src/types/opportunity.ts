@@ -2,13 +2,13 @@ import { NamedEntity } from "./common";
 import { ApprovalStatus } from "./organization";
 
 export interface OpportunityCreateData {
-  organizationId?: number;
   title: string;
   description: string;
   region: string;
   address: string;
   isHighPriority: boolean;
   sessions: Session[];
+  image?: string;
   categories: number[] | NamedEntity[];
   skills: number[] | NamedEntity[];
 }
