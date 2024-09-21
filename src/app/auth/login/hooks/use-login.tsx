@@ -7,9 +7,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { authApi } from "@/api/authApi";
 import useUserStore from "@/lib/user-store";
-import { UserLoginCredentials } from "@/types";
+import { LoginCredentials } from "@/types";
+
+import { authApi } from "../../api";
 
 export const formSchema = z.object({
   email: z
@@ -33,7 +34,7 @@ const useLogin = () => {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: UserLoginCredentials) => authApi.login(data),
+    mutationFn: (data: LoginCredentials) => authApi.login(data),
     onSuccess: (response) => {
       const { user } = response;
 
@@ -58,7 +59,7 @@ const useLogin = () => {
     }
   });
 
-  const onSubmit = (data: UserLoginCredentials) => mutate(data);
+  const onSubmit = (data: LoginCredentials) => mutate(data);
 
   return { form, onSubmit, isPending };
 };

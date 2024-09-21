@@ -1,11 +1,6 @@
 import { NamedEntity } from "@/types";
 
-export interface AdminCredentials {
-  username: string;
-  password: string;
-}
-
-export interface UserLoginCredentials {
+export interface LoginCredentials {
   email: string;
   password: string;
 }
@@ -16,11 +11,7 @@ export interface BaseUser {
   createdAt: string;
 }
 
-export interface AdminUser extends BaseUser {
-  username: string;
-}
-
-export interface UserRegisterCredentials extends UserLoginCredentials {
+export interface UserRegisterCredentials extends LoginCredentials {
   firstName: string;
   lastName: string;
   birthday: string;

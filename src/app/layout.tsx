@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { Toaster } from "sonner";
 
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/providers/auth-provider";
 import ProgressBarProvider from "@/providers/progress-bar-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
 
@@ -22,10 +23,26 @@ const montserrat = Montserrat({
   display: "swap"
 });
 
+const cspContent = `
+  default-src 'self';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none';
+  block-all-mixed-content;
+  upgrade-insecure-requests;
+`;
+
 export const metadata: Metadata = {
   title: "Voluntariat Moldova",
   description:
-    "Voluntariat Moldova este o platformă de voluntariat care conectează persoanele care doresc să ajute cu organizațiile care au nevoie de voluntari."
+    "Voluntariat Moldova este o platformă de voluntariat care conectează persoanele care doresc să ajute cu organizațiile care au nevoie de voluntari.",
+  viewport: "width=device-width, initial-scale=1",
+  other: {
+    "Content-Security-Policy": cspContent.replace(/\s{2,}/g, " ").trim()
+  }
 };
 
 export default function RootLayout({
@@ -38,7 +55,9 @@ export default function RootLayout({
       <html lang="ro" className={cn(inter.variable, montserrat.variable)}>
         <body>
           <Suspense>
-            <ProgressBarProvider>{children}</ProgressBarProvider>
+            <ProgressBarProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </ProgressBarProvider>
             <Toaster richColors closeButton />
           </Suspense>
         </body>

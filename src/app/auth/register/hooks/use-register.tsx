@@ -8,9 +8,10 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { authApi } from "@/api/authApi";
 import { PASSWORD_REGEX } from "@/lib/auth";
 import { UserRegisterCredentials } from "@/types";
+
+import { authApi } from "../../api";
 
 export const formSchema = z
   .object({
@@ -78,7 +79,7 @@ const useRegister = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: UserRegisterCredentials) => authApi.register(data),
     onSuccess: (data) => {
-      if (data.status === "PENDING_EMAIL_CONFIRMATION") {
+      if (data.status === "EMAIL_SENT") {
         setShowEmailDialog(true);
         form.reset();
       } else {

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-import { authApi } from "@/api/authApi";
+import { authApi } from "@/app/auth/api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,12 +19,12 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import useUserStore from "@/lib/user-store";
+import { User } from "@/types";
 
 export const UserNav = () => {
   const router = useRouter();
 
-  const { user } = useUserStore();
-  const clearUser = useUserStore((state) => state.clearUser);
+  const { user, clearUser } = useUserStore();
 
   const logoutMutation = useMutation({
     mutationFn: () => authApi.logout(),
@@ -40,23 +40,28 @@ export const UserNav = () => {
     }
   });
 
-  if (!user) {
+  if (user === null) {
     return null;
   }
 
-  const { profilePicture, firstName, lastName, email } = user;
+  const { profilePicture, firstName, lastName, email } = (user as User) || {
+    profilePicture: "",
+    firstName: "",
+    lastName: "",
+    email: ""
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
-            {profilePicture && (
+            {!!profilePicture && (
               <AvatarImage src={profilePicture} alt={`${firstName} ${lastName}`} />
             )}
             <AvatarFallback>
               <span className="text-sm font-semibold">
-                {firstName[0]}
-                {lastName[0]}
+                {firstName?.[0]}
+                {lastName?.[0]}
               </span>
             </AvatarFallback>
           </Avatar>

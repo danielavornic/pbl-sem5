@@ -50,7 +50,10 @@ export const OrganizationOverview = ({ organization }: { organization: Organizat
 
           <div className="mt-8 flex flex-wrap items-center gap-10">
             <Detail icon={<MapPin size={20} />} value={address} />
-            <Detail icon={<MapPinned size={20} />} value={region.name} />
+            <Detail
+              icon={<MapPinned size={20} />}
+              value={typeof region === "object" ? region?.name : region}
+            />
             <Detail icon={<Phone size={20} />} value={phoneNumber} href={`tel:${phoneNumber}`} />
             <Detail icon={<Globe size={20} />} value={website} href={website} />
           </div>
@@ -66,7 +69,7 @@ const Detail = ({
   href
 }: {
   icon: React.ReactNode;
-  value?: string;
+  value?: string | number;
   href?: string;
 }) => {
   if (!value || value === "") {

@@ -9,7 +9,7 @@ export interface OrganizationCreateData {
   name: string;
   description: string;
   address: string;
-  region: NamedEntity;
+  region: NamedEntity | null | number;
   categories?: number[] | NamedEntity[];
   website?: string;
   phoneNumber: string;

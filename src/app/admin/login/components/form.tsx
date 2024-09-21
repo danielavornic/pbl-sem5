@@ -28,12 +28,12 @@ export const AdminLoginForm = () => {
         >
           <FormField
             control={form.control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel>Numele de utilizator</FormLabel>
+                <FormLabel>E-mail</FormLabel>
                 <FormControl>
-                  <Input placeholder="admin_username" {...field} />
+                  <Input placeholder="email@example.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

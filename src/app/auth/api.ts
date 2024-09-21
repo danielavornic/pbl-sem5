@@ -1,12 +1,5 @@
 import { axiosInst } from "@/lib/axios";
-import {
-  AdminCredentials,
-  AdminUser,
-  ResponseMessage,
-  User,
-  UserLoginCredentials,
-  UserRegisterCredentials
-} from "@/types";
+import { LoginCredentials, ResponseMessage, User, UserRegisterCredentials } from "@/types";
 
 export const authApi = {
   register: async (body: UserRegisterCredentials): Promise<ResponseMessage> => {
@@ -18,7 +11,7 @@ export const authApi = {
       return error.response.data;
     }
   },
-  login: async (body: UserLoginCredentials): Promise<{ message: string; user: User }> => {
+  login: async (body: LoginCredentials): Promise<{ message: string; user: User }> => {
     try {
       const { data } = await axiosInst.post("/auth/login", body);
       return data;
@@ -27,15 +20,7 @@ export const authApi = {
       return error.response.data;
     }
   },
-  loginAdmin: async (body: AdminCredentials): Promise<{ message: string; userInfo: AdminUser }> => {
-    try {
-      const { data } = await axiosInst.post("/auth/login/admin", body);
-      return data;
-    } catch (error: Error | any) {
-      console.error("Error during login:", error);
-      return error.response.data;
-    }
-  },
+
   confirmEmail: async (token: string): Promise<ResponseMessage> => {
     try {
       const { data } = await axiosInst.get(`/auth/confirm-email`, {
@@ -47,22 +32,21 @@ export const authApi = {
       return error.response.data;
     }
   },
-  // For the first modal with options to create org or complete volunteer profile
-  setIsFirstLogin: async (): Promise<ResponseMessage> => {
-    try {
-      const { data } = await axiosInst.patch("/auth/first-login", { isFirstLogin: false });
-      return data;
-    } catch (error: Error | any) {
-      console.error("Error during setting first login:", error);
-      return error.response.data;
-    }
-  },
   logout: async (): Promise<ResponseMessage> => {
     try {
       const { data } = await axiosInst.post("/auth/logout");
       return data;
     } catch (error: Error | any) {
       console.error("Error during logout:", error);
+      return error.response.data;
+    }
+  },
+  getProfile: async (): Promise<User> => {
+    try {
+      const { data } = await axiosInst.get("/auth");
+      return data;
+    } catch (error: Error | any) {
+      console.error("Error during fetching user profile:", error);
       return error.response.data;
     }
   }

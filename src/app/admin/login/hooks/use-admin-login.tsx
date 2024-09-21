@@ -7,28 +7,41 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { authApi } from "@/api/authApi";
-import { AdminCredentials } from "@/types";
+import { adminApi } from "@/app/admin/api";
+import useUserStore from "@/lib/user-store";
+import { LoginCredentials } from "@/types";
 
 export const formSchema = z.object({
-  username: z.string().min(1, { message: "Numele de utilizator este obligatoriu" }),
+  email: z
+    .string()
+    .min(1, { message: "Adresa de email este obligatorie" })
+    .email({ message: "Introduceti o adresa de email valida" }),
   password: z.string().min(1, { message: "Parola este obligatorie" })
 });
 
 const useAdminLogin = () => {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: ""
     }
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: (data: AdminCredentials) => authApi.loginAdmin(data),
-    onSuccess: () => {
+    mutationFn: (data: LoginCredentials) => adminApi.loginAdmin(data),
+    onSuccess: (data) => {
+      if (data?.userInfo === null || !data?.userInfo) {
+        toast.error("Eroare la autentificare", {
+          description: "Nume de utilizator sau parolă greșită"
+        });
+        return;
+      }
+
+      setUser(data.userInfo);
       router.push("/admin");
     },
     onError: (error: any) => {
@@ -38,9 +51,7 @@ const useAdminLogin = () => {
     }
   });
 
-  const onSubmit = (data: AdminCredentials) => {
-    mutate(data);
-  };
+  const onSubmit = (data: LoginCredentials) => mutate(data);
 
   return { form, onSubmit, isPending };
 };

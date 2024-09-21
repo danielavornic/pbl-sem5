@@ -14,7 +14,7 @@ import { OrganizationCreateData } from "@/types";
 export const organizationFormSchema = z.object({
   name: z.string().min(1, { message: "Numele organizației este obligatoriu" }),
   description: z.string().min(1, { message: "Descrierea organizației este obligatorie" }),
-  region: z.string().min(1, { message: "Localitatea organizației este obligatorie" }),
+  region: z.number(),
   address: z.string().min(1, { message: "Adresa organizației este obligatorie" }),
   categories: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o categorie" }),
   website: z.union([
@@ -33,7 +33,7 @@ const useCreateOrganization = () => {
       name: "",
       description: "",
       address: "",
-      region: "",
+      region: 0,
       categories: [],
       website: "",
       phoneNumber: "",

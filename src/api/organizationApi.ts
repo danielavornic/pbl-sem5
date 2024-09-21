@@ -4,7 +4,7 @@ import { OrganizationCreateData, ResponseMessage } from "@/types";
 export const organizationApi = {
   create: async (body: OrganizationCreateData): Promise<ResponseMessage> => {
     try {
-      const { data } = await axiosInst.post("/organizations", body);
+      const { data } = await axiosInst.post("/organizations/create", body);
       return data;
     } catch (error: Error | any) {
       console.error("Error during organization creation:", error);
@@ -46,5 +46,5 @@ export const organizationApi = {
       console.error(`Error deleting organization with ID ${id}:`, error);
       return error.response.data;
     }
-  },
+  }
 };

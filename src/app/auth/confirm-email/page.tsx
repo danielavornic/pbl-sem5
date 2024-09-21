@@ -7,9 +7,10 @@ import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
-import { authApi } from "@/api/authApi";
 import { Spinner } from "@/components/spinner";
 import PublicLayout from "@/layouts/public";
+
+import { authApi } from "../api";
 
 const ConfirmEmail = () => {
   const [token] = useQueryState("token");
@@ -23,7 +24,7 @@ const ConfirmEmail = () => {
 
   useEffect(() => {
     if (!token) {
-      router.push("/login");
+      router.push("/auth/login");
       return;
     }
 
@@ -33,9 +34,9 @@ const ConfirmEmail = () => {
     }
 
     if (confirmEmail.isSuccess) {
-      if (confirmEmail.data.status === "success") {
+      if (confirmEmail.data.status === "SUCCESS") {
         toast.success(confirmEmail.data.message);
-        router.push("/login");
+        router.push("/auth/login");
       } else {
         toast.error(confirmEmail.data.message);
         router.push("/");

@@ -60,10 +60,10 @@ export const Header = () => {
         ) : (
           <div className="flex items-center gap-5">
             <Button variant="link-foreground" asChild>
-              <Link href="/login">Intră în cont</Link>
+              <Link href="/auth/login">Intră în cont</Link>
             </Button>
             <Button variant="default" asChild>
-              <Link href="/register">Creează un cont</Link>
+              <Link href="/auth/register">Creează un cont</Link>
             </Button>
           </div>
         )}

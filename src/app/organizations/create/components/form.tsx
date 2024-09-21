@@ -77,7 +77,7 @@ export const CreateOrganizationForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Regiune</FormLabel>
                   <FormControl>
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value?.toString()}>
                       <SelectTrigger
                         className={cn({ "border-destructive": form.formState.errors.region })}
                       >

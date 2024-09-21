@@ -146,7 +146,7 @@ export const RegisterForm = () => {
         <div className="mt-10 flex justify-center">
           <span className="mr-2">Ai deja un cont?</span>
           <Button variant="link-accent" className="h-auto p-0" asChild>
-            <Link href="/login">Conectează-te la contul tău</Link>
+            <Link href="/auth/login">Conectează-te la contul tău</Link>
           </Button>
         </div>
       </div>
