@@ -108,26 +108,26 @@ export const columns: ColumnDef<Organization>[] = [
       return createdAtDate;
     }
   },
-  {
-    accessorKey: "updatedAt",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="my-1 rounded-sm hover:bg-primary/30 hover:text-black"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Actualizat la
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const updatedAt = row.getValue("updatedAt") as string;
-      const updatedAtDate = format(new Date(updatedAt), "HH:mm, PPP");
-      return updatedAtDate;
-    }
-  },
+  // {
+  //   accessorKey: "updatedAt",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         className="my-1 rounded-sm hover:bg-primary/30 hover:text-black"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         Actualizat la
+  //         <ArrowUpDown className="ml-2 h-4 w-4" />
+  //       </Button>
+  //     );
+  //   },
+  // cell: ({ row }) => {
+  //   const updatedAt = row.getValue("updatedAt") as string;
+  //   const updatedAtDate = format(new Date(updatedAt), "HH:mm, PPP");
+  //   return updatedAtDate;
+  // }
+  // },
   {
     accessorKey: "actions",
     header: "",

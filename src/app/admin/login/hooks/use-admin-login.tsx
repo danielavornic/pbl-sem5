@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { adminApi } from "@/app/admin/api";
+import { adminApi } from "@/app/admin/login/queries";
 import useUserStore from "@/lib/user-store";
 import { LoginCredentials } from "@/types";
 

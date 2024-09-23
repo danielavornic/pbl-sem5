@@ -21,7 +21,6 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
 import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
 import { REGION_OPTIONS } from "@/constants/regionOptions";
 import { cn } from "@/lib/utils";
@@ -72,14 +71,14 @@ export const CreateOrganizationForm = () => {
 
             <FormField
               control={form.control}
-              name="region"
+              name="regionId"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Regiune</FormLabel>
                   <FormControl>
                     <Select onValueChange={field.onChange} value={field.value?.toString()}>
                       <SelectTrigger
-                        className={cn({ "border-destructive": form.formState.errors.region })}
+                        className={cn({ "border-destructive": form.formState.errors.regionId })}
                       >
                         <SelectValue placeholder="Selectează o regiune" />
                       </SelectTrigger>
@@ -113,20 +112,20 @@ export const CreateOrganizationForm = () => {
 
             <FormField
               control={form.control}
-              name="categories"
+              name="categoryIds"
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Categorii</FormLabel>
                   <FormControl>
                     <MultipleSelector
-                      className={cn({ "border-destructive": form.formState.errors.categories })}
+                      className={cn({ "border-destructive": form.formState.errors.categoryIds })}
                       options={CATEGORY_OPTIONS}
                       placeholder="Selectează cel puțin o categorie"
                       value={CATEGORY_OPTIONS.filter((option) =>
-                        field.value.includes(parseInt(option.value))
+                        field.value.includes(option.value)
                       )}
                       onChange={(selectedValues) => {
-                        const values = selectedValues.map((option) => parseInt(option.value));
+                        const values = selectedValues.map((option) => option.value);
                         field.onChange(values);
                       }}
                       emptyIndicator="Nu ați selectat nicio categorie"
@@ -184,9 +183,6 @@ export const CreateOrganizationForm = () => {
                     </FormControl>
                     <FormMessage />
                   </FormItem>
-                  {uploadedFiles.length > 0 ? (
-                    <UploadedFilesCard uploadedFiles={uploadedFiles} />
-                  ) : null}
                 </div>
               )}
             />

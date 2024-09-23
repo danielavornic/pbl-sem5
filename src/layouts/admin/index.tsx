@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-import { authApi } from "@/app/auth/api";
+import { authApi } from "@/app/auth/queries";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import useUserStore from "@/lib/user-store";

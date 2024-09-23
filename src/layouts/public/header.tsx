@@ -31,21 +31,23 @@ export const Header = () => {
           {isAdmin && <span className="font-heading text-sm font-semibold text-accent">admin</span>}
         </div>
 
-        <div className="flex items-center gap-8">
-          {menuLinks.map((link) => (
-            <Button
-              key={link.label}
-              size="lg"
-              variant="link-foreground"
-              className={cn("font-medium", {
-                "font-semibold underline": pathname.startsWith(link.href)
-              })}
-              asChild
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </Button>
-          ))}
-        </div>
+        {!isAdmin && (
+          <div className="flex items-center gap-8">
+            {menuLinks.map((link) => (
+              <Button
+                key={link.label}
+                size="lg"
+                variant="link-foreground"
+                className={cn("font-medium", {
+                  "font-semibold underline": pathname.startsWith(link.href)
+                })}
+                asChild
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </Button>
+            ))}
+          </div>
+        )}
 
         {user ? (
           <div className="flex">

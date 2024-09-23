@@ -7,10 +7,9 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { authApi } from "@/app/auth/queries";
 import useUserStore from "@/lib/user-store";
 import { LoginCredentials } from "@/types";
-
-import { authApi } from "../../api";
 
 export const formSchema = z.object({
   email: z

@@ -11,7 +11,7 @@ import { z } from "zod";
 import { PASSWORD_REGEX } from "@/lib/auth";
 import { UserRegisterCredentials } from "@/types";
 
-import { authApi } from "../../api";
+import { authApi } from "../../queries";
 
 export const formSchema = z
   .object({

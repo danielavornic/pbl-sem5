@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import useUserStore from "@/lib/user-store";
 
-import { authApi } from "./api";
+import { authApi } from "./queries";
 
 export const useAuth = () => {
   const { user, setUser, clearUser } = useUserStore();

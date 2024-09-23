@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Spinner } from "@/components/spinner";
 import PublicLayout from "@/layouts/public";
 
-import { authApi } from "../api";
+import { authApi } from "../queries";
 
 const ConfirmEmail = () => {
   const [token] = useQueryState("token");
