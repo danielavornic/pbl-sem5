@@ -1,5 +1,6 @@
 "use client";
 
+import { Footer } from "./footer";
 import { Header } from "./header";
 
 interface PublicLayoutProps {
@@ -13,13 +14,14 @@ const PublicLayout = ({
   children
 }: React.PropsWithChildren<PublicLayoutProps>) => {
   return (
-    <>
+    <div className="flex h-full flex-col">
       <title>{`${title} | voluntariat`}</title>
       {description && <meta name="description" content={description} />}
 
       <Header />
-      {children}
-    </>
+      <div className="min-h-screen flex-1">{children}</div>
+      <Footer />
+    </div>
   );
 };
 

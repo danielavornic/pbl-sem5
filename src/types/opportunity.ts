@@ -1,16 +1,19 @@
 import { NamedEntity } from "./common";
 import { ApprovalStatus } from "./organization";
 
-export interface OpportunityCreateData {
+export interface OpportunityBase {
   title: string;
   description: string;
-  region: string;
   address: string;
   isHighPriority: boolean;
   sessions: Session[];
   image?: string;
-  categories: number[] | NamedEntity[];
-  skills: number[] | NamedEntity[];
+}
+
+export interface OpportunityCreateData extends OpportunityBase {
+  regionId: number;
+  categoryIds: number[];
+  skills: number[];
 }
 
 export interface Session {
@@ -19,8 +22,9 @@ export interface Session {
   spotsLeft: number;
 }
 
-export interface Opportunity extends OpportunityCreateData {
+export interface Opportunity extends OpportunityBase {
   id: number;
+  region: NamedEntity;
   createdBy: {
     id: number;
     firstName: string;
@@ -29,14 +33,12 @@ export interface Opportunity extends OpportunityCreateData {
   organizationId?: number;
   categories: NamedEntity[];
   skills: NamedEntity[];
-
   approvalStatus: ApprovalStatus;
   approvedBy: {
     id: number;
     username: string;
   } | null;
   approvalDate: string | null;
-
   createdAt: string;
   updatedAt: string;
 }
