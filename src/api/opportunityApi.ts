@@ -20,7 +20,7 @@ export const opportunityApi = {
       throw error;
     }
   },
-  getById: async (id: string): Promise<Opportunity> => {
+  getById: async (id: number): Promise<Opportunity> => {
     try {
       const { data } = await axiosInst.get(`/opportunities/${id}`);
       return data;
@@ -46,5 +46,5 @@ export const opportunityApi = {
       console.error(`Error deleting opportunity with ID ${id}:`, error);
       return error.response.data;
     }
-  },
+  }
 };
