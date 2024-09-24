@@ -29,12 +29,12 @@ const links = [
     label: "Oportunități",
     href: "/admin/opportunities",
     icon: <CalendarHeart className="h-5 w-5 flex-shrink-0 text-background" />
-  },
-  {
-    label: "Utilizatori",
-    href: "/admin/users",
-    icon: <UsersRound className="h-5 w-5 flex-shrink-0 text-background" />
   }
+  // {
+  //   label: "Utilizatori",
+  //   href: "/admin/users",
+  //   icon: <UsersRound className="h-5 w-5 flex-shrink-0 text-background" />
+  // }
 ];
 
 const AdminLayout = ({ title, children }: React.PropsWithChildren<AdminLayoutProps>) => {

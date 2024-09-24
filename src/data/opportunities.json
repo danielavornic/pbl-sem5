@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "title": "Community Garden Planting",
+    "description": "Help plant vegetables and flowers in our local community garden.",
+    "address": "123 Green Street, Anytown, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": true,
+    "image": "/images/placeholder.webp",
+    "createdBy": {
+      "id": 101,
+      "firstName": "Jane",
+      "lastName": "Doe"
+    },
+    "organization": {
+      "id": 501,
+      "name": "Green Thumb Society"
+    },
+    "categories": [
+      { "id": 1, "name": "Environment" },
+      { "id": 2, "name": "Community Development" }
+    ],
+    "skills": [
+      { "id": 1, "name": "Gardening" },
+      { "id": 2, "name": "Teamwork" }
+    ],
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 201,
+      "username": "admin_user"
+    },
+    "approvalDate": "2024-09-20T14:30:00Z",
+    "createdAt": "2024-09-15T10:00:00Z",
+    "updatedAt": "2024-09-20T14:30:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-05",
+        "startTime": "09:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 10
+      },
+      {
+        "date": "2024-10-12",
+        "startTime": "09:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 8
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Elderly Care Home Visit",
+    "description": "Spend time with seniors at the local care home, engaging in conversations and activities.",
+    "address": "456 Care Lane, Eldertown, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": false,
+    "createdBy": {
+      "id": 102,
+      "firstName": "John",
+      "lastName": "Smith"
+    },
+    "organization": {
+      "id": 502,
+      "name": "Golden Years Foundation"
+    },
+    "categories": [
+      { "id": 3, "name": "Elderly Care" },
+      { "id": 4, "name": "Social Support" }
+    ],
+    "skills": [
+      { "id": 3, "name": "Communication" },
+      { "id": 4, "name": "Patience" }
+    ],
+    "approvalStatus": "pending",
+    "approvedBy": null,
+    "approvalDate": null,
+    "createdAt": "2024-09-18T15:30:00Z",
+    "updatedAt": "2024-09-18T15:30:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-07",
+        "startTime": "14:00:00",
+        "endTime": "16:00:00",
+        "spotsLeft": 5
+      },
+      {
+        "date": "2024-10-14",
+        "startTime": "14:00:00",
+        "endTime": "16:00:00",
+        "spotsLeft": 5
+      }
+    ]
+  }
+]
