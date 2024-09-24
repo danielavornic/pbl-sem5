@@ -6,7 +6,7 @@ export enum ApprovalStatus {
   rejected = "Respins"
 }
 
-interface OpportunityBase {
+export interface OpportunityBase {
   title: string;
   description: string;
   address: string;
@@ -15,9 +15,8 @@ interface OpportunityBase {
 }
 
 export interface OpportunityCreateData extends OpportunityBase {
-  sessions: Session[];
-  region: string;
-  categories: number[];
+  regionId: number;
+  categoryIds: number[];
   skills: number[];
 }
 
