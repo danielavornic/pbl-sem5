@@ -19,7 +19,7 @@ const PublicLayout = ({
       {description && <meta name="description" content={description} />}
 
       <Header />
-      <div className="min-h-screen flex-1">{children}</div>
+      <div className="min-h-[calc(100dvh-336px)] flex-1">{children}</div>
       <Footer />
     </div>
   );
