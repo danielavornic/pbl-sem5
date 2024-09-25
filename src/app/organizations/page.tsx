@@ -5,11 +5,12 @@ import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 
 import { organizationApi } from "@/api/organizationApi";
-import OrganizationCard from "@/components/organization-card";
 import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/components/ui/multiple-selector";
 import PublicLayout from "@/layouts/public";
+
+import OrganizationCard from "./components/organization-card";
 
 const OrganizationsPage = () => {
   const [searchTerm, setSearchTerm] = useQueryState("search", {
@@ -19,7 +20,10 @@ const OrganizationsPage = () => {
 
   const organizationQuery = useQuery({
     queryKey: ["organizations"],
-    queryFn: organizationApi.getAll
+    queryFn: organizationApi.getAll,
+    select: (data) => {
+      return Array.isArray(data) ? data : [];
+    }
   });
 
   const filteredOrganizations = useMemo(() => {

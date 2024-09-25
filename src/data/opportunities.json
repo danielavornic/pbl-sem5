@@ -96,5 +96,209 @@
         "spotsLeft": 5
       }
     ]
+  },
+  {
+    "id": 3,
+    "title": "Coding for Kids Workshop",
+    "description": "Teach basic coding concepts to children ages 8-12 in a fun and interactive workshop.",
+    "address": "789 Tech Street, Codeville, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": true,
+    "image": "/images/placeholder.webp",
+    "createdBy": {
+      "id": 103,
+      "firstName": "Alice",
+      "lastName": "Johnson"
+    },
+    "organization": {
+      "id": 503,
+      "name": "Code for Kids Foundation"
+    },
+    "categories": [
+      { "id": 5, "name": "Education" },
+      { "id": 6, "name": "Technology" }
+    ],
+    "skills": [
+      { "id": 5, "name": "Coding" },
+      { "id": 6, "name": "Teaching" }
+    ],
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 202,
+      "username": "tech_admin"
+    },
+    "approvalDate": "2024-09-22T10:00:00Z",
+    "createdAt": "2024-09-17T12:00:00Z",
+    "updatedAt": "2024-09-22T10:00:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-06",
+        "startTime": "10:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 15
+      },
+      {
+        "date": "2024-10-13",
+        "startTime": "10:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 12
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Beach Cleanup",
+    "description": "Join us for a beach cleanup to help keep our coastline clean and beautiful.",
+    "address": "1 Main Beach, Oceanside, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": false,
+    "image": "/images/placeholder.webp",
+    "createdBy": {
+      "id": 104,
+      "firstName": "Bob",
+      "lastName": "Williams"
+    },
+    "organization": {
+      "id": 504,
+      "name": "Ocean Conservation Group"
+    },
+    "categories": [
+      { "id": 7, "name": "Environment" },
+      { "id": 8, "name": "Community Service" }
+    ],
+    "skills": [
+      { "id": 7, "name": "Teamwork" },
+      { "id": 8, "name": "Physical Activity" }
+    ],
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 203,
+      "username": "ocean_admin"
+    },
+    "approvalDate": "2024-09-21T16:00:00Z",
+    "createdAt": "2024-09-19T18:00:00Z",
+    "updatedAt": "2024-09-21T16:00:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-08",
+        "startTime": "09:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 20
+      },
+      {
+        "date": "2024-10-15",
+        "startTime": "09:00:00",
+        "endTime": "12:00:00",
+        "spotsLeft": 18
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Animal Shelter Volunteering",
+    "description": "Help care for animals at the local animal shelter, providing food, water, and playtime.",
+    "address": "222 Pet Lane, Animalville, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": true,
+    "image": "/images/placeholder.webp",
+    "createdBy": {
+      "id": 105,
+      "firstName": "Carol",
+      "lastName": "Brown"
+    },
+    "organization": {
+      "id": 505,
+      "name": "Animal Care Society"
+    },
+    "categories": [
+      { "id": 9, "name": "Animal Welfare" },
+      { "id": 10, "name": "Community Service" }
+    ],
+    "skills": [
+      { "id": 9, "name": "Animal Handling" },
+      { "id": 10, "name": "Compassion" }
+    ],
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 204,
+      "username": "animal_admin"
+    },
+    "approvalDate": "2024-09-23T12:00:00Z",
+    "createdAt": "2024-09-20T10:00:00Z",
+    "updatedAt": "2024-09-23T12:00:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-09",
+        "startTime": "14:00:00",
+        "endTime": "17:00:00",
+        "spotsLeft": 10
+      },
+      {
+        "date": "2024-10-16",
+        "startTime": "14:00:00",
+        "endTime": "17:00:00",
+        "spotsLeft": 8
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Book Club Meeting",
+    "description": "Discuss the latest book selection in a relaxed and engaging environment.",
+    "address": "345 Library Lane, Booktown, USA",
+    "region": {
+      "id": 1,
+      "name": "North America"
+    },
+    "isHighPriority": false,
+    "image": "/images/placeholder.webp",
+    "createdBy": {
+      "id": 106,
+      "firstName": "David",
+      "lastName": "Wilson"
+    },
+    "organization": {
+      "id": 506,
+      "name": "Bookworm Club"
+    },
+    "categories": [
+      { "id": 11, "name": "Arts & Culture" },
+      { "id": 12, "name": "Social Events" }
+    ],
+    "skills": [
+      { "id": 11, "name": "Reading" },
+      { "id": 12, "name": "Discussion" }
+    ],
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 205,
+      "username": "book_admin"
+    },
+    "approvalDate": "2024-09-24T18:00:00Z",
+    "createdAt": "2024-09-21T16:00:00Z",
+    "updatedAt": "2024-09-24T18:00:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-10",
+        "startTime": "19:00:00",
+        "endTime": "21:00:00",
+        "spotsLeft": 12
+      },
+      {
+        "date": "2024-10-17",
+        "startTime": "19:00:00",
+        "endTime": "21:00:00",
+        "spotsLeft": 10
+      }
+    ]
   }
 ]

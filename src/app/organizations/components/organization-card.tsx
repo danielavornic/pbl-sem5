@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,11 +11,8 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { Organization } from "@/types";
-
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
 
 const OrganizationCard = ({ org }: { org: Organization }) => {
   return (
