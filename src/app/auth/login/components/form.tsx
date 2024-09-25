@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,9 +16,26 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 
 import useLogin from "../hooks/use-login";
+import MFADialog from "./mfa-dialog";
 
 export const LoginForm = () => {
   const { form, onSubmit, isPending } = useLogin();
+  const [isMFAOpen, setIsMFAOpen] = useState(false);
+
+  // const handleLogin = async (data: any) => {
+  //   const requiresMFA = true;
+
+  //   if (requiresMFA) {
+  //     setIsMFAOpen(true);
+  //   } else {
+  //     await onSubmit(data);
+  //   }
+  // };
+
+  // const handleMFASubmit = async (otpCode: string) => {
+  //   setIsMFAOpen(false);
+  //   // await onSubmit({ ...form.getValues(), otpCode });
+  // };
 
   return (
     <div className="min-w-[500px]">
@@ -58,7 +76,7 @@ export const LoginForm = () => {
             )}
           />
 
-          <Button type="submit" loading={isPending}>
+          <Button loading={isPending} type="submit" className="w-full">
             {isPending ? "Se incarcă..." : "Accesează contul"}
           </Button>
         </form>
@@ -70,6 +88,8 @@ export const LoginForm = () => {
           <Link href="/auth/register">Înregistrează-te</Link>
         </Button>
       </div>
+
+      {/* <MFADialog isOpen={true} onClose={() => setIsMFAOpen(false)} onSubmit={() => {}} /> */}
     </div>
   );
 };

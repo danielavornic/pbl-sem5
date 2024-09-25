@@ -18,6 +18,11 @@ const nextConfig = {
         source: "/auth",
         destination: "/auth/login",
         permanent: false
+      },
+      {
+        source: "/account",
+        destination: "/account/settings",
+        permanent: false
       }
     ];
   },

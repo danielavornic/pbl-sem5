@@ -8,12 +8,12 @@ import { cn } from "@/lib/utils";
 
 const menuItems = [
   {
-    title: "Informații personale",
-    href: "/account"
-  },
-  {
     title: "Setări",
     href: "/account/settings"
+  },
+  {
+    title: "Informații personale",
+    href: "/account"
   }
 ];
 

@@ -1,20 +1,17 @@
 import PublicLayout from "@/layouts/public";
 
-import { AccountSidebar } from "./components/sidebar";
+import { AccountSidebar } from "../components/sidebar";
+import { MfaView } from "./components/mfa.view";
 
-const AccountPage = () => {
+const SettingsPage = () => {
   return (
-    <PublicLayout title="Contul meu">
+    <PublicLayout title="Setări">
       <main className="container h-full py-10">
         <section>
           <h1 className="text-3xl font-semibold">Contul meu</h1>
-
           <div className="mt-8 flex">
             <AccountSidebar />
-
-            <div className="flex-1">
-              <h2 className="mt-20 text-center text-xl font-semibold">Coming Soon</h2>
-            </div>
+            <MfaView />
           </div>
         </section>
       </main>
@@ -22,4 +19,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default SettingsPage;
