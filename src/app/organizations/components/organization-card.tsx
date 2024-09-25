@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,6 +11,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+<<<<<<< Updated upstream:src/components/organization-card.tsx
 import organizations from "@/data/organizations";
 
 import { Badge } from "./ui/badge";
@@ -20,6 +23,12 @@ const OrganizationCard = () => {
     (org: any) => org.approvalStatus === "approved"
   );
 
+=======
+import { Label } from "@/components/ui/label";
+import { Organization } from "@/types";
+
+const OrganizationCard = ({ org }: { org: Organization }) => {
+>>>>>>> Stashed changes:src/app/organizations/components/organization-card.tsx
   return (
     <>
       {approvedOrganizations.length > 0 ? (
