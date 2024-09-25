@@ -14,9 +14,11 @@ import { OrganizationCreateData } from "@/types";
 export const organizationFormSchema = z.object({
   name: z.string().min(1, { message: "Numele organizației este obligatoriu" }),
   description: z.string().min(1, { message: "Descrierea organizației este obligatorie" }),
-  region: z.string().min(1, { message: "Localitatea organizației este obligatorie" }),
+  regionId: z.string().min(1, { message: "Regiunea este obligatorie" }),
   address: z.string().min(1, { message: "Adresa organizației este obligatorie" }),
-  categories: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o categorie" }),
+  categoryIds: z
+    .array(z.string())
+    .min(1, { message: "Trebuie să selectați cel puțin o categorie" }),
   website: z.union([
     z.literal(""),
     z.string().trim().url({ message: "Adresa site-ului trebuie să fie validă" })
@@ -33,8 +35,8 @@ const useCreateOrganization = () => {
       name: "",
       description: "",
       address: "",
-      region: "",
-      categories: [],
+      regionId: "",
+      categoryIds: [],
       website: "",
       phoneNumber: "",
       logo: []
@@ -66,8 +68,8 @@ const useCreateOrganization = () => {
         name: data.name,
         description: data.description,
         address: data.address,
-        region: data.region,
-        categories: data.categories,
+        regionId: +data.regionId,
+        categoryIds: data.categoryIds.map((id) => +id),
         website: data.website,
         phoneNumber: data.phoneNumber
       });
@@ -85,6 +87,8 @@ const useCreateOrganization = () => {
 
       mutate({
         ...formValues,
+        regionId: +formValues.regionId,
+        categoryIds: formValues.categoryIds.map((id) => +id),
         logo: logoUrl
       });
     }

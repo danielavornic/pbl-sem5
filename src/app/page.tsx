@@ -4,7 +4,7 @@ import { parseAsBoolean, useQueryState } from "nuqs";
 
 import PublicLayout from "@/layouts/public";
 
-import SetupAccountDialog from "./login/components/setup-dialog";
+import SetupAccountDialog from "./auth/login/components/setup-dialog";
 
 export default function Home() {
   const [setup, setSetup] = useQueryState("setup", parseAsBoolean);

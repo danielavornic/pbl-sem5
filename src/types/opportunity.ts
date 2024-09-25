@@ -1,16 +1,23 @@
 import { NamedEntity } from "./common";
-import { ApprovalStatus } from "./organization";
 
-export interface OpportunityCreateData {
-  organizationId?: number;
+export enum ApprovalStatus {
+  pending = "În așteptare",
+  approved = "Aprobat",
+  rejected = "Respins"
+}
+
+export interface OpportunityBase {
   title: string;
   description: string;
-  region: string;
   address: string;
   isHighPriority: boolean;
-  sessions: Session[];
-  categories: number[] | NamedEntity[];
-  skills: number[] | NamedEntity[];
+  image?: string;
+}
+
+export interface OpportunityCreateData extends OpportunityBase {
+  regionId: number;
+  categoryIds: number[];
+  skills: number[];
 }
 
 export interface Session {
@@ -19,24 +26,28 @@ export interface Session {
   spotsLeft: number;
 }
 
-export interface Opportunity extends OpportunityCreateData {
+export interface Opportunity extends OpportunityBase {
   id: number;
   createdBy: {
     id: number;
     firstName: string;
     lastName: string;
   };
-  organizationId?: number;
+  organization: NamedEntity;
+  region: NamedEntity;
   categories: NamedEntity[];
   skills: NamedEntity[];
-
-  approvalStatus: ApprovalStatus;
+  approvalStatus: string;
   approvedBy: {
     id: number;
     username: string;
   } | null;
   approvalDate: string | null;
-
   createdAt: string;
   updatedAt: string;
+  sessions: SessionExtended[];
+}
+
+export interface SessionExtended extends Session {
+  date: string;
 }

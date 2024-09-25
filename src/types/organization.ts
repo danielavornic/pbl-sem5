@@ -5,33 +5,36 @@ export enum ApprovalStatus {
   approved = "Aprobat",
   rejected = "Respins"
 }
-export interface OrganizationCreateData {
+
+interface OrganizationBase {
   name: string;
   description: string;
   address: string;
-  region: string;
-  categories?: number[] | NamedEntity[];
   website?: string;
   phoneNumber: string;
   logo?: string;
 }
 
-export interface Organization extends OrganizationCreateData {
+export interface OrganizationCreateData extends OrganizationBase {
+  regionId: number;
+  categoryIds?: number[];
+}
+
+export interface Organization extends OrganizationBase {
   id: number;
+  region: NamedEntity;
+  categories: NamedEntity[];
   createdBy: {
     id: number;
     firstName: string;
     lastName: string;
   };
-  categories?: NamedEntity[];
-
   approvalStatus: "pending" | "approved" | "rejected";
   approvedBy: {
     id: number;
     username: string;
   } | null;
   approvalDate: string | null;
-
   createdAt: string;
   updatedAt: string;
 }

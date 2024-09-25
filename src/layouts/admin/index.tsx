@@ -1,14 +1,18 @@
 "use client";
 
+import { useMutation } from "@tanstack/react-query";
 import { Building, CalendarHeart, LogOut, UsersRound } from "lucide-react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
+import { authApi } from "@/app/auth/queries";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import useUserStore from "@/lib/user-store";
 
-import { Sidebar, SidebarBody, SidebarLink, SidebarLogo } from "./sidebar";
+import { Sidebar, SidebarBody, SidebarItem, SidebarLink, SidebarLogo } from "./sidebar";
 import { AdminTopbar } from "./topbar";
 
 interface AdminLayoutProps {
@@ -25,18 +29,34 @@ const links = [
     label: "Oportunități",
     href: "/admin/opportunities",
     icon: <CalendarHeart className="h-5 w-5 flex-shrink-0 text-background" />
-  },
-  {
-    label: "Utilizatori",
-    href: "/admin/users",
-    icon: <UsersRound className="h-5 w-5 flex-shrink-0 text-background" />
   }
+  // {
+  //   label: "Utilizatori",
+  //   href: "/admin/users",
+  //   icon: <UsersRound className="h-5 w-5 flex-shrink-0 text-background" />
+  // }
 ];
 
 const AdminLayout = ({ title, children }: React.PropsWithChildren<AdminLayoutProps>) => {
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const { user, clearUser } = useUserStore();
+
+  const logoutMutation = useMutation({
+    mutationFn: () => authApi.logout(),
+    onSuccess: () => {
+      toast.success("Deconectat cu succes");
+      clearUser();
+      router.push("/admin/login");
+    },
+    onError: (error: any) => {
+      toast.error("Eroare la deconectare", {
+        description: error.response?.data?.message
+      });
+    }
+  });
 
   return (
     <>
@@ -61,19 +81,17 @@ const AdminLayout = ({ title, children }: React.PropsWithChildren<AdminLayoutPro
               </div>
             </div>
             <div>
-              <SidebarLink
-                link={{
-                  label: "Deconectare",
-                  href: "/admin/login",
-                  icon: (
-                    <LogOut className="h-5 w-5 flex-shrink-0 rotate-180 transform text-background" />
-                  )
-                }}
+              <SidebarItem
+                onClick={() => logoutMutation.mutate()}
+                label="Deconectare"
+                icon={
+                  <LogOut className="h-5 w-5 flex-shrink-0 rotate-180 transform text-background" />
+                }
               />
               <Separator className="my-4 opacity-20" />
               <SidebarLink
                 link={{
-                  label: "logged user",
+                  label: user?.email || "",
                   href: "#",
                   icon: (
                     <Image

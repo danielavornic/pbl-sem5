@@ -1,13 +1,5 @@
 "use client";
 
-<<<<<<< Updated upstream
-import OrganizationCard from "@/components/organization-card";
-import PublicLayout from "@/layouts/public";
-
-import FilteredSearch from "./FilteredSearch";
-
-const OrganizationsPage = () => {
-=======
 import { useQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
@@ -35,7 +27,7 @@ const OrganizationsPage = () => {
   });
 
   const filteredOrganizations = useMemo(() => {
-    if (!organizationQuery.data || !Array.isArray(organizationQuery.data)) {
+    if (!organizationQuery.data) {
       return [];
     }
 
@@ -44,16 +36,33 @@ const OrganizationsPage = () => {
     });
   }, [organizationQuery.data, debouncedSearchTerm]);
 
->>>>>>> Stashed changes
   return (
     <PublicLayout title="Organizații">
       <main className="container">
-        <div className="my-10">
-          <FilteredSearch />
+        <div className="mb-10 mt-10 flex items-center justify-between">
+          <h1 className="font-heading text-3xl font-bold">Organizații</h1>
+          <div>
+            <Input
+              type="text"
+              placeholder="Caută organizații"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <OrganizationCard />
-        </div>
+        {organizationQuery.isLoading ? (
+          <Spinner className="mt-32" />
+        ) : organizationQuery.isSuccess && filteredOrganizations.length > 0 ? (
+          <div className="grid grid-cols-3 gap-6 2xl:grid-cols-4">
+            {filteredOrganizations.map((org: any) => (
+              <OrganizationCard key={org.id} org={org} />
+            ))}
+          </div>
+        ) : (
+          <div className="font-heading font-semibold">
+            Nu s-au găsit organizații care să corespundă criteriilor de căutare.
+          </div>
+        )}
       </main>
     </PublicLayout>
   );

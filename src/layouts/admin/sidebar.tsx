@@ -188,6 +188,49 @@ export const SidebarLink = ({
   );
 };
 
+export const SidebarItem = ({
+  icon,
+  label,
+  className,
+  onClick,
+  ...props
+}: {
+  icon: React.ReactNode;
+  label: string;
+  className?: string;
+  onClick?: () => void;
+}) => {
+  const { open, animate } = useSidebar();
+  return (
+    <div
+      onClick={onClick}
+      className={cn(
+        "group/sidebar flex cursor-pointer items-center justify-start rounded-md px-3 py-3 font-semibold",
+        { "justify-center rounded-full px-1 py-2": !open },
+        className
+      )}
+      {...props}
+    >
+      {icon}
+
+      <motion.span
+        animate={{
+          display: animate ? (open ? "inline-block" : "none") : "inline-block",
+          opacity: animate ? (open ? 1 : 0) : 1
+        }}
+        className={cn(
+          "m-0 inline-block whitespace-pre !p-0 text-background transition duration-150 group-hover/sidebar:translate-x-1",
+          {
+            "ml-2": open
+          }
+        )}
+      >
+        {label}
+      </motion.span>
+    </div>
+  );
+};
+
 export const SidebarLogo = () => {
   const { open, animate } = useSidebar();
   return (

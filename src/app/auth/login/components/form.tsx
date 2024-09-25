@@ -67,7 +67,7 @@ export const LoginForm = () => {
       <div className="mt-10 flex justify-center">
         <span className="mr-2">Nu ai cont?</span>
         <Button variant="link-accent" className="h-auto p-0" asChild>
-          <Link href="/register">Înregistrează-te</Link>
+          <Link href="/auth/register">Înregistrează-te</Link>
         </Button>
       </div>
     </div>

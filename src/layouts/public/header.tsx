@@ -25,28 +25,31 @@ export const Header = () => {
     <header className="h-24">
       <div className="container flex h-full items-center justify-between">
         <div className="flex items-start">
-          <Link href={isAdmin ? "/admin" : "/"}>
+          <Link href={isAdmin ? "/admin" : "/"} className="flex-shrink-0">
             <Image src="/logo.svg" alt="Voluntariat Moldova" width={238} height={48} priority />
           </Link>
           {isAdmin && <span className="font-heading text-sm font-semibold text-accent">admin</span>}
         </div>
 
-        <div className="flex items-center gap-8">
-          {menuLinks.map((link) => (
-            <Button
-              key={link.label}
-              size="lg"
-              variant="link-foreground"
-              className={cn("font-medium", {
-                "font-semibold underline": pathname.startsWith(link.href)
-              })}
-              asChild
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </Button>
-          ))}
-        </div>
+        {!isAdmin && (
+          <div className="flex items-center gap-8">
+            {menuLinks.map((link) => (
+              <Button
+                key={link.label}
+                size="lg"
+                variant="link-foreground"
+                className={cn("font-medium", {
+                  "font-semibold underline": pathname.startsWith(link.href)
+                })}
+                asChild
+              >
+                <Link href={link.href}>{link.label}</Link>
+              </Button>
+            ))}
+          </div>
+        )}
 
+        <UserNav />
         {user ? (
           <div className="flex">
             <UserNav />
@@ -60,10 +63,10 @@ export const Header = () => {
         ) : (
           <div className="flex items-center gap-5">
             <Button variant="link-foreground" asChild>
-              <Link href="/login">Intră în cont</Link>
+              <Link href="/auth/login">Intră în cont</Link>
             </Button>
             <Button variant="default" asChild>
-              <Link href="/register">Creează un cont</Link>
+              <Link href="/auth/register">Creează un cont</Link>
             </Button>
           </div>
         )}

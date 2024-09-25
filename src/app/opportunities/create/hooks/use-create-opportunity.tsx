@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 import { opportunityApi } from "@/api/opportunityApi";
+import { useUploadFile } from "@/hooks/use-upload-file";
 import { OpportunityCreateData } from "@/types";
 
 const sessionSchema = z
@@ -58,7 +59,6 @@ const sessionSchema = z
   });
 
 export const opportunityFormSchema = z.object({
-  organizationId: z.number().optional(),
   title: z.string().min(1, { message: "Titlul este obligatoriu" }),
   description: z.string().min(1, { message: "Descrierea este obligatorie" }),
   region: z.string().min(1, { message: "Localitatea organizației este obligatorie" }),
@@ -66,7 +66,8 @@ export const opportunityFormSchema = z.object({
   isHighPriority: z.boolean(),
   sessions: z.array(sessionSchema).min(1, { message: "Trebuie să adăugați cel puțin o sesiune" }),
   categories: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o categorie" }),
-  skills: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o abilitate" })
+  skills: z.array(z.number()).min(1, { message: "Trebuie să selectați cel puțin o abilitate" }),
+  image: z.array(z.custom<File>())
 });
 
 const useCreateOpportunity = () => {
@@ -81,7 +82,8 @@ const useCreateOpportunity = () => {
       isHighPriority: false,
       sessions: [{ startTime: "", endTime: "", spotsLeft: 0 }],
       categories: [],
-      skills: []
+      skills: [],
+      image: []
     }
   });
 
@@ -112,6 +114,10 @@ const useCreateOpportunity = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form]);
 
+  const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile("imageUploader", {
+    defaultUploadedFiles: []
+  });
+
   const { mutate, isPending } = useMutation({
     mutationFn: (data: OpportunityCreateData) => opportunityApi.create(data),
     onSuccess: () => {
@@ -128,21 +134,49 @@ const useCreateOpportunity = () => {
   });
 
   const onSubmit = (data: z.infer<typeof opportunityFormSchema>) => {
-    mutate({
-      title: data.title,
-      description: data.description,
-      address: data.address,
-      region: data.region,
-      isHighPriority: data.isHighPriority,
-      sessions: data.sessions,
-      categories: data.categories,
-      skills: data.skills
-    });
+    if (data.image.length === 0) {
+      mutate({
+        title: data.title,
+        description: data.description,
+        address: data.address,
+        region: data.region,
+        isHighPriority: data.isHighPriority,
+        sessions: data.sessions,
+        categories: data.categories,
+        skills: data.skills
+      });
 
-    return;
+      return;
+    }
+
+    onUpload(data.image);
   };
 
-  return { form, onSubmit, isPending, fields, append, remove, canAddSession };
+  useEffect(() => {
+    if (uploadedFiles.length) {
+      const formValues = form.getValues();
+      const imageUrl = uploadedFiles[0].url;
+
+      mutate({
+        ...formValues,
+        image: imageUrl
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadedFiles, form]);
+
+  return {
+    form,
+    onSubmit,
+    isPending,
+    fields,
+    append,
+    remove,
+    canAddSession,
+    isUploading,
+    progresses,
+    uploadedFiles
+  };
 };
 
 export default useCreateOpportunity;

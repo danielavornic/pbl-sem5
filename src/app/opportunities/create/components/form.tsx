@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DateTimePickerOpportunity } from "@/components/ui/date-time-picker-opportunity";
+import { FileUploader } from "@/components/ui/file-uploader";
 import {
   Form,
   FormControl,
@@ -26,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
 import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
 import { REGION_OPTIONS } from "@/constants/regionOptions";
 import { SKILL_OPTIONS } from "@/constants/skillOptions";
@@ -34,8 +36,18 @@ import { cn } from "@/lib/utils";
 import useCreateOpportunity from "../hooks/use-create-opportunity";
 
 export const CreateOpportunityForm = () => {
-  const { form, onSubmit, isPending, fields, append, remove, canAddSession } =
-    useCreateOpportunity();
+  const {
+    form,
+    onSubmit,
+    isPending,
+    fields,
+    append,
+    remove,
+    canAddSession,
+    progresses,
+    uploadedFiles,
+    isUploading
+  } = useCreateOpportunity();
 
   const addSession = () => {
     append({ startTime: "", endTime: "", spotsLeft: 0 });
@@ -44,8 +56,6 @@ export const CreateOpportunityForm = () => {
   const removeSession = (index: number) => {
     remove(index);
   };
-
-  console.log(form.formState.errors.sessions);
 
   return (
     <div className="my-10">
@@ -307,6 +317,32 @@ export const CreateOpportunityForm = () => {
 
             <FormField
               control={form.control}
+              name="image"
+              render={({ field }) => (
+                <div className="space-y-6">
+                  <FormItem className="w-full">
+                    <FormLabel>Imagine</FormLabel>
+                    <FormControl>
+                      <FileUploader
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        maxFileCount={1}
+                        maxSize={4 * 1024 * 1024}
+                        progresses={progresses}
+                        disabled={isUploading}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                  {uploadedFiles.length > 0 ? (
+                    <UploadedFilesCard uploadedFiles={uploadedFiles} />
+                  ) : null}
+                </div>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="isHighPriority"
               render={({ field }) => (
                 <FormItem className="flex h-12 w-full flex-row items-center justify-between rounded-md border border-input bg-card px-4 py-2">
@@ -319,8 +355,8 @@ export const CreateOpportunityForm = () => {
             />
 
             <div>
-              <Button className="float-right" type="submit" loading={isPending}>
-                {isPending ? "Se încarcă..." : "Creează oportunitatea"}
+              <Button className="float-right" type="submit" loading={isPending || isUploading}>
+                {isPending || isUploading ? "Se încarcă..." : "Creează oportunitatea"}
               </Button>
             </div>
           </form>

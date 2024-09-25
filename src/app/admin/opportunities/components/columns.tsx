@@ -14,19 +14,19 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { NamedEntity } from "@/types";
-import { Organization } from "@/types/organization";
+import { Opportunity, SessionExtended } from "@/types/opportunity";
 
-export const columns: ColumnDef<Organization>[] = [
+export const columns: ColumnDef<Opportunity>[] = [
   {
     accessorKey: "id",
     header: "ID",
     cell: ({ row }) => {
-      const id = row.getValue("id") as string;
+      const id = row.getValue("id") as number;
       return <div className="w-4">{id}</div>;
     }
   },
   {
-    accessorKey: "name",
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <Button
@@ -34,14 +34,22 @@ export const columns: ColumnDef<Organization>[] = [
           className="my-1 rounded-sm hover:bg-primary/30 hover:text-black"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nume
+          Titlu
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      const name = row.getValue("name") as string;
-      return <span className="font-medium">{name}</span>;
+      const title = row.getValue("title") as string;
+      return <span className="font-medium">{title}</span>;
+    }
+  },
+  {
+    accessorKey: "organization",
+    header: "Organizație",
+    cell: ({ row }) => {
+      const organization = row.getValue("organization") as NamedEntity;
+      return organization.name;
     }
   },
   {
@@ -49,27 +57,28 @@ export const columns: ColumnDef<Organization>[] = [
     header: "Descriere",
     cell: ({ row }) => {
       const description = row.getValue("description") as string;
-      return (
-        <div className="trucate line-clamp-1 max-w-[250px] break-all text-sm">{description}</div>
-      );
+      return <div className="line-clamp-1 max-w-[250px] break-all text-sm">{description}</div>;
     }
-  },
-
-  {
-    accessorKey: "address",
-    header: "Adresă"
   },
   {
     accessorKey: "region",
-    header: "Regiune",
+    header: "Localitate",
     cell: ({ row }) => {
       const region = row.getValue("region") as NamedEntity;
-      return region?.name;
+      return region.name;
     }
   },
   {
-    accessorKey: "phoneNumber",
-    header: "Telefon"
+    accessorKey: "isHighPriority",
+    header: "Prioritate",
+    cell: ({ row }) => {
+      const isHighPriority = row.getValue("isHighPriority") as boolean;
+      return isHighPriority ? (
+        <Badge variant="destructive">Înaltă</Badge>
+      ) : (
+        <Badge variant="muted">Normală</Badge>
+      );
+    }
   },
   {
     accessorKey: "approvalStatus",
@@ -86,6 +95,38 @@ export const columns: ColumnDef<Organization>[] = [
         default:
           return null;
       }
+    }
+  },
+  {
+    accessorKey: "sessions",
+    header: "Prima sesiune",
+    cell: ({ row }) => {
+      const sessions = row.getValue("sessions") as SessionExtended[];
+      if (sessions && sessions.length > 0) {
+        const firstSession = sessions[0];
+        const formattedDate = format(new Date(firstSession.date), "dd.MM.yyyy");
+        const formattedTime = `${firstSession.startTime.slice(0, 5)} - ${firstSession.endTime.slice(0, 5)}`;
+        return (
+          <div className="text-sm">
+            <div>
+              {formattedDate}, {formattedTime}
+            </div>
+          </div>
+        );
+      }
+      return <div className="text-sm text-gray-500">Fără sesiuni</div>;
+    }
+  },
+  {
+    accessorKey: "sessions",
+    header: "Locuri",
+    cell: ({ row }) => {
+      const sessions = row.getValue("sessions") as SessionExtended[];
+      if (sessions && sessions.length > 0) {
+        const firstSession = sessions[0];
+        return firstSession.spotsLeft;
+      }
+      return <div className="text-sm text-gray-500">Fără sesiuni</div>;
     }
   },
   {
@@ -108,26 +149,6 @@ export const columns: ColumnDef<Organization>[] = [
       return createdAtDate;
     }
   },
-  // {
-  //   accessorKey: "updatedAt",
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         className="my-1 rounded-sm hover:bg-primary/30 hover:text-black"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         Actualizat la
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     );
-  //   },
-  // cell: ({ row }) => {
-  //   const updatedAt = row.getValue("updatedAt") as string;
-  //   const updatedAtDate = format(new Date(updatedAt), "HH:mm, PPP");
-  //   return updatedAtDate;
-  // }
-  // },
   {
     accessorKey: "actions",
     header: "",
@@ -141,10 +162,6 @@ export const columns: ColumnDef<Organization>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DetailsCellComponent row={row} />
-            {/* <DropdownMenuItem>
-              <Info size={16} className="mr-2" />
-              Vezi detalii
-            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -152,12 +169,12 @@ export const columns: ColumnDef<Organization>[] = [
   }
 ];
 
-const DetailsCellComponent = ({ row }: { row: Row<Organization> }) => {
+const DetailsCellComponent = ({ row }: { row: Row<Opportunity> }) => {
   const [id, setId] = useQueryState("id", parseAsInteger);
-  const organizationId = row.getValue("id") as number;
+  const opportunityId = row.getValue("id") as number;
 
   return (
-    <DropdownMenuItem onClick={() => setId(organizationId)}>
+    <DropdownMenuItem onClick={() => setId(opportunityId)}>
       <Info size={16} className="mr-2" />
       Vezi detalii
     </DropdownMenuItem>
