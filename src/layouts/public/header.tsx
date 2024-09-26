@@ -22,7 +22,7 @@ export const Header = () => {
   const { user } = useUserStore();
 
   return (
-    <header className="h-24">
+    <header className="mb-6 h-24">
       <div className="container flex h-full items-center justify-between">
         <div className="flex items-start">
           <Link href={isAdmin ? "/admin" : "/"} className="flex-shrink-0">
