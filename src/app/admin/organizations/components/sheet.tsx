@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { ApprovalStatus } from "@/types/organization";
+import { ApprovalStatus } from "@/types";
 
 export const OrganizationSheet = () => {
   const [id, setId] = useQueryState("id", parseAsInteger);

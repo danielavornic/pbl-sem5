@@ -105,7 +105,10 @@ export const columns: ColumnDef<Opportunity>[] = [
       if (sessions && sessions.length > 0) {
         const firstSession = sessions[0];
         const formattedDate = format(new Date(firstSession.date), "dd.MM.yyyy");
-        const formattedTime = `${firstSession.startTime.slice(0, 5)} - ${firstSession.endTime.slice(0, 5)}`;
+        const formattedTime =
+          format(new Date(firstSession.startTime), "hh:mm a") +
+          " - " +
+          format(new Date(firstSession.endTime), "hh:mm a");
         return (
           <div className="text-sm">
             <div>

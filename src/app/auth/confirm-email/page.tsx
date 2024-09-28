@@ -46,7 +46,7 @@ const ConfirmEmail = () => {
 
   return (
     <PublicLayout title="Confirmă adresa de email">
-      <main className="flex h-full flex-col items-center justify-center pt-20">
+      <main className="flex h-full w-full flex-col items-center justify-center pt-20">
         <MailCheck size={90} className="mb-4 text-secondary" />
         <h1 className="pb-20 text-3xl font-bold">Se confirmă adresa de email</h1>
         {confirmEmail.isLoading && <Spinner />}

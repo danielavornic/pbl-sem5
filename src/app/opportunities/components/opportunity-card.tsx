@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import { format } from "date-fns";
+import { CalendarClock } from "lucide-react";
 import Link from "next/link";
 
 import {
@@ -42,9 +44,23 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
               </Badge>
             ))}
           </div>
+          <div className="space-y-3 pt-5">
+            <div className="flex items-center gap-2">
+              <img src="/calendar-icon.svg" alt="time-icon" className="inline-block" />
+              <p className="text-sm text-muted-foreground">
+                {format(new Date(opportunity.sessions[0].date), "hh:mm, dd MMM yyyy")}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <img src="/location-icon.svg" alt="time-icon" className="inline-block" />
+              <p className="text-sm text-muted-foreground">
+                {opportunity.address}, {opportunity.region.name}
+              </p>
+            </div>
+          </div>
         </div>
         <CardFooter className="p-0 pt-4">
-          <Button asChild size="sm" className="ml-auto">
+          <Button asChild size="sm" variant="outline" className="ml-auto">
             <Link href={`/opportunities/${opportunity.id}`}>Detalii</Link>
           </Button>
         </CardFooter>

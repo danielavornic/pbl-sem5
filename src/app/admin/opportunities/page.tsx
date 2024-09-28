@@ -10,7 +10,6 @@ import AdminLayout from "@/layouts/admin";
 
 import { columns } from "./components/columns";
 import { OpportunitySheet } from "./components/sheet";
-// import { OrganizationSheet } from "./components/sheet";
 
 const OpportunitiesPage = () => {
   const opportunitiesQuery = useQuery({
@@ -21,14 +20,13 @@ const OpportunitiesPage = () => {
   return (
     <AdminLayout title="Oportunități">
       <main className="pt-8">
-        <DataTable columns={columns} data={data} />
-        {/* {opportunitiesQuery.isLoading ? (
+        {opportunitiesQuery.isLoading ? (
           <Spinner className="mt-20" />
         ) : opportunitiesQuery.isSuccess && opportunitiesQuery.data ? (
           <DataTable columns={columns} data={opportunitiesQuery.data} />
         ) : (
           <div className="font-heading font-semibold">Eroare la încărcarea oporunităților</div>
-        )} */}
+        )}
       </main>
 
       <OpportunitySheet />

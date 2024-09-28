@@ -44,17 +44,17 @@ export const UserNav = () => {
     return null;
   }
 
-  const { profilePicture, firstName, lastName, email, organizationId } = (user as User) || {
+  const { profilePicture, firstName, lastName, email, createdOrganizations } = (user as User) || {
     profilePicture: "",
     firstName: "",
     lastName: "",
     email: "",
-    organizationId: null
+    createdOrganizations: null
   };
 
   return (
     <div className="flex items-center gap-5">
-      {organizationId ? (
+      {!!createdOrganizations ? (
         <Button asChild>
           <Link href="/opportunities/create">Publică o oportunitate</Link>
         </Button>
@@ -96,7 +96,7 @@ export const UserNav = () => {
                 <span>Cont</span>
               </Link>
             </DropdownMenuItem>
-            {organizationId && (
+            {!!createdOrganizations && (
               <>
                 <DropdownMenuItem>
                   <Link href="/account/organization" className="flex items-center gap-2">

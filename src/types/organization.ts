@@ -1,11 +1,5 @@
 import { NamedEntity } from "./common";
 
-export enum ApprovalStatus {
-  pending = "În așteptare",
-  approved = "Aprobat",
-  rejected = "Respins"
-}
-
 interface OrganizationBase {
   name: string;
   description: string;

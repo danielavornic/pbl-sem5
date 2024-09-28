@@ -1,5 +1,6 @@
 "use client";
 
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Calendar, CircleCheck, CircleX, Clock, SquarePen, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { opportunityApi } from "@/api/opportunityApi";
 import { Spinner } from "@/components/spinner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,29 +22,29 @@ import { ApprovalStatus, Opportunity } from "@/types/opportunity";
 export const OpportunitySheet = () => {
   const [id, setId] = useQueryState("id", parseAsInteger);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState<string | null>(null);
 
-  const data: Opportunity | undefined = opportunitiesData.find(
-    (opp) => opp.id === id
-  ) as Opportunity;
+  // const data: Opportunity | undefined = opportunitiesData.find(
+  //   (opp) => opp.id === id
+  // ) as Opportunity;
 
-  const approveMutation = {
-    mutate: () => {
-      toast.success("Oportunitatea a fost aprobată cu succes.");
-    },
-    isPending: false
-  };
+  // const approveMutation = {
+  //   mutate: () => {
+  //     toast.success("Oportunitatea a fost aprobată cu succes.");
+  //   },
+  //   isPending: false
+  // };
 
-  const rejectMutation = {
-    mutate: () => {
-      toast.success("Oportunitatea a fost respinsă cu succes.");
-    },
-    isPending: false
-  };
+  // const rejectMutation = {
+  //   mutate: () => {
+  //     toast.success("Oportunitatea a fost respinsă cu succes.");
+  //   },
+  //   isPending: false
+  // };
 
   // Commented out React Query hooks for future implementation
-  /*
+
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
@@ -70,7 +72,6 @@ export const OpportunitySheet = () => {
     },
     onError: () => toast.error("Eroare la respingerea oportunității")
   });
-  */
 
   return (
     <Sheet open={!!id} onOpenChange={(open) => setId(open ? id : null)}>
@@ -208,7 +209,8 @@ export const OpportunitySheet = () => {
                               <div className="flex items-center gap-8">
                                 <div className="flex items-center gap-1.5">
                                   <Clock className="text-muted-foreground" size={16} />
-                                  {session.startTime.slice(0, 5)} - {session.endTime.slice(0, 5)}
+                                  {format(new Date(session.startTime), "hh:mm a")} -{" "}
+                                  {format(new Date(session.endTime), "hh:mm a")}
                                 </div>
                                 <div className="flex items-center gap-1.5">
                                   <Calendar className="text-muted-foreground" size={16} />

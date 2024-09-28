@@ -4,14 +4,14 @@ import { Opportunity, OpportunityCreateData, ResponseMessage } from "@/types";
 export const opportunityApi = {
   create: async (body: OpportunityCreateData): Promise<ResponseMessage> => {
     try {
-      const { data } = await axiosInst.post("/opportunities", body);
+      const { data } = await axiosInst.post("/opportunities/create", body);
       return data;
     } catch (error: Error | any) {
       console.error("Error during opportunity creation:", error);
       return error.response.data;
     }
   },
-  getAll: async (): Promise<{ opportunities: Opportunity[] }> => {
+  getAll: async (): Promise<Opportunity[]> => {
     try {
       const { data } = await axiosInst.get("/opportunities");
       return data;
@@ -29,12 +29,17 @@ export const opportunityApi = {
       throw error;
     }
   },
-  update: async (id: string, body: Partial<OpportunityCreateData>): Promise<ResponseMessage> => {
+  updateApprovalStatus: async (
+    id: number,
+    status: "approved" | "rejected"
+  ): Promise<ResponseMessage> => {
     try {
-      const { data } = await axiosInst.patch(`/opportunities/${id}`, body);
+      const { data } = await axiosInst.put(`/opportunities/${id}/status`, {
+        approvalStatus: status
+      });
       return data;
     } catch (error: Error | any) {
-      console.error(`Error updating opportunity with ID ${id}:`, error);
+      console.error(`Error updating organization status with ID ${id}:`, error);
       return error.response.data;
     }
   },

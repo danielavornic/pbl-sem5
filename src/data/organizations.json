@@ -3,42 +3,13 @@
     "id": 1,
     "createdBy": {
       "id": 1,
-      "firstName": "First Name",
-      "lastName": "Last Name"
+      "firstName": "Ion",
+      "lastName": "Rusu"
     },
-    "name": "Team name",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac volutpat turpis, quis dictum felis. Aenean quis dui non arcu congue tincidunt. Donec neque urna, congue in euismod non, egestas id neque. Suspendisse potenti. In lobortis libero eget quam euismod semper. Nunc consectetur pharetra posuere. Suspendisse in rutrum ligula, nec sodales dolor. Mauris quis tincidunt nisl. Nam molestie sapien quam, ut vulputate dui blandit vitae. In hac habitasse platea dictumst. Aliquam elementum libero id viverra egestas. Etiam pellentesque enim eu mauris pulvinar eleifend.\n Nulla pretium eros id dui lacinia iaculis. Donec id ligula mattis, condimentum metus vitae, vestibulum mi. Donec at turpis in leo suscipit faucibus eget quis est. Aenean non justo est. Etiam vehicula, turpis non vestibulum convallis, ligula ligula imperdiet arcu, vitae sagittis ante tellus non dui. Ut sed purus massa. Phasellus faucibus risus scelerisque, fringilla diam non, consequat arcu. Fusce sollicitudin vel nunc et commodo.",
-    "logo": "/images/avatar.png",
-    "address": "address",
-    "region": {
-      "id": 1,
-      "name": "Chisinau"
-    },
-    "categories": [
-      {
-        "id": 1,
-        "name": "Category"
-      }
-    ],
-    "website": "url",
-    "phoneNumber": "+37368576855",
-    "createdAt": "2023-07-01T00:00:00.000Z",
-    "updatedAt": "2023-07-01T00:00:00.000Z",
-    "approvalStatus": "pending",
-    "approvedBy": null,
-    "approvalDate": null
-  },
-  {
-    "id": 2,
-    "createdBy": {
-      "id": 1,
-      "firstName": "First Name",
-      "lastName": "Last Name"
-    },
-    "name": "Vaconi",
-    "description": "descriptionvcgbhjnnnnhbbbdcjhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-    "logo": "/images/avatar.png",
-    "address": "address",
+    "name": "Clasa Viitorului",
+    "description": "O organizație dedicată îmbunătățirii vieții celor nevoiași din Moldova prin acțiuni de voluntariat și proiecte comunitare.",
+    "logo": "https://www.clasaviitorului.md/wp-content/uploads/2019/04/logosite_ro.png",
+    "address": "Str. Ștefan cel Mare 100, Chișinău",
     "region": {
       "id": 1,
       "name": "Chișinău"
@@ -46,346 +17,378 @@
     "categories": [
       {
         "id": 1,
-        "name": "Category"
+        "name": "Asistență socială"
       },
       {
         "id": 2,
-        "name": "Educatie"
-      },
-      {
-        "id": 3,
-        "name": "Sanatate"
+        "name": "Dezvoltare comunitară"
       }
     ],
-    "website": "url",
-    "phoneNumber": "+37368576855",
-    "createdAt": "2024-07-01T00:00:00.000Z",
-    "updatedAt": "2024-07-01T00:00:00.000Z",
+    "website": "www.ajutamoldova.md",
+    "phoneNumber": "+373 22 123 456",
+    "createdAt": "2023-05-15T00:00:00.000Z",
+    "updatedAt": "2023-05-15T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 7,
-      "username": "username"
+      "id": 5,
+      "username": "admin_moldova"
     },
-    "approvalDate": "2024-07-01T00:00:00.000Z"
+    "approvalDate": "2023-05-16T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "createdBy": {
+      "id": 2,
+      "firstName": "Maria",
+      "lastName": "Cojocaru"
+    },
+    "name": "EcoMoldova",
+    "description": "Organizație de mediu care se concentrează pe protejarea naturii și promovarea practicilor ecologice în Moldova.",
+    "logo": "https://img.freepik.com/premium-vector/eco-logo_689076-17.jpg",
+    "address": "Str. Veronica Micle 15, Bălți",
+    "region": {
+      "id": 2,
+      "name": "Bălți"
+    },
+    "categories": [
+      {
+        "id": 3,
+        "name": "Mediu"
+      },
+      {
+        "id": 4,
+        "name": "Educație ecologică"
+      }
+    ],
+    "website": "www.ecomoldova.md",
+    "phoneNumber": "+373 231 54321",
+    "createdAt": "2023-06-20T00:00:00.000Z",
+    "updatedAt": "2023-06-20T00:00:00.000Z",
+    "approvalStatus": "approved",
+    "approvedBy": {
+      "id": 6,
+      "username": "moderator_eco"
+    },
+    "approvalDate": "2023-06-21T00:00:00.000Z"
   },
   {
     "id": 3,
     "createdBy": {
-      "id": 1,
-      "firstName": "First Name",
-      "lastName": "Last Name"
+      "id": 3,
+      "firstName": "Andrei",
+      "lastName": "Popescu"
     },
-    "name": "Maria",
-    "description": "description",
-    "logo": "/images/avatar.png",
-    "address": "address",
+    "name": "Moldova pentru pace",
+    "description": "O organizație de tineret care încurajează implicarea civică și dezvoltarea personală a tinerilor din Moldova.",
+    "logo": "https://tnme.md/wp-content/uploads/2022/03/MFP_RO-768x768.png",
+    "address": "Bd. Dacia 30, Orhei",
     "region": {
-      "id": 1,
-      "name": "Soroca"
+      "id": 3,
+      "name": "Orhei"
     },
     "categories": [
-      {
-        "id": 1,
-        "name": "Category"
-      }
-    ],
-    "website": "url",
-    "phoneNumber": "+37368576855",
-    "createdAt": "2024-07-01T00:00:00.000Z",
-    "updatedAt": "2024-07-01T00:00:00.000Z",
-    "approvalStatus": "rejected",
-    "approvedBy": {
-      "id": 7,
-      "username": "username"
-    },
-    "approvalDate": "2024-07-01T00:00:00.000Z"
-  },
-  {
-    "id": 11,
-    "createdBy": {
-      "id": 1,
-      "firstName": "First Name",
-      "lastName": "Last Name"
-    },
-    "name": "TechHub",
-    "description": "A hub for technology startups and entrepreneurs.",
-    "logo": "/images/avatar.png",
-    "address": "123 Tech Street, London",
-    "region": {
-      "id": 2,
-      "name": "London"
-    },
-    "categories": [
-      {
-        "id": 4,
-        "name": "Technology"
-      },
       {
         "id": 5,
-        "name": "Entrepreneurship"
+        "name": "Tineret"
+      },
+      {
+        "id": 6,
+        "name": "Educație"
       }
     ],
-    "website": "www.techhub.com",
-    "phoneNumber": "+44 20 7123 4567",
-    "createdAt": "2024-08-15T00:00:00.000Z",
-    "updatedAt": "2024-08-15T00:00:00.000Z",
+    "website": "www.tineriimoldova.md",
+    "phoneNumber": "+373 235 67890",
+    "createdAt": "2023-07-10T00:00:00.000Z",
+    "updatedAt": "2023-07-10T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 8,
-      "username": "admin"
+      "id": 7,
+      "username": "coordinator_tineret"
     },
-    "approvalDate": "2024-08-15T00:00:00.000Z"
+    "approvalDate": "2023-07-11T00:00:00.000Z"
   },
   {
     "id": 4,
     "createdBy": {
-      "id": 2,
-      "firstName": "Jane",
-      "lastName": "Doe"
+      "id": 4,
+      "firstName": "Elena",
+      "lastName": "Munteanu"
     },
-    "name": "Greenpeace",
-    "description": "An environmental organization dedicated to protecting the planet.",
-    "logo": "/images/avatar.png",
-    "address": "456 Green Avenue, New York",
+    "name": "Sănătate pentru Toți",
+    "description": "Organizație care oferă asistență medicală gratuită și educație pentru sănătate în comunitățile rurale din Moldova.",
+    "logo": "/images/placeholder-square.webp",
+    "address": "Str. Mihai Eminescu 5, Cahul",
     "region": {
-      "id": 3,
-      "name": "New York"
+      "id": 4,
+      "name": "Cahul"
     },
     "categories": [
       {
-        "id": 6,
-        "name": "Environmental"
+        "id": 7,
+        "name": "Sănătate"
       },
       {
-        "id": 7,
-        "name": "Conservation"
+        "id": 8,
+        "name": "Asistență medicală"
       }
     ],
-    "website": "www.greenpeace.org",
-    "phoneNumber": "+1 212 555 1212",
-    "createdAt": "2024-09-01T00:00:00.000Z",
-    "updatedAt": "2024-09-01T00:00:00.000Z",
+    "website": "www.sanatatepentrutoti.md",
+    "phoneNumber": "+373 299 12345",
+    "createdAt": "2023-08-05T00:00:00.000Z",
+    "updatedAt": "2023-08-05T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 9,
-      "username": "reviewer"
+      "id": 8,
+      "username": "admin_sanatate"
     },
-    "approvalDate": "2024-09-01T00:00:00.000Z"
+    "approvalDate": "2023-08-06T00:00:00.000Z"
   },
   {
     "id": 5,
     "createdBy": {
-      "id": 3,
-      "firstName": "John",
-      "lastName": "Smith"
+      "id": 5,
+      "firstName": "Vasile",
+      "lastName": "Lungu"
     },
-    "name": "World Wildlife Fund",
-    "description": "A global conservation organization working to protect endangered species.",
-    "logo": "/images/avatar.png",
-    "address": "789 Wildlife Lane, Washington D.C.",
+    "name": "Cultura Moldovei",
+    "description": "O organizație dedicată păstrării și promovării patrimoniului cultural al Moldovei prin evenimente și proiecte educaționale.",
+    "logo": "/images/placeholder-square.webp",
+    "address": "Str. Alexandru cel Bun 78, Soroca",
     "region": {
-      "id": 4,
-      "name": "Washington D.C."
+      "id": 5,
+      "name": "Soroca"
     },
     "categories": [
       {
-        "id": 8,
-        "name": "Wildlife"
+        "id": 9,
+        "name": "Cultură"
       },
       {
-        "id": 9,
-        "name": "Conservation"
+        "id": 10,
+        "name": "Patrimoniu"
       }
     ],
-    "website": "www.worldwildlife.org",
-    "phoneNumber": "+1 202 555 5555",
-    "createdAt": "2024-09-10T00:00:00.000Z",
-    "updatedAt": "2024-09-10T00:00:00.000Z",
+    "website": "www.culturamoldovei.md",
+    "phoneNumber": "+373 230 98765",
+    "createdAt": "2023-09-01T00:00:00.000Z",
+    "updatedAt": "2023-09-01T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 10,
-      "username": "moderator"
+      "id": 9,
+      "username": "moderator_cultura"
     },
-    "approvalDate": "2024-09-10T00:00:00.000Z"
+    "approvalDate": "2023-09-02T00:00:00.000Z"
   },
   {
     "id": 6,
     "createdBy": {
-      "id": 4,
-      "firstName": "Emily",
-      "lastName": "Jones"
+      "id": 6,
+      "firstName": "Mihai",
+      "lastName": "Codreanu"
     },
-    "name": "The Red Cross",
-    "description": "A humanitarian organization providing aid to those in need.",
-    "logo": "/images/avatar.png",
-    "address": "1011 Red Cross Way, Geneva",
+    "name": "Digital Moldova",
+    "description": "O organizație care promovează alfabetizarea digitală și accesul la tehnologie în comunitățile rurale din Moldova.",
+    "logo": "/images/placeholder-square.webp",
+    "address": "Str. Independenței 45, Comrat",
     "region": {
-      "id": 5,
-      "name": "Geneva"
+      "id": 6,
+      "name": "Comrat"
     },
     "categories": [
       {
-        "id": 10,
-        "name": "Humanitarian"
+        "id": 11,
+        "name": "Educație digitală"
       },
       {
-        "id": 11,
-        "name": "Aid"
+        "id": 12,
+        "name": "Tehnologie"
       }
     ],
-    "website": "www.redcross.org",
-    "phoneNumber": "+41 22 748 20 00",
-    "createdAt": "2024-09-15T00:00:00.000Z",
-    "updatedAt": "2024-09-15T00:00:00.000Z",
+    "website": "www.digitalmoldova.md",
+    "phoneNumber": "+373 298 23456",
+    "createdAt": "2023-10-15T00:00:00.000Z",
+    "updatedAt": "2023-10-15T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 11,
-      "username": "admin2"
+      "id": 10,
+      "username": "admin_tech"
     },
-    "approvalDate": "2024-09-15T00:00:00.000Z"
+    "approvalDate": "2023-10-16T00:00:00.000Z"
   },
   {
     "id": 7,
     "createdBy": {
-      "id": 5,
-      "firstName": "Michael",
-      "lastName": "Brown"
+      "id": 7,
+      "firstName": "Ana",
+      "lastName": "Bucătaru"
     },
-    "name": "Doctors Without Borders",
-    "description": "A medical humanitarian organization providing healthcare in conflict zones.",
-    "logo": "/images/avatar.png",
-    "address": "1213 Doctors Lane, Paris",
+    "name": "Bucătăria Tradițională Moldovenească",
+    "description": "O organizație care păstrează și promovează tradițiile culinare moldovenești prin ateliere de gătit și evenimente gastronomice.",
+    "logo": "/images/placeholder-square.webp",
+    "address": "Str. Ștefan cel Mare 22, Ungheni",
     "region": {
-      "id": 6,
-      "name": "Paris"
+      "id": 7,
+      "name": "Ungheni"
     },
     "categories": [
       {
-        "id": 12,
-        "name": "Medical"
+        "id": 13,
+        "name": "Gastronomie"
       },
       {
-        "id": 13,
-        "name": "Humanitarian"
+        "id": 14,
+        "name": "Cultură tradițională"
       }
     ],
-    "website": "www.doctorswithoutborders.org",
-    "phoneNumber": "+33 1 40 21 21 21",
-    "createdAt": "2024-09-18T00:00:00.000Z",
-    "updatedAt": "2024-09-18T00:00:00.000Z",
+    "website": "www.bucatariatraditionala.md",
+    "phoneNumber": "+373 236 78901",
+    "createdAt": "2023-11-20T00:00:00.000Z",
+    "updatedAt": "2023-11-20T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 12,
-      "username": "reviewer2"
+      "id": 11,
+      "username": "moderator_cultura"
     },
-    "approvalDate": "2024-09-18T00:00:00.000Z"
+    "approvalDate": "2023-11-21T00:00:00.000Z"
   },
   {
     "id": 8,
     "createdBy": {
-      "id": 6,
-      "firstName": "Sarah",
-      "lastName": "Wilson"
+      "id": 8,
+      "firstName": "Gheorghe",
+      "lastName": "Ursu"
     },
-    "name": "Save the Children",
-    "description": "A global organization working to improve the lives of children.",
-    "logo": "/images/avatar.png",
-    "address": "1415 Save Street, London",
+    "name": "Sport pentru Toți",
+    "description": "O organizație care promovează un stil de viață sănătos și activ prin organizarea de evenimente sportive și programe de fitness gratuite.",
+    "logo": "/images/placeholder-square.webp",
+    "address": "Bd. Sportivilor 10, Bender",
     "region": {
-      "id": 7,
-      "name": "London"
+      "id": 8,
+      "name": "Bender"
     },
     "categories": [
       {
-        "id": 14,
-        "name": "Children"
+        "id": 15,
+        "name": "Sport"
       },
       {
-        "id": 15,
-        "name": "Humanitarian"
+        "id": 16,
+        "name": "Sănătate"
       }
     ],
-    "website": "www.savethechildren.org",
-    "phoneNumber": "+44 20 7012 6400",
-    "createdAt": "2024-09-19T00:00:00.000Z",
-    "updatedAt": "2024-09-19T00:00:00.000Z",
+    "website": "www.sportpentrutoti.md",
+    "phoneNumber": "+373 552 34567",
+    "createdAt": "2023-12-05T00:00:00.000Z",
+    "updatedAt": "2023-12-05T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 13,
-      "username": "moderator2"
+      "id": 12,
+      "username": "admin_sport"
     },
-    "approvalDate": "2024-09-19T00:00:00.000Z"
+    "approvalDate": "2023-12-06T00:00:00.000Z"
   },
   {
     "id": 9,
     "createdBy": {
-      "id": 7,
-      "firstName": "David",
-      "lastName": "Garcia"
+      "id": 9,
+      "firstName": "Cristina",
+      "lastName": "Moraru"
     },
-    "name": "Habitat for Humanity",
-    "description": "A non-profit organization that helps families build and improve their homes.",
-    "logo": "/images/avatar.png",
-    "address": "1617 Habitat Avenue, Atlanta",
+    "name": "Artă pentru Comunitate",
+    "description": "O organizație care folosește arta ca instrument de dezvoltare comunitară și incluziune socială în diferite regiuni ale Moldovei.",
+    "logo": "/images/arta-pentru-comunitate-logo.png",
+    "address": "Str. Mihai Eminescu 15, Edineț",
     "region": {
-      "id": 8,
-      "name": "Atlanta"
+      "id": 9,
+      "name": "Edineț"
     },
     "categories": [
       {
-        "id": 16,
-        "name": "Housing"
+        "id": 17,
+        "name": "Artă"
       },
       {
-        "id": 17,
-        "name": "Community Development"
+        "id": 18,
+        "name": "Dezvoltare comunitară"
       }
     ],
-    "website": "www.habitat.org",
-    "phoneNumber": "+1 404 420 1212",
-    "createdAt": "2024-09-20T00:00:00.000Z",
-    "updatedAt": "2024-09-20T00:00:00.000Z",
+    "website": "www.artapentrucomunitatemoldova.md",
+    "phoneNumber": "+373 246 45678",
+    "createdAt": "2024-01-10T00:00:00.000Z",
+    "updatedAt": "2024-01-10T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 14,
-      "username": "admin3"
+      "id": 13,
+      "username": "moderator_arta"
     },
-    "approvalDate": "2024-09-20T00:00:00.000Z"
+    "approvalDate": "2024-01-11T00:00:00.000Z"
   },
   {
     "id": 10,
     "createdBy": {
-      "id": 8,
-      "firstName": "Ashley",
-      "lastName": "Rodriguez"
+      "id": 10,
+      "firstName": "Dumitru",
+      "lastName": "Postolachi"
     },
-    "name": "UNICEF",
-    "description": "A United Nations agency working to improve the lives of children worldwide.",
-    "logo": "/images/avatar.png",
-    "address": "1819 UNICEF Way, New York",
+    "name": "Educație Financiară Moldova",
+    "description": "O organizație care oferă programe de educație financiară gratuite pentru tineri și adulți din Moldova.",
+    "logo": "/images/educatie-financiara-moldova-logo.png",
+    "address": "Str. Băncilor 50, Chișinău",
     "region": {
-      "id": 9,
-      "name": "New York"
+      "id": 1,
+      "name": "Chișinău"
     },
     "categories": [
       {
-        "id": 18,
-        "name": "Children"
+        "id": 19,
+        "name": "Educație financiară"
       },
       {
-        "id": 19,
-        "name": "Humanitarian"
+        "id": 20,
+        "name": "Dezvoltare personală"
       }
     ],
-    "website": "www.unicef.org",
-    "phoneNumber": "+1 212 326 7000",
-    "createdAt": "2024-09-17T00:00:00.000Z",
-    "updatedAt": "2024-09-17T00:00:00.000Z",
+    "website": "www.educatiefinanciara.md",
+    "phoneNumber": "+373 22 567890",
+    "createdAt": "2024-02-15T00:00:00.000Z",
+    "updatedAt": "2024-02-15T00:00:00.000Z",
     "approvalStatus": "approved",
     "approvedBy": {
-      "id": 15,
-      "username": "reviewer3"
+      "id": 14,
+      "username": "admin_educatie"
     },
-    "approvalDate": "2024-09-17T00:00:00.000Z"
+    "approvalDate": "2024-02-16T00:00:00.000Z"
+  },
+  {
+    "id": 11,
+    "createdBy": {
+      "id": 10,
+      "firstName": "Viorel",
+      "lastName": "Bostan"
+    },
+    "name": "FAF",
+    "description": "FAF is an English taught Honors Program in Computer Science at the Technical University of Moldova.",
+    "logo": "https://scontent.fkiv8-1.fna.fbcdn.net/v/t39.30808-6/326777890_920847885602578_2600930784406450986_n.png?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=aouh0fxWmo8Q7kNvgGI1q_Z&_nc_ht=scontent.fkiv8-1.fna&oh=00_AYClPlOYzw5iQdNqWpiK1zIpsO4pbqb2u0GiCqbdXOCDoQ&oe=66FE01A4",
+    "address": "Strada Studenților 9/7, et.3, cab. 309",
+    "region": {
+      "id": 1,
+      "name": "Chișinău"
+    },
+    "categories": [
+      {
+        "id": 19,
+        "name": "Tineret"
+      },
+      {
+        "id": 20,
+        "name": "Educație"
+      }
+    ],
+    "website": "www.faf.md",
+    "phoneNumber": "+373 22 567890",
+    "createdAt": "2024-05-15T00:00:00.000Z",
+    "updatedAt": "2024-05-15T00:00:00.000Z",
+    "approvalStatus": "pending",
+    "approvalDate": null
   }
 ]

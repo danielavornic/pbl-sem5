@@ -9,7 +9,7 @@ import { opportunityApi } from "@/api/opportunityApi";
 import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/components/ui/multiple-selector";
-import data from "@/data/opportunities.json";
+import defaultOpportunities from "@/data/opportunities.json";
 import PublicLayout from "@/layouts/public";
 
 import FilteredSearch from "./components/filteredSearch";
@@ -21,13 +21,14 @@ const OpportunitiesPage = () => {
   });
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // const opportunityQuery = useQuery({
-  //   queryKey: ["opportunities"],
-  //   queryFn: opportunityApi.getAll,
-  //   select: (data) => {
-  //     return Array.isArray(data) ? data : [];
-  //   }
-  // });
+  const opportunityQuery = useQuery({
+    queryKey: ["opportunities"],
+    queryFn: opportunityApi.getAll,
+    select: (data) => {
+      return Array.isArray(data) ? data : [];
+    }
+  });
+  console.log(opportunityQuery.data);
 
   // const filteredOpportunities = useMemo(() => {
   //   if (!opportunityQuery.data || !Array.isArray(opportunityQuery.data)) {
@@ -45,22 +46,30 @@ const OpportunitiesPage = () => {
         <div className="mb-10 mt-10">
           <h1 className="text-3xl font-bold">Oportunități</h1>
         </div>
-        {/* {opportunityQuery.isLoading ? (
+        {opportunityQuery.isLoading ? (
           <Spinner className="mt-32" />
-        ) : opportunityQuery.isSuccess && filteredOpportunities.length > 0 ? ( */}
-        <div className="grid grid-cols-3 gap-4">
-          <FilteredSearch />
-          <div className="col-span-2 grid grid-cols-2 gap-6">
-            {data.map((opportunity: any) => (
-              <OpportunityCard key={opportunity.id} opportunity={opportunity} />
-            ))}
+        ) : opportunityQuery.isSuccess ? (
+          <div className="grid grid-cols-3 gap-4">
+            <FilteredSearch />
+            <div className="col-span-2 grid grid-cols-2 gap-6">
+              {opportunityQuery.data.map((opportunity: any) => (
+                <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+              ))}
+            </div>
           </div>
-        </div>
-        {/* ) : (
+        ) : (
           <div className="font-heading font-semibold">
             Nu s-au găsit oportunități care să corespundă criteriilor de căutare.
           </div>
-        )} */}
+        )}
+        {/* <div className="grid grid-cols-3 gap-4">
+          <FilteredSearch />
+          <div className="col-span-2 grid grid-cols-2 gap-6">
+            {defaultOpportunities.map((opportunity: any) => (
+              <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+            ))}
+          </div>
+        </div> */}
       </main>
     </PublicLayout>
   );

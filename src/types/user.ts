@@ -21,7 +21,7 @@ export interface UserRegisterCredentials extends LoginCredentials {
 export interface User extends UserRegisterCredentials {
   isFirstLogin: boolean;
   role: "user" | "admin";
-  organizationId: number | null;
+  createdOrganizations: number[] | null;
   bio: string | null;
   region?: NamedEntity;
   skils?: NamedEntity[];

@@ -10,6 +10,7 @@ import { z } from "zod";
 
 import { commonApi } from "@/api/common";
 import { opportunityApi } from "@/api/opportunityApi";
+import { useAuth } from "@/app/auth/use-auth";
 import { useUploadFile } from "@/hooks/use-upload-file";
 import { OpportunityCreateData } from "@/types";
 
@@ -72,6 +73,8 @@ export const opportunityFormSchema = z.object({
 });
 
 const useCreateOpportunity = () => {
+  const { user } = useAuth();
+
   const form = useForm<z.infer<typeof opportunityFormSchema>>({
     resolver: zodResolver(opportunityFormSchema),
     mode: "onChange",
@@ -149,8 +152,15 @@ const useCreateOpportunity = () => {
     }
   });
 
+  console.log(user);
+
   const onSubmit = (data: z.infer<typeof opportunityFormSchema>) => {
+    const organizationId = (user as any)?.createdOrganizations?.[0];
+
+    console.log(organizationId);
+
     const submitValues = {
+      organizationId,
       title: data.title,
       description: data.description,
       address: data.address,
@@ -180,6 +190,7 @@ const useCreateOpportunity = () => {
 
       mutate({
         ...formValues,
+        organizationId: (user as any)?.createdOrganizations?.[0],
         region: +formValues.region,
         categories: formValues.categories.map((id) => +id),
         skills: formValues.skills.map((id) => +id),

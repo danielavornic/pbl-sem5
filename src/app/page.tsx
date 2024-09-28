@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <PublicLayout title="Home">
       <main className="container my-10 flex items-center justify-center">
-        <div className="flex items-center justify-between space-x-[110px]">
+        <div className="flex items-center justify-between space-x-[10vw]">
           <div>
             <h1 className="mb-6 max-w-[600px] text-5xl font-bold">
               Bine ai venit în lumea voluntarilor!

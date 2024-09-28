@@ -39,7 +39,6 @@ export const metadata: Metadata = {
   title: "Voluntariat Moldova",
   description:
     "Voluntariat Moldova este o platformă de voluntariat care conectează persoanele care doresc să ajute cu organizațiile care au nevoie de voluntari.",
-  viewport: "width=device-width, initial-scale=1",
   other: {
     "Content-Security-Policy": cspContent.replace(/\s{2,}/g, " ").trim()
   }

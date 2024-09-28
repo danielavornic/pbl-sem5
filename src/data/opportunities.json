@@ -1,83 +1,32 @@
 [
   {
-    "id": 1,
-    "title": "Community Garden Planting",
-    "description": "Help plant vegetables and flowers in our local community garden. What to bring: sunscreen, hat, water bottle, comfortable clothes. \n What we provide: all necessary gardening tools, plants, seeds, gardening materials, light refreshments and gardening guidance from experienced volunteers. Come ready to learn, get your hands dirty and have fun while making a difference in our community! No experience necessary!",
-    "address": "123 Green Street, Anytown, USA",
-    "region": {
-      "id": 1,
-      "name": "North America"
-    },
-    "isHighPriority": true,
-    "image": "/images/placeholder.webp",
-    "createdBy": {
-      "id": 101,
-      "firstName": "Jane",
-      "lastName": "Doe"
-    },
-    "organization": {
-      "id": 501,
-      "name": "Green Thumb Society"
-    },
-    "categories": [
-      { "id": 1, "name": "Environment" },
-      { "id": 2, "name": "Community Development" }
-    ],
-    "skills": [
-      { "id": 1, "name": "Gardening" },
-      { "id": 2, "name": "Teamwork" }
-    ],
-    "approvalStatus": "approved",
-    "approvedBy": {
-      "id": 201,
-      "username": "admin_user"
-    },
-    "approvalDate": "2024-09-20T14:30:00Z",
-    "createdAt": "2024-09-15T10:00:00Z",
-    "updatedAt": "2024-09-20T14:30:00Z",
-    "sessions": [
-      {
-        "date": "2024-10-05",
-        "startTime": "09:00",
-        "endTime": "12:00",
-        "spotsLeft": 10
-      },
-      {
-        "date": "2024-10-12",
-        "startTime": "09:00",
-        "endTime": "12:00",
-        "spotsLeft": 8
-      }
-    ]
-  },
-  {
     "id": 2,
-    "title": "Elderly Care Home Visit",
-    "description": "Spend time with seniors at the local care home, engaging in conversations and activities.",
-    "address": "456 Care Lane, Eldertown, USA",
+    "title": "Vizită la Căminul de Bătrâni",
+    "description": "Petrece timp cu vârstnicii de la căminul local, angajându-te în conversații și activități.",
+    "address": "Strada Îngrijirii 456, Bălți, Moldova",
     "region": {
       "id": 1,
-      "name": "North America"
+      "name": "Moldova"
     },
     "isHighPriority": false,
     "createdBy": {
       "id": 102,
-      "firstName": "John",
-      "lastName": "Smith"
+      "firstName": "Ion",
+      "lastName": "Rusu"
     },
     "organization": {
       "id": 502,
-      "name": "Golden Years Foundation"
+      "name": "Fundația Ani de Aur"
     },
     "categories": [
-      { "id": 3, "name": "Elderly Care" },
-      { "id": 4, "name": "Social Support" }
+      { "id": 3, "name": "Îngrijirea Vârstnicilor" },
+      { "id": 4, "name": "Suport Social" }
     ],
     "skills": [
-      { "id": 3, "name": "Communication" },
-      { "id": 4, "name": "Patience" }
+      { "id": 3, "name": "Comunicare" },
+      { "id": 4, "name": "Răbdare" }
     ],
-    "approvalStatus": "pending",
+    "approvalStatus": "în așteptare",
     "approvedBy": null,
     "approvalDate": null,
     "createdAt": "2024-09-18T15:30:00Z",
@@ -99,36 +48,36 @@
   },
   {
     "id": 3,
-    "title": "Coding for Kids Workshop",
-    "description": "Teach basic coding concepts to children ages 8-12 in a fun and interactive workshop.",
-    "address": "789 Tech Street, Codeville, USA",
+    "title": "Atelier de Programare pentru Copii",
+    "description": "Predă concepte de bază de programare copiilor cu vârste între 8-12 ani într-un atelier distractiv și interactiv. În acest atelier, copiii vor învăța:\n1. Introducere în gândirea computațională \n2. Bazele programării folosind Scratch - un limbaj de programare vizual \n3. Crearea de jocuri simple și animații interactive \n4. Concepte fundamentale precum secvențe, bucle și condiții\n\nAbilitățile necesare pentru voluntari:\n- Cunoștințe de bază în programare (preferabil Scratch, dar nu este obligatoriu) \n- Răbdare și abilități de comunicare cu copiii \n- Entuziasm pentru tehnologie și educație \n \nCe oferim: \n- Materiale de curs și planuri de lecții \n- Computere pentru copii (dar participanții pot aduce propriile laptopuri, dacă doresc) \n- O sesiune de instruire pentru voluntari înainte de atelier \n",
+    "address": "Strada Tehnologiei 789",
     "region": {
       "id": 1,
-      "name": "North America"
+      "name": "Chisinau"
     },
     "isHighPriority": true,
-    "image": "/images/placeholder.webp",
+    "image": "https://icopil.md/wp-content/uploads/2020/12/IMG_0171-scaled.jpg",
     "createdBy": {
       "id": 103,
-      "firstName": "Alice",
-      "lastName": "Johnson"
+      "firstName": "Alina",
+      "lastName": "Munteanu"
     },
     "organization": {
       "id": 503,
-      "name": "Code for Kids Foundation"
+      "name": "Fundația Cod pentru Copii"
     },
     "categories": [
-      { "id": 5, "name": "Education" },
-      { "id": 6, "name": "Technology" }
+      { "id": 5, "name": "Educație" },
+      { "id": 6, "name": "Tehnologie" }
     ],
     "skills": [
-      { "id": 5, "name": "Coding" },
-      { "id": 6, "name": "Teaching" }
+      { "id": 5, "name": "Programare" },
+      { "id": 6, "name": "Predare" }
     ],
-    "approvalStatus": "approved",
+    "approvalStatus": "aprobat",
     "approvedBy": {
       "id": 202,
-      "username": "tech_admin"
+      "username": "admin_tech"
     },
     "approvalDate": "2024-09-22T10:00:00Z",
     "createdAt": "2024-09-17T12:00:00Z",
@@ -138,48 +87,48 @@
         "date": "2024-10-06",
         "startTime": "10:00",
         "endTime": "12:00",
-        "spotsLeft": 15
+        "spotsLeft": 3
       },
       {
         "date": "2024-10-13",
         "startTime": "10:00",
         "endTime": "12:00",
-        "spotsLeft": 12
+        "spotsLeft": 10
       }
     ]
   },
   {
     "id": 4,
-    "title": "Beach Cleanup",
-    "description": "Join us for a beach cleanup to help keep our coastline clean and beautiful.",
-    "address": "1 Main Beach, Oceanside, USA",
+    "title": "Curățarea Lacului Ghidighici",
+    "description": "Alătură-te nouă pentru o acțiune de curățare a lacului pentru a ajuta la menținerea curată și frumoasă a zonei noastre de agrement.",
+    "address": "Lacul Ghidighici, Vatra, Moldova",
     "region": {
       "id": 1,
-      "name": "North America"
+      "name": "Moldova"
     },
     "isHighPriority": false,
     "image": "/images/placeholder.webp",
     "createdBy": {
       "id": 104,
-      "firstName": "Bob",
-      "lastName": "Williams"
+      "firstName": "Vasile",
+      "lastName": "Lungu"
     },
     "organization": {
       "id": 504,
-      "name": "Ocean Conservation Group"
+      "name": "Grupul de Conservare a Apelor"
     },
     "categories": [
-      { "id": 7, "name": "Environment" },
-      { "id": 8, "name": "Community Service" }
+      { "id": 7, "name": "Mediu" },
+      { "id": 8, "name": "Serviciu Comunitar" }
     ],
     "skills": [
-      { "id": 7, "name": "Teamwork" },
-      { "id": 8, "name": "Physical Activity" }
+      { "id": 7, "name": "Lucru în echipă" },
+      { "id": 8, "name": "Activitate fizică" }
     ],
-    "approvalStatus": "approved",
+    "approvalStatus": "aprobat",
     "approvedBy": {
       "id": 203,
-      "username": "ocean_admin"
+      "username": "admin_ape"
     },
     "approvalDate": "2024-09-21T16:00:00Z",
     "createdAt": "2024-09-19T18:00:00Z",
@@ -201,36 +150,36 @@
   },
   {
     "id": 5,
-    "title": "Animal Shelter Volunteering",
-    "description": "Help care for animals at the local animal shelter, providing food, water, and playtime.",
-    "address": "222 Pet Lane, Animalville, USA",
+    "title": "Voluntariat la Adăpostul de Animale",
+    "description": "Ajută la îngrijirea animalelor de la adăpostul local, oferind hrană, apă și timp de joacă.",
+    "address": "Strada Animalelor 222, Comrat, Moldova",
     "region": {
       "id": 1,
-      "name": "North America"
+      "name": "Moldova"
     },
     "isHighPriority": true,
     "image": "/images/placeholder.webp",
     "createdBy": {
       "id": 105,
-      "firstName": "Carol",
-      "lastName": "Brown"
+      "firstName": "Carolina",
+      "lastName": "Balan"
     },
     "organization": {
       "id": 505,
-      "name": "Animal Care Society"
+      "name": "Societatea de Îngrijire a Animalelor"
     },
     "categories": [
-      { "id": 9, "name": "Animal Welfare" },
-      { "id": 10, "name": "Community Service" }
+      { "id": 9, "name": "Bunăstarea Animalelor" },
+      { "id": 10, "name": "Serviciu Comunitar" }
     ],
     "skills": [
-      { "id": 9, "name": "Animal Handling" },
-      { "id": 10, "name": "Compassion" }
+      { "id": 9, "name": "Manipularea animalelor" },
+      { "id": 10, "name": "Compasiune" }
     ],
-    "approvalStatus": "approved",
+    "approvalStatus": "aprobat",
     "approvedBy": {
       "id": 204,
-      "username": "animal_admin"
+      "username": "admin_animale"
     },
     "approvalDate": "2024-09-23T12:00:00Z",
     "createdAt": "2024-09-20T10:00:00Z",
@@ -252,36 +201,36 @@
   },
   {
     "id": 6,
-    "title": "Book Club Meeting",
-    "description": "Discuss the latest book selection in a relaxed and engaging environment.",
-    "address": "345 Library Lane, Booktown, USA",
+    "title": "Întâlnirea Clubului de Carte",
+    "description": "Discută ultima carte selectată într-un mediu relaxat și angajant.",
+    "address": "Strada Bibliotecii 345, Cahul, Moldova",
     "region": {
       "id": 1,
-      "name": "North America"
+      "name": "Moldova"
     },
     "isHighPriority": false,
     "image": "/images/placeholder.webp",
     "createdBy": {
       "id": 106,
-      "firstName": "David",
-      "lastName": "Wilson"
+      "firstName": "Dumitru",
+      "lastName": "Cojocaru"
     },
     "organization": {
       "id": 506,
-      "name": "Bookworm Club"
+      "name": "Clubul Iubitorilor de Cărți"
     },
     "categories": [
-      { "id": 11, "name": "Arts & Culture" },
-      { "id": 12, "name": "Social Events" }
+      { "id": 11, "name": "Artă și Cultură" },
+      { "id": 12, "name": "Evenimente Sociale" }
     ],
     "skills": [
-      { "id": 11, "name": "Reading" },
-      { "id": 12, "name": "Discussion" }
+      { "id": 11, "name": "Citire" },
+      { "id": 12, "name": "Discuție" }
     ],
-    "approvalStatus": "approved",
+    "approvalStatus": "aprobat",
     "approvedBy": {
       "id": 205,
-      "username": "book_admin"
+      "username": "admin_carti"
     },
     "approvalDate": "2024-09-24T18:00:00Z",
     "createdAt": "2024-09-21T16:00:00Z",

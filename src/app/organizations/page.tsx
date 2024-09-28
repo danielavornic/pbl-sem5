@@ -8,6 +8,7 @@ import { organizationApi } from "@/api/organizationApi";
 import { Spinner } from "@/components/spinner";
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/components/ui/multiple-selector";
+import defaultOrganizations from "@/data/organizations.json";
 import PublicLayout from "@/layouts/public";
 
 import OrganizationCard from "./components/organization-card";
@@ -63,6 +64,11 @@ const OrganizationsPage = () => {
             Nu s-au găsit organizații care să corespundă criteriilor de căutare.
           </div>
         )}
+        {/* <div className="grid grid-cols-3 gap-6 2xl:grid-cols-4">
+          {defaultOrganizations.map((org: any) => (
+            <OrganizationCard key={org.id} org={org} />
+          ))}
+        </div> */}
       </main>
     </PublicLayout>
   );

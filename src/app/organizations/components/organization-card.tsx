@@ -24,7 +24,7 @@ const OrganizationCard = ({ org }: { org: Organization }) => {
         <img
           src={org.logo ?? "/images/placeholder.webp"}
           alt={org.name}
-          className="h-[150px] w-[150px] object-cover"
+          className="h-[150px] w-[150px] object-contain"
         />
       </CardHeader>
       <CardContent className="flex flex-grow flex-col justify-between">
@@ -40,7 +40,7 @@ const OrganizationCard = ({ org }: { org: Organization }) => {
           </div>
         </div>
         <CardFooter className="p-0 pt-4">
-          <Button asChild size="sm" className="ml-auto">
+          <Button asChild size="sm" variant="outline" className="ml-auto">
             <Link href={`/organizations/${org.id}`}>Detalii</Link>
           </Button>
         </CardFooter>
