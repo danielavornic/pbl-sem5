@@ -660,7 +660,7 @@ const DateTimePickerOpportunity = React.forwardRef<
       yearRange = 50,
       disabled = false,
       displayFormat,
-      granularity = "second",
+      granularity = "minute",
       placeholder = "Alege o dată",
       minDate,
       maxDate,
@@ -706,12 +706,8 @@ const DateTimePickerOpportunity = React.forwardRef<
     );
 
     const initHourFormat = {
-      hour24:
-        displayFormat?.hour24 ??
-        `PPP HH:mm${!granularity || granularity === "second" ? ":ss" : ""}`,
-      hour12:
-        displayFormat?.hour12 ??
-        `PP hh:mm${!granularity || granularity === "second" ? ":ss" : ""} b`
+      hour24: displayFormat?.hour24 ?? `PPP HH:mm`,
+      hour12: displayFormat?.hour12 ?? `PP hh:mm b`
     };
 
     let loc = ro;
