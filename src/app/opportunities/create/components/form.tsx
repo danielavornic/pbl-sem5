@@ -46,7 +46,10 @@ export const CreateOpportunityForm = () => {
     canAddSession,
     progresses,
     uploadedFiles,
-    isUploading
+    isUploading,
+    skills,
+    categories,
+    regions
   } = useCreateOpportunity();
 
   const addSession = () => {
@@ -109,11 +112,15 @@ export const CreateOpportunityForm = () => {
                         <SelectValue placeholder="Selectează o regiune" />
                       </SelectTrigger>
                       <SelectContent>
-                        {REGION_OPTIONS.map((option: Option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
+                        {regions && regions?.length > 0 ? (
+                          regions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <SelectItem value="0">Loading...</SelectItem>
+                        )}
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -145,9 +152,9 @@ export const CreateOpportunityForm = () => {
                   <FormControl>
                     <MultipleSelector
                       className={cn({ "border-destructive": form.formState.errors.categories })}
-                      options={CATEGORY_OPTIONS}
+                      options={categories}
                       placeholder="Selectează cel puțin o categorie"
-                      value={CATEGORY_OPTIONS.filter((option) =>
+                      value={(categories || []).filter((option) =>
                         field.value.includes(parseInt(option.value))
                       )}
                       onChange={(selectedValues) => {
@@ -171,9 +178,9 @@ export const CreateOpportunityForm = () => {
                   <FormControl>
                     <MultipleSelector
                       className={cn({ "border-destructive": form.formState.errors.skills })}
-                      options={SKILL_OPTIONS}
+                      options={skills}
                       placeholder="Selectează abilitățile necesare"
-                      value={SKILL_OPTIONS.filter((option: Option) =>
+                      value={(skills || []).filter((option: Option) =>
                         field.value.includes(parseInt(option.value))
                       )}
                       onChange={(selectedValues) => {

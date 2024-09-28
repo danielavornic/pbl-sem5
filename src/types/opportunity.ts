@@ -15,9 +15,10 @@ export interface OpportunityBase {
 }
 
 export interface OpportunityCreateData extends OpportunityBase {
-  regionId: number;
-  categoryIds: number[];
+  region: number;
+  categories: number[];
   skills: number[];
+  sessions: Session[];
 }
 
 export interface Session {

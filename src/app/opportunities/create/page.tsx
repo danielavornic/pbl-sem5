@@ -11,7 +11,7 @@ const CreateOpportunityPage = () => {
         className="container flex w-full items-start justify-center gap-[8vw] py-9"
         suppressHydrationWarning
       >
-        <div className="grid max-w-[420px] grid-cols-2 justify-center gap-y-3">
+        {/* <div className="grid max-w-[420px] grid-cols-2 justify-center gap-y-3">
           <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
           <div className="h-[240px] w-[240px] rounded-[30px]" />
           <div className="h-[240px] w-[240px] rounded-[30px]" />
@@ -20,7 +20,7 @@ const CreateOpportunityPage = () => {
           <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
           <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
           <div className="h-[240px] w-[240px] rounded-[30px]" />
-        </div>
+        </div> */}
         <CreateOpportunityForm />
       </main>
     </PublicLayout>

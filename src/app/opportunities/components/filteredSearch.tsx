@@ -1,25 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { useQueryState } from "nuqs";
 import { useState } from "react";
 
+import { commonApi } from "@/api/common";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
 import { REGION_OPTIONS } from "@/constants/regionOptions";
+import { SKILL_OPTIONS } from "@/constants/skillOptions";
 
 const FilteredSearch = () => {
   const [searchTerm, setSearchTerm] = useQueryState("search", {
@@ -35,6 +31,21 @@ const FilteredSearch = () => {
   const handleTimeFilterChange = (value: any) => {
     setTimeFilter(timeFilter === value ? null : value);
   };
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: commonApi.getCategories
+  });
+
+  const { data: regions } = useQuery({
+    queryKey: ["regions"],
+    queryFn: commonApi.getRegions
+  });
+
+  const { data: skills } = useQuery({
+    queryKey: ["skills"],
+    queryFn: commonApi.getSkills
+  });
 
   return (
     <Card className="h-fit">
@@ -57,7 +68,7 @@ const FilteredSearch = () => {
           <AccordionTrigger>Locație</AccordionTrigger>
           <AccordionContent>
             <div className="flex flex-col space-y-2">
-              {REGION_OPTIONS.map((region) => (
+              {(regions || REGION_OPTIONS).map((region) => (
                 <div key={region.value} className="flex items-center space-x-2">
                   <Checkbox id={region.value} />
                   <Label htmlFor={region.value} className="font-body text-sm">
@@ -109,7 +120,7 @@ const FilteredSearch = () => {
           <AccordionTrigger>Categorii</AccordionTrigger>
           <AccordionContent>
             <div className="flex flex-col space-y-2">
-              {CATEGORY_OPTIONS.map((category) => (
+              {(categories || CATEGORY_OPTIONS).map((category) => (
                 <div key={category.value} className="flex items-center space-x-2">
                   <Checkbox id={category.value} />
                   <Label htmlFor={category.value} className="font-body text-sm">
@@ -121,6 +132,21 @@ const FilteredSearch = () => {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
+          <AccordionTrigger>Abilități necesare</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-col space-y-2">
+              {(skills || SKILL_OPTIONS).map((skill) => (
+                <div key={skill.value} className="flex items-center space-x-2">
+                  <Checkbox id={skill.value} />
+                  <Label htmlFor={skill.value} className="font-body text-sm">
+                    {skill.label}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-5" className="mb-6">
           <AccordionTrigger>Sortează după nr de locuri disponibile</AccordionTrigger>
           <AccordionContent>
             <div className="flex items-center space-x-2">

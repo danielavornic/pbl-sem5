@@ -1,12 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { commonApi } from "@/api/common";
 import { organizationApi } from "@/api/organizationApi";
 import { useUploadFile } from "@/hooks/use-upload-file";
 import { OrganizationCreateData } from "@/types";
@@ -41,6 +42,16 @@ const useCreateOrganization = () => {
       phoneNumber: "",
       logo: []
     }
+  });
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: commonApi.getCategories
+  });
+
+  const { data: regions } = useQuery({
+    queryKey: ["regions"],
+    queryFn: commonApi.getRegions
   });
 
   const { onUpload, progresses, uploadedFiles, isUploading } = useUploadFile("imageUploader", {
@@ -95,7 +106,17 @@ const useCreateOrganization = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadedFiles, form]);
 
-  return { form, onSubmit, isPending, onUpload, progresses, uploadedFiles, isUploading };
+  return {
+    form,
+    onSubmit,
+    isPending,
+    onUpload,
+    progresses,
+    uploadedFiles,
+    isUploading,
+    categories,
+    regions
+  };
 };
 
 export default useCreateOrganization;

@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import useCreateOrganization from "../hooks/use-create-organization";
 
 export const CreateOrganizationForm = () => {
-  const { form, onSubmit, isPending, isUploading, progresses, uploadedFiles } =
+  const { form, onSubmit, isPending, isUploading, progresses, uploadedFiles, categories, regions } =
     useCreateOrganization();
 
   return (
@@ -83,11 +83,15 @@ export const CreateOrganizationForm = () => {
                         <SelectValue placeholder="Selectează o regiune" />
                       </SelectTrigger>
                       <SelectContent>
-                        {REGION_OPTIONS.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
+                        {regions && regions?.length > 0 ? (
+                          regions.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <SelectItem value="0">Loading...</SelectItem>
+                        )}
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -119,9 +123,9 @@ export const CreateOrganizationForm = () => {
                   <FormControl>
                     <MultipleSelector
                       className={cn({ "border-destructive": form.formState.errors.categoryIds })}
-                      options={CATEGORY_OPTIONS}
+                      options={categories}
                       placeholder="Selectează cel puțin o categorie"
-                      value={CATEGORY_OPTIONS.filter((option) =>
+                      value={(categories || []).filter((option) =>
                         field.value.includes(option.value)
                       )}
                       onChange={(selectedValues) => {

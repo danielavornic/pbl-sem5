@@ -26,7 +26,7 @@ const OpportunityCard = ({ opportunity }: { opportunity: Opportunity }) => {
         <img
           src={opportunity.image ?? "/images/placeholder.webp"}
           alt={opportunity.title}
-          className="w-fill h-[150px] object-cover"
+          className="w-fill h-[260px] object-cover"
         />
       </CardHeader>
       <CardContent className="flex flex-grow flex-col justify-between">

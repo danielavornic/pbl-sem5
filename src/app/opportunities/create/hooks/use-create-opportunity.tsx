@@ -1,13 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { isBefore, isSameDay, startOfDay } from "date-fns";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { commonApi } from "@/api/common";
 import { opportunityApi } from "@/api/opportunityApi";
 import { useUploadFile } from "@/hooks/use-upload-file";
 import { OpportunityCreateData } from "@/types";
@@ -87,6 +88,21 @@ const useCreateOpportunity = () => {
     }
   });
 
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: commonApi.getCategories
+  });
+
+  const { data: regions } = useQuery({
+    queryKey: ["regions"],
+    queryFn: commonApi.getRegions
+  });
+
+  const { data: skills } = useQuery({
+    queryKey: ["skills"],
+    queryFn: commonApi.getSkills
+  });
+
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "sessions"
@@ -134,17 +150,22 @@ const useCreateOpportunity = () => {
   });
 
   const onSubmit = (data: z.infer<typeof opportunityFormSchema>) => {
+    const submitValues = {
+      title: data.title,
+      description: data.description,
+      address: data.address,
+      region: +data.region,
+      isHighPriority: data.isHighPriority,
+      sessions: data.sessions.map((session) => ({
+        ...session,
+        date: new Date(session.startTime).toISOString().split("T")[0]
+      })),
+      categories: data.categories.map((id) => +id),
+      skills: data.skills.map((id) => +id)
+    };
+
     if (data.image.length === 0) {
-      mutate({
-        title: data.title,
-        description: data.description,
-        address: data.address,
-        region: data.region,
-        isHighPriority: data.isHighPriority,
-        sessions: data.sessions,
-        categories: data.categories,
-        skills: data.skills
-      });
+      mutate(submitValues);
 
       return;
     }
@@ -159,6 +180,13 @@ const useCreateOpportunity = () => {
 
       mutate({
         ...formValues,
+        region: +formValues.region,
+        categories: formValues.categories.map((id) => +id),
+        skills: formValues.skills.map((id) => +id),
+        sessions: formValues.sessions.map((session) => ({
+          ...session,
+          date: new Date(session.startTime).toISOString().split("T")[0]
+        })),
         image: imageUrl
       });
     }
@@ -175,7 +203,10 @@ const useCreateOpportunity = () => {
     canAddSession,
     isUploading,
     progresses,
-    uploadedFiles
+    uploadedFiles,
+    categories,
+    regions,
+    skills
   };
 };
 
