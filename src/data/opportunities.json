@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Community Garden Planting",
-    "description": "Help plant vegetables and flowers in our local community garden.",
+    "description": "Help plant vegetables and flowers in our local community garden. What to bring: sunscreen, hat, water bottle, comfortable clothes. \n What we provide: all necessary gardening tools, plants, seeds, gardening materials, light refreshments and gardening guidance from experienced volunteers. Come ready to learn, get your hands dirty and have fun while making a difference in our community! No experience necessary!",
     "address": "123 Green Street, Anytown, USA",
     "region": {
       "id": 1,
@@ -38,14 +38,14 @@
     "sessions": [
       {
         "date": "2024-10-05",
-        "startTime": "09:00:00",
-        "endTime": "12:00:00",
+        "startTime": "09:00",
+        "endTime": "12:00",
         "spotsLeft": 10
       },
       {
         "date": "2024-10-12",
-        "startTime": "09:00:00",
-        "endTime": "12:00:00",
+        "startTime": "09:00",
+        "endTime": "12:00",
         "spotsLeft": 8
       }
     ]
@@ -85,14 +85,14 @@
     "sessions": [
       {
         "date": "2024-10-07",
-        "startTime": "14:00:00",
-        "endTime": "16:00:00",
+        "startTime": "14:00",
+        "endTime": "16:00",
         "spotsLeft": 5
       },
       {
         "date": "2024-10-14",
-        "startTime": "14:00:00",
-        "endTime": "16:00:00",
+        "startTime": "14:00",
+        "endTime": "16:00",
         "spotsLeft": 5
       }
     ]
@@ -136,14 +136,14 @@
     "sessions": [
       {
         "date": "2024-10-06",
-        "startTime": "10:00:00",
-        "endTime": "12:00:00",
+        "startTime": "10:00",
+        "endTime": "12:00",
         "spotsLeft": 15
       },
       {
         "date": "2024-10-13",
-        "startTime": "10:00:00",
-        "endTime": "12:00:00",
+        "startTime": "10:00",
+        "endTime": "12:00",
         "spotsLeft": 12
       }
     ]
@@ -187,14 +187,14 @@
     "sessions": [
       {
         "date": "2024-10-08",
-        "startTime": "09:00:00",
-        "endTime": "12:00:00",
+        "startTime": "09:00",
+        "endTime": "12:00",
         "spotsLeft": 20
       },
       {
         "date": "2024-10-15",
-        "startTime": "09:00:00",
-        "endTime": "12:00:00",
+        "startTime": "09:00",
+        "endTime": "12:00",
         "spotsLeft": 18
       }
     ]
@@ -238,14 +238,14 @@
     "sessions": [
       {
         "date": "2024-10-09",
-        "startTime": "14:00:00",
-        "endTime": "17:00:00",
+        "startTime": "14:00",
+        "endTime": "17:00",
         "spotsLeft": 10
       },
       {
         "date": "2024-10-16",
-        "startTime": "14:00:00",
-        "endTime": "17:00:00",
+        "startTime": "14:00",
+        "endTime": "17:00",
         "spotsLeft": 8
       }
     ]
@@ -289,14 +289,14 @@
     "sessions": [
       {
         "date": "2024-10-10",
-        "startTime": "19:00:00",
-        "endTime": "21:00:00",
+        "startTime": "19:00",
+        "endTime": "21:00",
         "spotsLeft": 12
       },
       {
         "date": "2024-10-17",
-        "startTime": "19:00:00",
-        "endTime": "21:00:00",
+        "startTime": "19:00",
+        "endTime": "21:00",
         "spotsLeft": 10
       }
     ]

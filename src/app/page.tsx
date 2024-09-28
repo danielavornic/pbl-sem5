@@ -21,7 +21,7 @@ export default function Home() {
               Bine ai venit în lumea voluntarilor!
               <Image
                 alt="heart"
-                src="/heart.svg"
+                src="/heart-icon.svg"
                 className="ml-3 mt-[-24px] inline-block"
                 height={57}
                 width={48}
