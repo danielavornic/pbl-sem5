@@ -49,7 +49,6 @@ export const Header = () => {
           </div>
         )}
 
-        <UserNav />
         {user ? (
           <div className="flex">
             <UserNav />
