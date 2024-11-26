@@ -143,8 +143,8 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                             <div className="flex w-[220px] items-center justify-center space-x-2">
                               <img src="/time-icon.svg" alt="time-icon" className="inline-block" />
                               <p className="inline-block text-lg opacity-80">
-                                {format(new Date(session.startTime), "hh:mm a")} -{" "}
-                                {format(new Date(session.endTime), "hh:mm a")}
+                                {format(new Date(session.startTime), "HH:mm")} -{" "}
+                                {format(new Date(session.endTime), "HH:mm")}
                               </p>
                             </div>
                             <div className="flex w-[141px] items-center justify-center space-x-2">

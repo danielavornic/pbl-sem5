@@ -10,9 +10,13 @@ import { cn } from "@/lib/utils";
 
 import { UserNav } from "./user-nav";
 
-const menuLinks: { label: string; href: string }[] = [
+const publicLinks: { label: string; href: string }[] = [
   { label: "Oportunități", href: "/opportunities" },
   { label: "Organizații", href: "/organizations" }
+];
+
+const orgOwnerLinks: { label: string; href: string }[] = [
+  { label: "Organizația mea", href: "/account/organization" }
 ];
 
 export const Header = () => {
@@ -20,6 +24,8 @@ export const Header = () => {
   const isAdmin = pathname.startsWith("/admin");
 
   const { user } = useUserStore();
+
+  const menuLinks = user && "createdOrganizations" in user ? orgOwnerLinks : publicLinks;
 
   return (
     <header className="mb-6 h-24">

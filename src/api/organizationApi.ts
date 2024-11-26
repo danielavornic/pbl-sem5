@@ -29,6 +29,7 @@ export const organizationApi = {
       throw error;
     }
   },
+
   updateApprovalStatus: async (
     id: number,
     status: "approved" | "rejected"

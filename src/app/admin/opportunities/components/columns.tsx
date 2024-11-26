@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { ArrowUpDown, Info, MoreHorizontal } from "lucide-react";
 import { parseAsInteger, useQueryState } from "nuqs";
 
+import OppStatusBadge from "@/app/opportunities/components/opp-status-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -85,16 +86,7 @@ export const columns: ColumnDef<Opportunity>[] = [
     header: "Status",
     cell: ({ row }) => {
       const approvalStatus = row.getValue("approvalStatus") as string;
-      switch (approvalStatus) {
-        case "pending":
-          return <Badge variant="warning">În așteptare</Badge>;
-        case "approved":
-          return <Badge variant="success">Aprobat</Badge>;
-        case "rejected":
-          return <Badge variant="destructive">Respins</Badge>;
-        default:
-          return null;
-      }
+      return <OppStatusBadge status={approvalStatus} />;
     }
   },
   {
@@ -106,9 +98,9 @@ export const columns: ColumnDef<Opportunity>[] = [
         const firstSession = sessions[0];
         const formattedDate = format(new Date(firstSession.date), "dd.MM.yyyy");
         const formattedTime =
-          format(new Date(firstSession.startTime), "hh:mm a") +
+          format(new Date(firstSession.startTime), "HH:mm") +
           " - " +
-          format(new Date(firstSession.endTime), "hh:mm a");
+          format(new Date(firstSession.endTime), "HH:mm");
         return (
           <div className="text-sm">
             <div>

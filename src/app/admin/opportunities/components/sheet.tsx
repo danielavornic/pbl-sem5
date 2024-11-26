@@ -209,8 +209,8 @@ export const OpportunitySheet = () => {
                               <div className="flex items-center gap-8">
                                 <div className="flex items-center gap-1.5">
                                   <Clock className="text-muted-foreground" size={16} />
-                                  {format(new Date(session.startTime), "hh:mm a")} -{" "}
-                                  {format(new Date(session.endTime), "hh:mm a")}
+                                  {format(new Date(session.startTime), "HH:mm")} -{" "}
+                                  {format(new Date(session.endTime), "HH:mm")}
                                 </div>
                                 <div className="flex items-center gap-1.5">
                                   <Calendar className="text-muted-foreground" size={16} />

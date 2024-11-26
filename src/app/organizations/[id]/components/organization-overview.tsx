@@ -1,13 +1,35 @@
-import { Globe, MapPin, MapPinned, Phone } from "lucide-react";
+import {
+  EllipsisIcon,
+  Globe,
+  MapPin,
+  MapPinned,
+  Phone,
+  SquarePenIcon,
+  Trash2Icon
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import { Organization } from "@/types";
 
-export const OrganizationOverview = ({ organization }: { organization: Organization }) => {
+export const OrganizationOverview = ({
+  organization,
+  hasOptions
+}: {
+  organization: Organization;
+  hasOptions?: boolean;
+}) => {
   const { name, createdBy, description, address, region, phoneNumber, website } = organization;
 
   return (
@@ -58,6 +80,29 @@ export const OrganizationOverview = ({ organization }: { organization: Organizat
             <Detail icon={<Globe size={20} />} value={website} href={website} />
           </div>
         </div>
+
+        {hasOptions && (
+          <div className="-mr-4 -mt-4 flex flex-1 justify-end">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button size="icon" variant="ghost" className="rounded-full">
+                  <EllipsisIcon className="h-6 w-6 text-foreground" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <SquarePenIcon className="mr-2" size={16} />
+                  Editează
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-destructive">
+                  <Trash2Icon className="mr-2" size={16} />
+                  Șterge
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

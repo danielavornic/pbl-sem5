@@ -12,7 +12,7 @@ import { useDebounce } from "@/components/ui/multiple-selector";
 import defaultOpportunities from "@/data/opportunities.json";
 import PublicLayout from "@/layouts/public";
 
-import FilteredSearch from "./components/filteredSearch";
+import FilteredSearch from "./components/filtered-search";
 import OpportunityCard from "./components/opportunity-card";
 
 const OpportunitiesPage = () => {
@@ -28,7 +28,6 @@ const OpportunitiesPage = () => {
       return Array.isArray(data) ? data : [];
     }
   });
-  console.log(opportunityQuery.data);
 
   // const filteredOpportunities = useMemo(() => {
   //   if (!opportunityQuery.data || !Array.isArray(opportunityQuery.data)) {

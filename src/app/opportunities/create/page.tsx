@@ -1,27 +1,46 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+
+import { organizationApi } from "@/api/organizationApi";
+import { useAuth } from "@/app/auth/use-auth";
 import PublicLayout from "@/layouts/public";
+import { Organization } from "@/types";
 
 import CreateOpportunityForm from "./components/form";
 
 const CreateOpportunityPage = () => {
+  const { user } = useAuth();
+
+  const organizationId =
+    user && "createdOrganizations" in user ? user.createdOrganizations?.[0] : null;
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["organization", { id: organizationId }],
+    queryFn: () => organizationApi.getById(organizationId as number),
+    enabled: !!organizationId
+  });
+
+  if (!organizationId) {
+    return (
+      <PublicLayout title="Creează o oportunitate">
+        <main className="container h-full py-10">
+          <section>
+            <h1 className="text-3xl font-semibold">Organizația mea</h1>
+            <p>Nu ai creat încă nicio organizație.</p>
+          </section>
+        </main>
+      </PublicLayout>
+    );
+  }
+
   return (
     <PublicLayout title="Creează o oportunitate">
       <main
         className="container flex w-full items-start justify-center gap-[8vw] py-9"
         suppressHydrationWarning
       >
-        {/* <div className="grid max-w-[420px] grid-cols-2 justify-center gap-y-3">
-          <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
-          <div className="h-[240px] w-[240px] rounded-[30px]" />
-          <div className="h-[240px] w-[240px] rounded-[30px]" />
-          <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
-          <div className="h-[240px] w-[240px] rounded-[30px]" />
-          <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
-          <div className="h-[240px] w-[240px] rounded-[30px] bg-muted" />
-          <div className="h-[240px] w-[240px] rounded-[30px]" />
-        </div> */}
-        <CreateOpportunityForm />
+        <CreateOpportunityForm organization={data as Organization} />
       </main>
     </PublicLayout>
   );

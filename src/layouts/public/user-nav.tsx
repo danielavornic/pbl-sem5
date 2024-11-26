@@ -96,7 +96,7 @@ export const UserNav = () => {
                 <span>Cont</span>
               </Link>
             </DropdownMenuItem>
-            {(createdOrganizations || [])?.length > 0 && (
+            {/* {(createdOrganizations || [])?.length > 0 && (
               <>
                 <DropdownMenuItem>
                   <Link href="/account/organization" className="flex items-center gap-2">
@@ -114,7 +114,7 @@ export const UserNav = () => {
                   </Link>
                 </DropdownMenuItem>
               </>
-            )}
+            )} */}
             <DropdownMenuItem>
               <Link href="/account/settings" className="flex items-center gap-2">
                 <Settings2 size="16" />

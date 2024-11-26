@@ -29,6 +29,15 @@ export const opportunityApi = {
       throw error;
     }
   },
+  getAllByOrganizationId: async (id: number): Promise<Opportunity[]> => {
+    try {
+      const { data } = await axiosInst.get(`/opportunities/organization/${id}`);
+      return data;
+    } catch (error: Error | any) {
+      console.error(`Error fetching opportunities with organization ID ${id}:`, error);
+      throw error;
+    }
+  },
   updateApprovalStatus: async (
     id: number,
     status: "approved" | "rejected"

@@ -2,6 +2,7 @@
 
 import { addMinutes, endOfDay, isBefore, startOfDay } from "date-fns";
 import { Plus, Trash2 } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -32,10 +33,11 @@ import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
 import { REGION_OPTIONS } from "@/constants/regionOptions";
 import { SKILL_OPTIONS } from "@/constants/skillOptions";
 import { cn } from "@/lib/utils";
+import { Organization } from "@/types";
 
 import useCreateOpportunity from "../hooks/use-create-opportunity";
 
-export const CreateOpportunityForm = () => {
+export const CreateOpportunityForm = ({ organization }: { organization: Organization }) => {
   const {
     form,
     onSubmit,
@@ -63,6 +65,12 @@ export const CreateOpportunityForm = () => {
   return (
     <div className="my-10">
       <h1 className="mb-4 text-3xl font-bold">Creează o nouă oportunitate</h1>
+      <div className="text-body mb-8 text-lg">
+        Organizația ta:
+        <Button variant="link-accent" className="ml-2 p-0" asChild>
+          <Link href="/account/organization">{organization.name}</Link>
+        </Button>
+      </div>
       <div className="mx-auto w-[700px] max-w-[720px]">
         <Form {...form}>
           <form

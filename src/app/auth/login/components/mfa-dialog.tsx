@@ -50,7 +50,7 @@ export const MFADialog = ({ isOpen, onClose, onSubmit }: MFADialogProps) => {
             Verificare în doi pași
           </DialogTitle>
           <DialogDescription className="text-center">
-            Introduceți codul generat de Google Authenticator.
+            Introduceți codul OTP primit e-mail pentru a vă autentifica.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
