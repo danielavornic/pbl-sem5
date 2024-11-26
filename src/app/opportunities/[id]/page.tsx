@@ -2,13 +2,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { format, isBefore } from "date-fns";
+import { format, isAfter, isBefore } from "date-fns";
 import { Bookmark, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 
 import { opportunityApi } from "@/api/opportunityApi";
+import { organizationApi } from "@/api/organizationApi";
 import { Spinner } from "@/components/spinner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,12 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
     enabled: !!opportunityId
   });
 
+  const { data: org } = useQuery({
+    queryKey: ["organization", { id: data?.organization.id }],
+    queryFn: () => organizationApi.getById(data?.organization.id as number),
+    enabled: !!data?.organization && !!data.organization.id
+  });
+
   const { isLoggedIn } = useUserStore();
 
   const isPast = useMemo(() => {
@@ -40,7 +47,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
 
     data.sessions.forEach((session: any) => {
       const sessionDate = new Date(session.date);
-      if (isBefore(sessionDate, today)) {
+      if (isAfter(sessionDate, today)) {
         isPast = false;
       }
     });
@@ -192,9 +199,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                   <CardContent className="pt-6">
                     <CardTitle className="text-xl opacity-80">Despre {organization.name}</CardTitle>
                     <CardDescription className="mt-4 text-base">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas natus hic ut.
-                      Assumenda, dignissimos iusto quis minus dicta est explicabo et aut, officia
-                      ratione unde dolorum hic! Excepturi, iste corporis.
+                      {org?.description ?? "Descriere indisponibilă"}
                     </CardDescription>
                   </CardContent>
                 </Card>

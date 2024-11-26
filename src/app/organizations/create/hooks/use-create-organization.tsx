@@ -62,7 +62,7 @@ const useCreateOrganization = () => {
     mutationFn: (data: OrganizationCreateData) => organizationApi.create(data),
     onSuccess: () => {
       toast.success("Organizația a fost creată cu succes", {
-        description: "Organizația a fost creată cu succes și va fi verificată de un administrator"
+        description: "În curând va fi verificată de un administrator"
       });
       form.reset();
     },

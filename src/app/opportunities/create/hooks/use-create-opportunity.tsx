@@ -141,7 +141,7 @@ const useCreateOpportunity = () => {
     mutationFn: (data: OpportunityCreateData) => opportunityApi.create(data),
     onSuccess: () => {
       toast.success("Oportunitatea a fost creată cu succes", {
-        description: "Oportunitatea a fost creată cu succes și va fi verificată de un administrator"
+        description: "În curând va fi verificată de un administrator"
       });
       form.reset();
     },

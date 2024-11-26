@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -32,6 +32,7 @@ const useLogin = () => {
     }
   });
 
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: (data: LoginCredentials) => authApi.login(data),
     onSuccess: (response) => {
@@ -50,6 +51,8 @@ const useLogin = () => {
       } else {
         router.push("/");
       }
+
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
     },
     onError: (error: any) => {
       toast.error("Eroare la autentificare", {

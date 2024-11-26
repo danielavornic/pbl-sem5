@@ -49,7 +49,7 @@ export const Header = () => {
           </div>
         )}
 
-        {user ? (
+        {user && !isAdmin ? (
           <div className="flex">
             <UserNav />
           </div>

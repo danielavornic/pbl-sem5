@@ -49,5 +49,14 @@ export const authApi = {
       console.error("Error during fetching user profile:", error);
       return error.response.data;
     }
+  },
+  loginGoogle: async (): Promise<{ message: string; user: User }> => {
+    try {
+      const { data } = await axiosInst.get("/login/oauth2/code/google");
+      return data;
+    } catch (error: Error | any) {
+      console.error("Error during Google login:", error);
+      return error.response.data;
+    }
   }
 };

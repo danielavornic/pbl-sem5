@@ -22,7 +22,7 @@ const OrganizationCard = ({ org }: { org: Organization }) => {
           <Label className="text-body p-1 text-gray-100">{org.region.name}</Label>
         </Badge>
         <img
-          src={org.logo ?? "/images/placeholder.webp"}
+          src={org.logo ?? "/images/placeholder-square.webp"}
           alt={org.name}
           className="h-[150px] w-[150px] object-contain"
         />
@@ -32,7 +32,7 @@ const OrganizationCard = ({ org }: { org: Organization }) => {
           <CardTitle>{org.name}</CardTitle>
           <CardDescription className="line-clamp-3 break-words">{org.description}</CardDescription>
           <div className="flex flex-wrap gap-2">
-            {org.categories.map((category: any, index: any) => (
+            {org.categories.slice(0, 2).map((category: any, index: any) => (
               <Badge key={index} variant="muted">
                 <span className="text-body p-1">{category.name}</span>
               </Badge>

@@ -49,12 +49,12 @@ export const UserNav = () => {
     firstName: "",
     lastName: "",
     email: "",
-    createdOrganizations: null
+    createdOrganizations: []
   };
 
   return (
     <div className="flex items-center gap-5">
-      {!!createdOrganizations ? (
+      {(createdOrganizations || [])?.length > 0 ? (
         <Button asChild>
           <Link href="/opportunities/create">Publică o oportunitate</Link>
         </Button>
@@ -96,7 +96,7 @@ export const UserNav = () => {
                 <span>Cont</span>
               </Link>
             </DropdownMenuItem>
-            {!!createdOrganizations && (
+            {(createdOrganizations || [])?.length > 0 && (
               <>
                 <DropdownMenuItem>
                   <Link href="/account/organization" className="flex items-center gap-2">
