@@ -1,6 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 
+import { opportunityApi } from "@/api/opportunityApi";
 import { organizationApi } from "@/api/organizationApi";
 import OpportunityCard from "@/app/opportunities/components/opportunity-card";
 import { Spinner } from "@/components/spinner";
@@ -15,10 +16,11 @@ import {
 export const OrganizationEvents = ({ organizationId }: { organizationId: number }) => {
   const opportunityQuery = useQuery({
     queryKey: ["organizations", organizationId, "opportunities"],
-    queryFn: () => organizationApi.getOpportunities(organizationId),
+    queryFn: () => opportunityApi.getAllByOrganizationId(organizationId),
     select: (data) => {
       return Array.isArray(data) ? data : [];
-    }
+    },
+    enabled: !!organizationId
   });
 
   return (
@@ -42,12 +44,9 @@ export const OrganizationEvents = ({ organizationId }: { organizationId: number 
         </div>
       ) : (
         <div className="font-heading font-semibold">
-          Nu s-au găsit oportunități care să corespundă criteriilor de căutare.
+          Acestă organizație nu a adăugat nicio oportuniate de voluntariat până acum.
         </div>
       )}
-      <p className="mt-4 text-muted-foreground">
-        Acestă organizație nu a adăugat nicio oportuniate de voluntariat până acum.
-      </p>
     </section>
   );
 };

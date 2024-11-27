@@ -25,7 +25,13 @@ export const Header = () => {
 
   const { user } = useUserStore();
 
-  const menuLinks = user && "createdOrganizations" in user ? orgOwnerLinks : publicLinks;
+  const menuLinks =
+    user &&
+    "createdOrganizations" in user &&
+    user.createdOrganizations &&
+    user.createdOrganizations.length > 0
+      ? orgOwnerLinks
+      : publicLinks;
 
   return (
     <header className="mb-6 h-24">
