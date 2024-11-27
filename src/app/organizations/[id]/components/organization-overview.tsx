@@ -28,9 +28,10 @@ export const OrganizationOverview = ({ organization }: { organization: Organizat
           <CardHeader className="p-0">
             <CardTitle className="text-4xl">{name}</CardTitle>
             <CardDescription className="pt-1 text-sm text-foreground">
+              <p className="inline-block pr-1 font-heading font-medium">Administrat de:</p>
               <Button variant="link-foreground" className="h-auto p-0" asChild>
                 <Link href={`/users/${createdBy.id}`}>
-                  Administrat de: {createdBy.firstName + " " + createdBy.lastName}
+                  {createdBy.firstName + " " + createdBy.lastName}
                 </Link>
               </Button>
             </CardDescription>
