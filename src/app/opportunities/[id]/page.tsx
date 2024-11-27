@@ -6,7 +6,9 @@ import { format, isAfter, isBefore } from "date-fns";
 import { Bookmark, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import Router from "next/router";
+import React from "react";
+import { useMemo, useState } from "react";
 
 import { opportunityApi } from "@/api/opportunityApi";
 import { organizationApi } from "@/api/organizationApi";
@@ -15,7 +17,19 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog";
+import { FileUploader } from "@/components/ui/file-uploader";
+import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 import PublicLayout from "@/layouts/public";
 import useUserStore from "@/lib/user-store";
 import { cn } from "@/lib/utils";
@@ -24,6 +38,16 @@ import { NamedEntity, SessionExtended } from "@/types";
 const today = new Date();
 
 const OpportunityPage = ({ params }: { params: { id: string } }) => {
+  // for the modal
+  const [isOpen, setIsOpen] = useState(false);
+  const handleButtonClick = () => {
+    if (isLoggedIn) {
+      setIsOpen(true);
+    } else {
+      Router.push("/auth/login");
+    }
+  };
+
   const opportunityId = Number(params.id);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
@@ -171,7 +195,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                       ))}
 
                       <div className="mt-6 flex w-fit flex-col gap-2">
-                        <Button variant="default">
+                        <Button variant="default" onClick={handleButtonClick}>
                           {isLoggedIn ? "Înscrie-te" : "Conectează-te pentru a te înscrie"}
                         </Button>
                         <Button variant="outline">
@@ -179,6 +203,37 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                           {isLoggedIn ? "Salvează" : "Conectează-te pentru a salva"}
                         </Button>
                       </div>
+
+                      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                        <DialogContent className="sm:max-w-[425px]">
+                          <DialogHeader>
+                            <DialogTitle>Aplică</DialogTitle>
+                            <DialogDescription>
+                              Completează formularul de mai jos pentru a aplica la această
+                              oportunitate.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <div className="grid gap-4 py-4">
+                            <div className="grid grid-cols-4 items-center gap-4">
+                              <Label htmlFor="message" className="text-right">
+                                Mesaj opțional
+                              </Label>
+                              <Textarea id="message" className="col-span-3" />
+                            </div>
+                            <div className="grid grid-cols-4 items-center gap-4">
+                              <Label htmlFor="file-upload" className="text-center">
+                                Încarcă CV-ul/alt document
+                              </Label>
+                              <div className="col-span-3">
+                                <FileUploader id="file-upload" />
+                              </div>
+                            </div>
+                          </div>
+                          <DialogFooter>
+                            <Button type="submit">Trimite</Button>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   )}
                 </div>

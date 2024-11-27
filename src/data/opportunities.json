@@ -1,5 +1,52 @@
 [
   {
+    "id": 1,
+    "title": "Vizită la Căminul de Bătrâni",
+    "description": "Petrece timp cu vârstnicii de la căminul local, angajându-te în conversații și activități.",
+    "address": "Strada Îngrijirii 456, Bălți, Moldova",
+    "region": {
+      "id": 1,
+      "name": "Moldova"
+    },
+    "isHighPriority": false,
+    "createdBy": {
+      "id": 102,
+      "firstName": "Ion",
+      "lastName": "Rusu"
+    },
+    "organization": {
+      "id": 502,
+      "name": "Fundația Ani de Aur"
+    },
+    "categories": [
+      { "id": 3, "name": "Îngrijirea Vârstnicilor" },
+      { "id": 4, "name": "Suport Social" }
+    ],
+    "skills": [
+      { "id": 3, "name": "Comunicare" },
+      { "id": 4, "name": "Răbdare" }
+    ],
+    "approvalStatus": "în așteptare",
+    "approvedBy": null,
+    "approvalDate": null,
+    "createdAt": "2024-09-18T15:30:00Z",
+    "updatedAt": "2024-09-18T15:30:00Z",
+    "sessions": [
+      {
+        "date": "2024-10-07",
+        "startTime": "14:00",
+        "endTime": "16:00",
+        "spotsLeft": 5
+      },
+      {
+        "date": "2024-10-14",
+        "startTime": "14:00",
+        "endTime": "16:00",
+        "spotsLeft": 5
+      }
+    ]
+  },
+  {
     "id": 2,
     "title": "Vizită la Căminul de Bătrâni",
     "description": "Petrece timp cu vârstnicii de la căminul local, angajându-te în conversații și activități.",
