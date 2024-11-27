@@ -1,7 +1,5 @@
-import { get } from "http";
-
 import { axiosInst } from "@/lib/axios";
-import { Opportunity, Organization, OrganizationCreateData, ResponseMessage } from "@/types";
+import { Organization, OrganizationCreateData, ResponseMessage } from "@/types";
 
 export const organizationApi = {
   create: async (body: OrganizationCreateData): Promise<ResponseMessage> => {
@@ -31,15 +29,7 @@ export const organizationApi = {
       throw error;
     }
   },
-  getOpportunities: async (id: number): Promise<Opportunity[]> => {
-    try {
-      const { data } = await axiosInst.get(`/organizations/${id}/opportunities`);
-      return data;
-    } catch (error: Error | any) {
-      console.error(`Error fetching opportunities for organization with ID ${id}:`, error);
-      throw error;
-    }
-  },
+
   updateApprovalStatus: async (
     id: number,
     status: "approved" | "rejected"
