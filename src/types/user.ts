@@ -9,6 +9,7 @@ export interface BaseUser {
   id: number;
   email: string;
   createdAt: string;
+  mfaEnabled: boolean;
 }
 
 export interface UserRegisterCredentials extends LoginCredentials {

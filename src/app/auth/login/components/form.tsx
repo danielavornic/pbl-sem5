@@ -17,37 +17,31 @@ import { PasswordInput } from "@/components/ui/password-input";
 
 import GoogleButton from "../../components/google-button";
 import useLogin from "../hooks/use-login";
+import MFADialog from "./mfa-dialog";
 
 export const LoginForm = () => {
-  const { form, onSubmit, isPending } = useLogin();
-  const [isMFAOpen, setIsMFAOpen] = useState(false);
-
-  // const handleLogin = async (data: any) => {
-  //   const requiresMFA = true;
-
-  //   if (requiresMFA) {
-  //     setIsMFAOpen(true);
-  //   } else {
-  //     await onSubmit(data);
-  //   }
-  // };
-
-  // const handleMFASubmit = async (otpCode: string) => {
-  //   setIsMFAOpen(false);
-  //   // await onSubmit({ ...form.getValues(), otpCode });
-  // };
+  const {
+    loginForm,
+    mfaForm,
+    onLoginSubmit,
+    onMFASubmit,
+    onMFAClose,
+    isMFAOpen,
+    isLoginPending,
+    isMFAPending
+  } = useLogin();
 
   return (
     <div className="min-w-[500px]">
       <h1 className="mb-4 text-3xl font-bold">Intră în cont</h1>
-      <Form {...form}>
+      <Form {...loginForm}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={loginForm.handleSubmit(onLoginSubmit)}
           className="flex flex-col items-end space-y-4"
           noValidate
         >
           <FormField
-            control={form.control}
+            control={loginForm.control}
             name="email"
             render={({ field }) => (
               <FormItem className="w-full">
@@ -60,7 +54,7 @@ export const LoginForm = () => {
             )}
           />
           <FormField
-            control={form.control}
+            control={loginForm.control}
             name="password"
             render={({ field }) => (
               <FormItem className="w-full">
@@ -76,8 +70,8 @@ export const LoginForm = () => {
             )}
           />
 
-          <Button loading={isPending} type="submit" className="w-full">
-            {isPending ? "Se incarcă..." : "Accesează contul"}
+          <Button loading={isLoginPending} type="submit" className="w-full">
+            {isLoginPending ? "Se incarcă..." : "Accesează contul"}
           </Button>
         </form>
       </Form>
@@ -91,7 +85,13 @@ export const LoginForm = () => {
         </Button>
       </div>
 
-      {/* <MFADialog isOpen={true} onClose={() => setIsMFAOpen(false)} onSubmit={() => {}} /> */}
+      <MFADialog
+        form={mfaForm}
+        isOpen={isMFAOpen}
+        onClose={onMFAClose}
+        onSubmit={onMFASubmit}
+        isPending={isMFAPending}
+      />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { organizationApi } from "@/api/organizationApi";
 import { useAuth } from "@/app/auth/use-auth";
+import { Spinner } from "@/components/spinner";
 import PublicLayout from "@/layouts/public";
 import { Organization } from "@/types";
 
@@ -40,7 +41,13 @@ const CreateOpportunityPage = () => {
         className="container flex w-full items-start justify-center gap-[8vw] py-9"
         suppressHydrationWarning
       >
-        <CreateOpportunityForm organization={data as Organization} />
+        {isLoading ? (
+          <Spinner className="pt-20" />
+        ) : data ? (
+          <CreateOpportunityForm organization={data as Organization} />
+        ) : isError ? (
+          <p>Eroare la încărcarea datelor</p>
+        ) : null}
       </main>
     </PublicLayout>
   );

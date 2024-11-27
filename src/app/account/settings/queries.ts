@@ -1,16 +1,12 @@
 import { axiosInst } from "@/lib/axios";
 
 export const settingsApi = {
-  verifyMfaCode: async (body: { code: string }) => {
-    const { data } = await axiosInst.post("/account/settings/mfa/verify", body);
+  verifyOTP: async (body: { otp: string }) => {
+    const { data } = await axiosInst.post(`/auth/validate-otp?otp=${body.otp}`);
     return data;
   },
-  hasMfa: async () => {
-    const { data } = await axiosInst.get("/account/settings/mfa");
-    return data;
-  },
-  disableMfa: async () => {
-    const { data } = await axiosInst.post("/account/settings/mfa/disable");
+  updateMfa: async (body: { enable: boolean }) => {
+    const { data } = await axiosInst.patch(`/auth/mfa?enable=${body.enable}`);
     return data;
   }
 };

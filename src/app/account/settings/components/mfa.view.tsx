@@ -1,23 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
+import { useAuth } from "@/app/auth/use-auth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-import MfaDialog from "./mfa-dialog";
+import { settingsApi } from "../queries";
 
 export const MfaView = () => {
-  const [isMfaEnabled, setIsMfaEnabled] = useState(false);
-  const [showDialog, setShowDialog] = useState(false);
+  const { user } = useAuth();
+  const isMfaEnabled = user && "mfaEnabled" in user && user.mfaEnabled;
 
-  const disableMfa = () => {
-    const confirm = window.confirm("Ești sigur că vrei să dezactivezi autentificarea dublă?");
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({ enable }: { enable: boolean }) => settingsApi.updateMfa({ enable }),
+    onSuccess: () => {
+      toast.success("MFA a fost schimbat cu succes!");
+      queryClient.invalidateQueries({ queryKey: ["userProfile"] });
+    },
+    onError: (error: any) => {
+      toast.error("Eroare la MFA", {
+        description: error.response?.data?.message
+      });
+    }
+  });
+
+  const toggleMfa = () => {
+    const confirm = window.confirm(
+      `Ești sigur că vrei să ${isMfaEnabled ? "dezactivezi" : "activezi"} MFA?`
+    );
     if (!confirm) {
       return;
     }
 
-    setIsMfaEnabled(false);
+    mutate({ enable: !!!isMfaEnabled });
   };
 
   return (
@@ -27,18 +46,13 @@ export const MfaView = () => {
           <div className="space-y-1">
             <h3 className="font-semibold uppercase">Autentificare dublă</h3>
             <p className="text-sm text-gray-500">
-              Utilizează Google Authenticator pentru a-ți proteja contul. La fiecare autentificare
-              vei avea nevoie de un cod generat de aplicație.
+              La fiecare autentificare vei avea nevoie de un cod generat și trimis pe e-mail.
             </p>
           </div>
-          <Button
-            className="flex-shrink-0"
-            variant="secondary"
-            onClick={() => (isMfaEnabled ? disableMfa() : setShowDialog(true))}
-          >
+          <Button className="flex-shrink-0" variant="secondary" onClick={toggleMfa}>
             {isMfaEnabled ? "Dezactivează" : "Activează"}
           </Button>
-          <MfaDialog open={showDialog} onOpenChange={setShowDialog} />
+          {/* <MfaDialog open={showDialog} onOpenChange={setShowDialog} /> */}
         </div>
       </CardContent>
     </Card>

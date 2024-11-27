@@ -11,7 +11,9 @@ export const authApi = {
       return error.response.data;
     }
   },
-  login: async (body: LoginCredentials): Promise<{ message: string; user: User }> => {
+  login: async (
+    body: LoginCredentials
+  ): Promise<{ message: string; user: User; mfaEnabled: boolean }> => {
     try {
       const { data } = await axiosInst.post("/auth/login", body);
       return data;

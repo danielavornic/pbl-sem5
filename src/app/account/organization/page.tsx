@@ -29,13 +29,13 @@ const MyOrganizationPage = () => {
     enabled: !!organizationId
   });
 
-  // TODO: use opportunities by organization
   const opportunityQuery = useQuery({
-    queryKey: ["opportunities"],
-    queryFn: opportunityApi.getAll,
+    queryKey: ["org-opportunities", { orgId: organizationId }],
+    queryFn: () => opportunityApi.getAllByOrganizationId(organizationId as number),
     select: (data) => {
       return Array.isArray(data) ? data : [];
-    }
+    },
+    enabled: typeof organizationId === "number"
   });
 
   if (!organizationId) {

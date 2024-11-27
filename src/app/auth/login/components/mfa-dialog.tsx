@@ -1,6 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,30 +16,15 @@ import {
   InputOTPSlot
 } from "@/components/ui/input-otp";
 
-const formSchema = z.object({
-  otp: z.string().min(6, {
-    message: "Codul OTP trebuie să conțină 6 caractere."
-  })
-});
-
 interface MFADialogProps {
+  form: UseFormReturn<{ otp: string }>;
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (otp: string) => void;
+  onSubmit: (values: { otp: string }) => void;
+  isPending: boolean;
 }
 
-export const MFADialog = ({ isOpen, onClose, onSubmit }: MFADialogProps) => {
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      otp: ""
-    }
-  });
-
-  const handleSubmit = (values: { otp: string }) => {
-    onSubmit(values.otp);
-  };
-
+export const MFADialog = ({ form, isOpen, onClose, onSubmit, isPending }: MFADialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -50,14 +33,11 @@ export const MFADialog = ({ isOpen, onClose, onSubmit }: MFADialogProps) => {
             Verificare în doi pași
           </DialogTitle>
           <DialogDescription className="text-center">
-            Introduceți codul OTP primit e-mail pentru a vă autentifica.
+            Introduceți codul OTP primit pe e-mail pentru a vă autentifica.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleSubmit)}
-            className="flex flex-col items-center gap-6"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-6">
             <FormField
               control={form.control}
               name="otp"
@@ -82,8 +62,8 @@ export const MFADialog = ({ isOpen, onClose, onSubmit }: MFADialogProps) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Verifică
+            <Button type="submit" loading={isPending} className="w-full">
+              {isPending ? "Se verifică..." : "Verifică"}
             </Button>
           </form>
         </Form>
