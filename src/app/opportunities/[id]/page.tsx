@@ -2,59 +2,54 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { format, isAfter, isBefore } from "date-fns";
+import { format, isAfter } from "date-fns";
 import { Bookmark, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Router from "next/router";
-import React from "react";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
-import { opportunityApi } from "@/api/opportunityApi";
 import { organizationApi } from "@/api/organizationApi";
 import { Spinner } from "@/components/spinner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import { FileUploader } from "@/components/ui/file-uploader";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
+import mockOpps from "@/data/opportunities.json";
 import PublicLayout from "@/layouts/public";
 import useUserStore from "@/lib/user-store";
 import { cn } from "@/lib/utils";
 import { NamedEntity, SessionExtended } from "@/types";
+
+import ApplicationDialog from "./components/application-dialog";
 
 const today = new Date();
 
 const OpportunityPage = ({ params }: { params: { id: string } }) => {
   // for the modal
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const [selectedSessions, setSelectedSessions] = useState<number[]>([]);
+
   const handleButtonClick = () => {
-    if (isLoggedIn) {
-      setIsOpen(true);
-    } else {
-      Router.push("/auth/login");
-    }
+    // if (isLoggedIn) {
+    setIsOpen(true);
+    // } else {
+    //   router.push("/auth/login");
+    // }
   };
 
   const opportunityId = Number(params.id);
-
-  const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["opportunity", { id: opportunityId }],
-    queryFn: () => opportunityApi.getById(opportunityId as number),
-    enabled: !!opportunityId
-  });
+  const data = mockOpps.find((opp) => opp.id === opportunityId);
+  const isLoading = false;
+  const isError = false;
+  const isSuccess = true;
+  // const { data, isLoading, isError, isSuccess } = useQuery({
+  //   queryKey: ["opportunity", { id: opportunityId }],
+  //   queryFn: () => opportunityApi.getById(opportunityId as number),
+  //   enabled: !!opportunityId
+  // });
 
   const { data: org } = useQuery({
     queryKey: ["organization", { id: data?.organization.id }],
@@ -152,46 +147,65 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                         Alege dățile care ți se potrivesc
                       </p>
                       {data.sessions.map((session: SessionExtended, index: number) => (
-                        <Card
-                          key={index}
-                          className={cn("mt-2 flex w-fit items-center space-x-2 p-4", {
-                            "cursor-not-allowed": session.spotsLeft === 0
-                          })}
-                          title={session.spotsLeft === 0 ? "Toate locurile sunt ocupate" : ""}
-                        >
-                          <Checkbox
-                            disabled={session.spotsLeft === 0}
-                            className="mr-4 rounded-[4px] border-secondary data-[state=checked]:bg-secondary data-[state=checked]:text-secondary-foreground"
-                          />
-                          <div className="flex items-center space-x-6">
-                            <div className="flex w-[220px] items-center justify-center space-x-2">
-                              <img src="/time-icon.svg" alt="time-icon" className="inline-block" />
-                              <p className="inline-block text-lg opacity-80">
-                                {format(new Date(session.startTime), "HH:mm")} -{" "}
-                                {format(new Date(session.endTime), "HH:mm")}
-                              </p>
-                            </div>
-                            <div className="flex w-[141px] items-center justify-center space-x-2">
-                              <img
-                                src="/calendar-icon.svg"
-                                alt="calendar-icon"
-                                className="inline-block"
-                              />
-                              <p className="inline-block text-lg opacity-80">
-                                {format(new Date(session.date), "dd MMM yyyy")}
-                              </p>
-                            </div>
-
-                            <p className="inline-block w-[164px] text-center text-lg text-muted-foreground">
-                              {session.spotsLeft} locuri rămase
-                              {session.spotsLeft <= 8 ? (
-                                <p className="ml-1 inline-block text-xl font-semibold text-secondary">
-                                  !
+                        <label htmlFor={session.id?.toString()} key={index}>
+                          <Card
+                            className={cn(
+                              "mt-2 flex w-fit cursor-pointer items-center space-x-2 p-4",
+                              {
+                                "cursor-not-allowed": session.spotsLeft === 0
+                              }
+                            )}
+                            title={session.spotsLeft === 0 ? "Toate locurile sunt ocupate" : ""}
+                          >
+                            <Checkbox
+                              value={session.id?.toString()}
+                              id={session.id?.toString()}
+                              onCheckedChange={(checked) => {
+                                if (checked) {
+                                  setSelectedSessions([...selectedSessions, session.id]);
+                                } else {
+                                  setSelectedSessions(
+                                    selectedSessions.filter((id) => id !== session.id)
+                                  );
+                                }
+                              }}
+                              disabled={session.spotsLeft === 0}
+                              className="mr-4 rounded-[4px] border-secondary data-[state=checked]:bg-secondary data-[state=checked]:text-secondary-foreground"
+                            />
+                            <div className="flex items-center space-x-6">
+                              <div className="flex w-[220px] items-center justify-center space-x-2">
+                                <img
+                                  src="/time-icon.svg"
+                                  alt="time-icon"
+                                  className="inline-block"
+                                />
+                                <p className="inline-block text-lg opacity-80">
+                                  {format(new Date(session.startTime), "HH:mm")} -{" "}
+                                  {format(new Date(session.endTime), "HH:mm")}
                                 </p>
-                              ) : null}
-                            </p>
-                          </div>
-                        </Card>
+                              </div>
+                              <div className="flex w-[141px] items-center justify-center space-x-2">
+                                <img
+                                  src="/calendar-icon.svg"
+                                  alt="calendar-icon"
+                                  className="inline-block"
+                                />
+                                <p className="inline-block text-lg opacity-80">
+                                  {format(new Date(session.date), "dd MMM yyyy")}
+                                </p>
+                              </div>
+
+                              <p className="inline-block w-[164px] text-center text-lg text-muted-foreground">
+                                {session.spotsLeft} locuri rămase
+                                {session.spotsLeft <= 8 ? (
+                                  <p className="ml-1 inline-block text-xl font-semibold text-secondary">
+                                    !
+                                  </p>
+                                ) : null}
+                              </p>
+                            </div>
+                          </Card>
+                        </label>
                       ))}
 
                       <div className="mt-6 flex w-fit flex-col gap-2">
@@ -204,36 +218,12 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                         </Button>
                       </div>
 
-                      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                        <DialogContent className="sm:max-w-[425px]">
-                          <DialogHeader>
-                            <DialogTitle>Aplică</DialogTitle>
-                            <DialogDescription>
-                              Completează formularul de mai jos pentru a aplica la această
-                              oportunitate.
-                            </DialogDescription>
-                          </DialogHeader>
-                          <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="message" className="text-right">
-                                Mesaj opțional
-                              </Label>
-                              <Textarea id="message" className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="file-upload" className="text-center">
-                                Încarcă CV-ul/alt document
-                              </Label>
-                              <div className="col-span-3">
-                                <FileUploader id="file-upload" />
-                              </div>
-                            </div>
-                          </div>
-                          <DialogFooter>
-                            <Button type="submit">Trimite</Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
+                      <ApplicationDialog
+                        isOpen={isOpen}
+                        setIsOpen={setIsOpen}
+                        opportunityId={opportunityId}
+                        sessions={sessions}
+                      />
                     </div>
                   )}
                 </div>

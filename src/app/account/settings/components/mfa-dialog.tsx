@@ -61,7 +61,7 @@ const MfaDialog = ({ open, onOpenChange }: MfaDialogProps) => {
   });
 
   const verifyCodeMutation = useMutation({
-    mutationFn: (code: string) => settingsApi.verifyMfaCode({ code }),
+    mutationFn: (code: string) => settingsApi.verifyOTP({ otp: code }),
     onSuccess: () => {
       onOpenChange(false);
       toast.success("Autentificarea dublă a fost activată cu succes.");

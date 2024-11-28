@@ -152,12 +152,8 @@ const useCreateOpportunity = () => {
     }
   });
 
-  console.log(user);
-
   const onSubmit = (data: z.infer<typeof opportunityFormSchema>) => {
     const organizationId = (user as any)?.createdOrganizations?.[0];
-
-    console.log(organizationId);
 
     const submitValues = {
       organizationId,

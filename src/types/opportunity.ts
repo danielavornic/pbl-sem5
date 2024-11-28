@@ -51,5 +51,6 @@ export interface Opportunity extends OpportunityBase {
 }
 
 export interface SessionExtended extends Session {
+  id: number;
   date: string;
 }
