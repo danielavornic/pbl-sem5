@@ -2,6 +2,7 @@
 import { format } from "date-fns";
 import { Calendar, Clock, EllipsisIcon, EyeIcon, SquarePenIcon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
+import { parseAsInteger, useQueryState } from "nuqs";
 import React from "react";
 
 import OppStatusBadge from "@/app/opportunities/components/opp-status-badge";
@@ -25,6 +26,8 @@ import {
 import { Application } from "@/types";
 
 const ApplicationCard = ({ application }: { application: Application }) => {
+  const [id, setId] = useQueryState("id", parseAsInteger);
+
   return (
     <Card key={application.id} className="flex h-full flex-col">
       <CardHeader className="flex-grow-0 space-y-4">
@@ -111,8 +114,13 @@ const ApplicationCard = ({ application }: { application: Application }) => {
           )}
         </div>
         <CardFooter className="p-0 pt-4">
-          <Button asChild size="sm" variant="outline" className="ml-auto">
-            <Link href={`/applications/${application.id}`}>Vezi aplicarea</Link>
+          <Button
+            size="sm"
+            variant="outline"
+            className="ml-auto"
+            onClick={() => setId(application.id)}
+          >
+            Vezi aplicarea
           </Button>
         </CardFooter>
       </CardContent>

@@ -10,7 +10,9 @@ import { useUploadFile } from "@/hooks/use-upload-file";
 import { ApplicationPayload } from "@/types/application";
 
 const applicationFormSchema = z.object({
-  text: z.string().optional(),
+  text: z
+    .string()
+    .min(10, { message: "Mesajul este obligatoriu și trebuie să aibă cel puțin 10 caractere" }),
   files: z.array(z.custom<File>())
 });
 

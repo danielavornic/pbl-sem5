@@ -180,6 +180,7 @@ const useCreateOpportunity = () => {
   };
 
   useEffect(() => {
+    console.log(uploadedFiles);
     if (uploadedFiles.length) {
       const formValues = form.getValues();
       const imageUrl = uploadedFiles[0].url;

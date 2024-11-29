@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
+import { applicationApi } from "@/api/applicationsApi";
 // import { applicationApi } from "@/api/applicationApi";
 import { Spinner } from "@/components/spinner";
 import applications from "@/data/applications.json";
@@ -12,19 +13,13 @@ import { ApplicationSheet } from "../components/sheet";
 import { AccountSidebar } from "../components/sidebar";
 
 const ApplicationsPage = () => {
-  // const opportunityQuery = useQuery({
-  //   queryKey: ["opportunities"],
-  //   queryFn: opportunityApi.getAll,
-  //   select: (data) => {
-  //     return Array.isArray(data) ? data : [];
-  //   }
-  // });
-
-  const applicationQuery = {
-    isLoading: false,
-    isSuccess: true,
-    data: applications
-  };
+  const applicationQuery = useQuery({
+    queryKey: ["my-applications"],
+    queryFn: applicationApi.getMyApplications,
+    select: (data) => {
+      return Array.isArray(data) ? data : [];
+    }
+  });
 
   return (
     <PublicLayout title="Aplicările mele">

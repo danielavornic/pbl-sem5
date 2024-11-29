@@ -8,6 +8,7 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 import { toast } from "sonner";
 
+import { applicationApi } from "@/api/applicationsApi";
 import OppStatusBadge from "@/app/opportunities/components/opp-status-badge";
 import { Spinner } from "@/components/spinner";
 import { Badge } from "@/components/ui/badge";
@@ -24,50 +25,31 @@ export const ApplicationSheet = () => {
   const [id, setId] = useQueryState("id", parseAsInteger);
   const queryClient = useQueryClient();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["application", { id }],
+    queryFn: () => applicationApi.getById(id as number),
+    enabled: !!id
+  });
 
-  const data: Application | undefined = mockData.find((opp) => opp.id === id) as Application;
-
-  const approveMutation = {
-    mutate: () => {
-      toast.success("Oportunitatea a fost aprobată cu succes.");
+  const approveMutation = useMutation({
+    mutationFn: () => applicationApi.updateApprovalStatus(id as number, "approved"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["application", { id }] });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast.success("Aplicația a fost aprobată cu succes.");
     },
-    isPending: false
-  };
+    onError: () => toast.error("Eroare la aprobarea aplicației")
+  });
 
-  const rejectMutation = {
-    mutate: () => {
-      toast.success("Oportunitatea a fost respinsă cu succes.");
+  const rejectMutation = useMutation({
+    mutationFn: () => applicationApi.updateApprovalStatus(id as number, "rejected"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["application", { id }] });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast.success("Aplicația a fost respinsă cu succes.");
     },
-    isPending: false
-  };
-
-  // const { data, isLoading, error } = useQuery({
-  //   queryKey: ["application", { id }],
-  //   queryFn: () => applicationApi.getById(id as number),
-  //   enabled: !!id
-  // });
-
-  // const approveMutation = useMutation({
-  //   mutationFn: () => applicationApi.updateApprovalStatus(id as number, "approved"),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["application", { id }] });
-  //     queryClient.invalidateQueries({ queryKey: ["applications"] });
-  //     toast.success("Aplicația a fost aprobată cu succes.");
-  //   },
-  //   onError: () => toast.error("Eroare la aprobarea aplicației")
-  // });
-
-  // const rejectMutation = useMutation({
-  //   mutationFn: () => applicationApi.updateApprovalStatus(id as number, "rejected"),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({ queryKey: ["application", { id }] });
-  //     queryClient.invalidateQueries({ queryKey: ["applications"] });
-  //     toast.success("Aplicația a fost respinsă cu succes.");
-  //   },
-  //   onError: () => toast.error("Eroare la respingerea aplicației")
-  // });
+    onError: () => toast.error("Eroare la respingerea aplicației")
+  });
 
   return (
     <Sheet open={!!id} onOpenChange={(open) => setId(open ? id : null)}>
@@ -110,10 +92,10 @@ export const ApplicationSheet = () => {
                 <div className="flex items-center gap-2">
                   <SheetTitle className="text-2xl font-semibold">
                     <Link
-                      href={`/users/${data.user.id}`}
+                      href={`/users/${data.applicant.id}`}
                       className="underline-offset-4 hover:underline"
                     >
-                      {data.user.firstName} {data.user.lastName}
+                      {data.applicant.firstName} {data.applicant.lastName}
                     </Link>
                   </SheetTitle>
                   <OppStatusBadge status={data.approvalStatus} />
@@ -147,9 +129,9 @@ export const ApplicationSheet = () => {
                   {data.sessions.length > 0 && (
                     <div className="space-y-2">
                       <Heading>Sesiuni selectate</Heading>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 gap-2">
                         {data.sessions.map((session, index) => (
-                          <Card key={index} className="shadow-none">
+                          <Card key={index} className="w-fit shadow-none">
                             <CardHeader className="flex flex-row items-center gap-6 space-y-0 p-3 text-sm">
                               <div className="flex items-center gap-1.5">
                                 <Clock className="text-muted-foreground" size={16} />

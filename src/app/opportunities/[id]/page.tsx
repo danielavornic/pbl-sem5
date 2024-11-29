@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
+import { opportunityApi } from "@/api/opportunityApi";
 import { organizationApi } from "@/api/organizationApi";
 import { Spinner } from "@/components/spinner";
 import { Badge } from "@/components/ui/badge";
@@ -41,20 +42,11 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
   };
 
   const opportunityId = Number(params.id);
-  const data = mockOpps.find((opp) => opp.id === opportunityId);
-  const isLoading = false;
-  const isError = false;
-  const isSuccess = true;
-  // const { data, isLoading, isError, isSuccess } = useQuery({
-  //   queryKey: ["opportunity", { id: opportunityId }],
-  //   queryFn: () => opportunityApi.getById(opportunityId as number),
-  //   enabled: !!opportunityId
-  // });
 
-  const { data: org } = useQuery({
-    queryKey: ["organization", { id: data?.organization.id }],
-    queryFn: () => organizationApi.getById(data?.organization.id as number),
-    enabled: !!data?.organization && !!data.organization.id
+  const { data, isLoading, isError, isSuccess } = useQuery({
+    queryKey: ["opportunity", { id: opportunityId }],
+    queryFn: () => opportunityApi.getById(opportunityId as number),
+    enabled: !!opportunityId
   });
 
   const { isLoggedIn } = useUserStore();
@@ -233,7 +225,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                 <Card className="max-w-[520px]">
                   <CardHeader className="flex-grow-0 space-y-4">
                     <Image
-                      src={image ?? "/images/placeholder.webp"}
+                      src={image || organization.logo || "/images/placeholder.webp"}
                       alt={title ?? "Oportunitate"}
                       width={500}
                       height={300}
@@ -244,7 +236,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                   <CardContent className="pt-6">
                     <CardTitle className="text-xl opacity-80">Despre {organization.name}</CardTitle>
                     <CardDescription className="mt-4 text-base">
-                      {org?.description ?? "Descriere indisponibilă"}
+                      {organization.description}
                     </CardDescription>
                   </CardContent>
                 </Card>

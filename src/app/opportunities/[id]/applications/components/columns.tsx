@@ -23,11 +23,11 @@ export const columns: ColumnDef<Application>[] = [
     cell: ({ row }) => <div className="w-4">{row.getValue("id")}</div>
   },
   {
-    accessorKey: "user",
+    accessorKey: "applicant",
     header: "Voluntar",
     cell: ({ row }) => {
-      const user = row.getValue("user") as any;
-      return `${user.firstName} ${user.lastName}`;
+      const applicant = row.getValue("applicant") as any;
+      return `${applicant.firstName} ${applicant.lastName}`;
     }
   },
   {

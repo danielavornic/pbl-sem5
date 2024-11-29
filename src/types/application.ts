@@ -10,7 +10,7 @@ export interface ApplicationPayload {
 export interface Application {
   id: number;
   opportunity: Opportunity;
-  user: {
+  applicant: {
     id: number;
     firstName: string;
     lastName: string;

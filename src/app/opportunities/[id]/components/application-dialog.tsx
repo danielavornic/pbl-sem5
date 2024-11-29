@@ -52,7 +52,7 @@ const ApplicationDialog = ({
               name="text"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mesaj (opțional)</FormLabel>
+                  <FormLabel>Mesaj*</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Descrie motivația ta pentru această oportunitate..."
@@ -69,7 +69,7 @@ const ApplicationDialog = ({
               name="files"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Documente atașate</FormLabel>
+                  <FormLabel>Fișiere atașate</FormLabel>
                   <FormControl>
                     <FileUploader
                       value={field.value}

@@ -36,7 +36,7 @@ export const applicationApi = {
   ): Promise<ResponseMessage> => {
     try {
       const { data } = await axiosInst.put(`/applications/${id}/status`, {
-        approvalStatus: status
+        status
       });
       return data;
     } catch (error: Error | any) {

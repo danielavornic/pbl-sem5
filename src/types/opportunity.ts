@@ -1,4 +1,5 @@
 import { NamedEntity } from "./common";
+import { Organization } from "./organization";
 
 export enum ApprovalStatus {
   pending = "În așteptare",
@@ -35,7 +36,7 @@ export interface Opportunity extends OpportunityBase {
     firstName: string;
     lastName: string;
   };
-  organization: NamedEntity;
+  organization: Organization;
   region: NamedEntity;
   categories: NamedEntity[];
   skills: NamedEntity[];

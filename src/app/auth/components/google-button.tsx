@@ -19,15 +19,15 @@ const GoogleButton = () => {
   };
 
   return (
-    <div className="mt-6">
+    <div className="mt-6 w-full">
       <div className="flex items-center">
         <div className="h-px flex-grow bg-muted-foreground"></div>
         <span className="mx-4 text-muted-foreground">sau</span>
         <div className="h-px flex-grow bg-muted-foreground"></div>
       </div>
 
-      <div className="mt-4 flex justify-center">
-        <a href="https://192.168.100.21:8443/api/login/oauth2/code/google">
+      <div className="mt-4 flex w-full justify-center">
+        <a href="https://192.168.100.21:8443/api/login/oauth2/code/google" className="w-full">
           <Button className="flex w-full items-center bg-card px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
             <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path
