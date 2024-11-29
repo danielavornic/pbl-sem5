@@ -14,6 +14,10 @@ const menuItems = [
   {
     title: "Informații personale",
     href: "/account"
+  },
+  {
+    title: "Aplicările mele",
+    href: "/account/applications"
   }
 ];
 
