@@ -73,6 +73,7 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
     description: "",
     image: ""
   };
+
   return (
     <PublicLayout title={data?.title ?? "Oportunitate"}>
       <main className="container py-8">
@@ -214,7 +215,9 @@ const OpportunityPage = ({ params }: { params: { id: string } }) => {
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         opportunityId={opportunityId}
-                        sessions={sessions}
+                        sessions={sessions.filter((session) =>
+                          selectedSessions.includes(session.id as number)
+                        )}
                       />
                     </div>
                   )}
