@@ -15,18 +15,18 @@ export default function Home() {
   return (
     <PublicLayout title="Home">
       <main className="container my-10 flex items-center justify-center">
-        <div className="flex items-center justify-between space-x-[10vw]">
-          <div>
-            <h1 className="mb-6 max-w-[600px] text-5xl font-bold">
+        <div className="flex items-center justify-between space-x-12">        
+          <div className="w-[50%] relative">
+            <h1 className="mb-6 max-w-[600px] text-5xl font-semibold">
               Bine ai venit în lumea voluntarilor!
-              <Image
-                alt="heart"
-                src="/heart-icon.svg"
-                className="ml-3 mt-[-24px] inline-block"
-                height={57}
-                width={48}
-              />
             </h1>
+            <Image
+              alt="heart"
+              src="/heart-icon.svg"
+              className="inline-block absolute right-[-20px] top-[40px]"
+              height={57}
+              width={48}
+            />
             <div className="max-w-[570px]">
               <p className="max-w-[520px] text-lg text-gray-600">
                 Conectăm oamenii care vor să se implice cu organizațiile care creează oportunități
@@ -39,14 +39,31 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="w-auto">
+          <div className="w-auto relative m-0">
+            <div className="absolute top-[-50px] left-[-70px] w-auto h-auto">
+              <Image
+                src="/doodles.svg"
+                alt="Doodles"
+                width={170}
+                height={200}
+                className="animate-doodle-bounce"
+              />
+            </div>  
             <Image
-              width={458}
-              height={446}
-              src="/home-page.webp"
+              width={340}
+              height={511}
+              src="/home-page.jpg"
               alt="Hands joining together"
-              className="rounded-lg"
+              className="rounded-lg border-[6px] border-[#DBC6FF]"
             />
+            <div className="absolute bottom-[-60px] right-[-80px] w-auto h-auto animate-sun-rotate">
+              <Image
+                src="/sun.svg"
+                alt="Sun"
+                width={150}
+                height={150}
+              />
+            </div>
           </div>
         </div>
       </main>

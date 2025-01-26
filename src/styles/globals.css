@@ -22,6 +22,24 @@
   }
 }
 
+@keyframes doodle-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes sun-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-doodle-bounce {
+  animation: doodle-bounce 2s ease-in-out infinite;
+}
+
+.animate-sun-rotate {
+  animation: sun-rotate 10s linear infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 96%;
