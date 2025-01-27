@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { applicationApi } from "@/api/applicationsApi";
 // import { applicationApi } from "@/api/applicationApi";
 import { Spinner } from "@/components/spinner";
-import applications from "@/data/applications.json";
 import PublicLayout from "@/layouts/public";
 
 import ApplicationCard from "../components/application-card";

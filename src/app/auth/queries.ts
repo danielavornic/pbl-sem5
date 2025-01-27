@@ -1,5 +1,11 @@
-import { axiosInst } from "@/lib/axios";
-import { LoginCredentials, ResponseMessage, User, UserRegisterCredentials } from "@/types";
+import { axiosInst, axiosInstNoApi } from "@/lib/axios";
+import {
+  LoginCredentials,
+  LoginWithGoogleCredentials,
+  ResponseMessage,
+  User,
+  UserRegisterCredentials
+} from "@/types";
 
 export const authApi = {
   register: async (body: UserRegisterCredentials): Promise<ResponseMessage> => {
@@ -52,12 +58,14 @@ export const authApi = {
       return error.response.data;
     }
   },
-  loginGoogle: async (): Promise<{ message: string; user: User }> => {
+  loginWithGoogle: async (
+    body: LoginWithGoogleCredentials
+  ): Promise<{ message: string; user: User; mfaEnabled: boolean }> => {
     try {
-      const { data } = await axiosInst.get("/login/oauth2/code/google");
+      const { data } = await axiosInst.post("/auth/google", body);
       return data;
     } catch (error: Error | any) {
-      console.error("Error during Google login:", error);
+      console.error("Error during login:", error);
       return error.response.data;
     }
   }

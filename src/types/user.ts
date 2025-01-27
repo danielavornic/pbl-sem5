@@ -5,6 +5,12 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface LoginWithGoogleCredentials {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface BaseUser {
   id: number;
   email: string;

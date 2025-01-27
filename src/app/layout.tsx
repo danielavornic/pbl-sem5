@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/auth-provider";
 import ProgressBarProvider from "@/providers/progress-bar-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
+import GoogleAuthProvider from "@/providers/google-auth-provider";
 
 const inter = Inter({
   subsets: ["latin-ext"],
@@ -55,7 +56,9 @@ export default function RootLayout({
         <body>
           <Suspense>
             <ProgressBarProvider>
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <GoogleAuthProvider>{children}</GoogleAuthProvider>
+              </AuthProvider>
             </ProgressBarProvider>
             <Toaster richColors closeButton />
           </Suspense>

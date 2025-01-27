@@ -6,7 +6,7 @@ import { LoginForm } from "./components/form";
 const LoginPage = () => {
   return (
     <PublicLayout title="Intră în cont">
-      <main className="h-without-topbar container flex items-center justify-center gap-[12vw]">
+      <main className="container flex items-center justify-center gap-[12vw]">
         <div className="grid w-[440px] grid-cols-2 justify-center gap-x-2 gap-y-2">
           <div className="h-[214px] overflow-hidden">
             <Image src="/square1.svg" alt="Square 1" width={214} height={214} />

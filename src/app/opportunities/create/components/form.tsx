@@ -1,9 +1,8 @@
 "use client";
 
 import { addMinutes, endOfDay, isBefore, startOfDay } from "date-fns";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DateTimePickerOpportunity } from "@/components/ui/date-time-picker-opportunity";
@@ -29,9 +28,6 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { UploadedFilesCard } from "@/components/ui/uploaded-files-card";
-import { CATEGORY_OPTIONS } from "@/constants/categoryOptions";
-import { REGION_OPTIONS } from "@/constants/regionOptions";
-import { SKILL_OPTIONS } from "@/constants/skillOptions";
 import { cn } from "@/lib/utils";
 import { Organization } from "@/types";
 

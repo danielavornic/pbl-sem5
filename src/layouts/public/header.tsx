@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import useUserStore from "@/lib/user-store";
 import { cn } from "@/lib/utils";
 
-import { UserNav } from "./user-nav";
 import { User } from "@/types/user";
+import { UserNav } from "./user-nav";
 
 const publicLinks: { label: string; href: string }[] = [
   { label: "Oportunități", href: "/opportunities" },
@@ -25,10 +25,11 @@ export const Header = () => {
   const isAdmin = pathname.startsWith("/admin");
 
   const { user } = useUserStore() as { user: User & { createdOrganizations?: any[] } };
+  // check if user is object
+  const isLogged = typeof user === "object";
 
   const menuLinks =
-    user?.createdOrganizations && 
-    user.createdOrganizations.length > 0
+    user?.createdOrganizations && user.createdOrganizations.length > 0
       ? orgOwnerLinks
       : publicLinks;
 
@@ -37,12 +38,13 @@ export const Header = () => {
       <div className="container relative flex h-full items-center justify-between">
         <div className="flex items-start">
           <Link href={isAdmin ? "/admin" : "/"} className="flex-shrink-0">
-            <Image 
-              src="/logo.svg" 
-              alt="Voluntariat Moldova" 
-              width={238} height={48} 
+            <Image
+              src="/logo.svg"
+              alt="Voluntariat Moldova"
+              width={238}
+              height={48}
               priority
-              className="w-40 lg:auto" 
+              className="lg:auto w-40"
             />
           </Link>
           {isAdmin && <span className="font-heading text-sm font-semibold text-accent">admin</span>}
@@ -66,7 +68,7 @@ export const Header = () => {
           </div>
         )}
 
-        {user && !isAdmin ? (
+        {isLogged && !isAdmin ? (
           <div className="flex">
             <UserNav />
           </div>

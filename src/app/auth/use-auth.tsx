@@ -12,7 +12,8 @@ export const useAuth = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["userProfile"],
-    queryFn: () => authApi.getProfile()
+    queryFn: () => authApi.getProfile(),
+    retry: false
   });
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isError) {
+      console.log("Error fetching user profile");
       clearUser();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
