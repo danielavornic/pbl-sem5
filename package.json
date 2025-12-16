@@ -39,7 +39,7 @@
     "framer-motion": "^11.5.4",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.437.0",
-    "next": "^15.4.9",
+    "next": "^15.4.10",
     "next-nprogress-bar": "^2.3.13",
     "next-safe": "^3.5.0",
     "next-themes": "^0.3.0",
